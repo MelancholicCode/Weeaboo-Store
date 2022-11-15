@@ -1,0 +1,82 @@
+.cartListItem {
+  padding: 20px 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.cartListItem:not(:last-child) {
+  border-bottom: 1px solid #eee;
+}
+
+.productCard {
+  display: flex;
+  margin-right: auto;
+}
+
+.productCardImage {
+  cursor: pointer;
+  width: 200px;
+  height: 300px;
+}
+
+.productCardDescr {
+  margin-left: 50px;
+  margin-top: 50px;
+}
+
+.goodName {
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.goodAuthor {
+  color: #999;
+}
+
+.productButtons {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 40px;
+}
+
+.leftButtons {
+  display: flex;
+  margin-right: 30px;
+}
+
+.countButton {
+  cursor: pointer;
+  padding: 10px 20px;
+  border: 1px solid #eee;
+}
+
+.favourite {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.favouriteIcon {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.price {
+  margin-right: 30px;
+}
+
+.delete {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.deleteIcon {
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
+}

@@ -1,0 +1,9 @@
+.searchInput {
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid #999;
+  width: 400px;
+  font-family: 'Montserrat';
+  font-size: 20px;
+  padding: 10px;
+}

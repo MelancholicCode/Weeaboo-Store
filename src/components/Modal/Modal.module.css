@@ -1,0 +1,80 @@
+.modal {
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  opacity: 0;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+}
+
+.modal.active {
+  pointer-events: all;
+  opacity: 1;
+}
+
+.modalContent {
+  position: relative;
+  padding: 0 30px 30px;
+  width: 600px;
+  max-width: 900px;
+  background-color: #fff;
+  border-radius: 15px;
+}
+
+.authBtns {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+.signInBtn, .signUpBtn {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 4em;
+  width: 10em;
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.authLabel {
+  margin-bottom: 10px;
+}
+
+.authInput {
+  font-size: 20px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.submitBtn {
+  height: 2em;
+  font-size: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  border: none;
+  background-color: #ff4c4c;
+  color: #fff;
+}
+
+.closeBtn {
+  top: 0;
+  right: 0;
+  position: absolute;
+  cursor: pointer;
+  padding: 15px;
+  width: 20px;
+  height: 20px;
+}

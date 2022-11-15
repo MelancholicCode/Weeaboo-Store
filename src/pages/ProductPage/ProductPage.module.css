@@ -1,0 +1,11 @@
+.ProductPage {
+  padding: 20px 0 80px;
+}
+
+.productTitle {
+  color: #999;
+}
+
+.productDescr {
+  line-height: 1.8em;
+}

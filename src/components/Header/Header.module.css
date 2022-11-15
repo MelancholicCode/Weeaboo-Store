@@ -1,0 +1,57 @@
+.Header {
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(60deg, #ff4c4c, #ff7c7c);
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.headerLinkBtns {
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  align-items: center;
+}
+
+.count {
+  position: absolute;
+  color: #ff4c4c;
+  text-align: center;
+  font-weight: 600;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 15px;
+}
+
+.favouritesCount {
+  transform: translate(1.6em, -1.3em);
+}
+
+.cartCount {
+  transform: translate(0.6em, -1.4em);
+}
+
+.cartBtn {
+  margin-left: 20px;
+  width: max-content;
+}
+
+.loginBtn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 20px;
+  height: 80%;
+  width: 100px;
+  border-radius: 10px;
+  background-color: #fff;
+  color: #666;
+  border: 1px solid #999;
+}
