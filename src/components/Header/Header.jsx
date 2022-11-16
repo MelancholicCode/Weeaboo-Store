@@ -6,17 +6,43 @@ import Search from '../Search/Search';
 
 import cl from './Header.module.css';
 import Bookmark from '../../assets/img/svg/Bookmark';
-import { useState } from 'react';
+import { useEffect } from 'react';
 import Modal from '../Modal/Modal';
+import { useDispatch, useSelector } from 'react-redux';
+import { closeAccess, getAccess, setModal } from '../Form/authSlice';
+import LogOutIcon from '../../assets/img/svg/LogOutIcon';
+import ProfileIcon from '../../assets/img/svg/ProfileIcon';
 
 const Header = () => {
-  const [modal, setModal] = useState(false);
+  const dispatch = useDispatch();
+  const {signedIn, modal} = useSelector(state => state.auth);
+
+  console.log(modal)
+
+  useEffect(() => {
+    if (localStorage.getItem('accessToken')) {
+      dispatch(getAccess());
+    }
+    if (signedIn) {
+      dispatch(setModal(false));
+    }
+    // eslint-disable-next-line
+  }, [signedIn]);
+
+  const signOut = () => {
+    localStorage.removeItem('accessToken');
+    dispatch(closeAccess());
+  }
+
+  const onOpenModal = (value) => {
+    dispatch(setModal(value))
+  }
 
   return (
     <header className={cl.Header}>
       <Modal
         modal={modal}
-        setModal={setModal}/>
+        onOpenModal={onOpenModal}/>
       <div className={`container ${cl.headerContainer}`}>
         <Link to="/">
           <Logo/>
@@ -32,9 +58,19 @@ const Header = () => {
             <Cart/>
             <p className={`${cl.count} ${cl.cartCount}`}>3</p>
           </Link>
-          <div
-            onClick={() => setModal(true)}
-            className={cl.loginBtn}>Вход</div>
+          {signedIn
+            ? <>
+                <div className={cl.profileBtn}>
+                  <ProfileIcon/>
+                </div>
+                <div className={cl.logoutBtn} onClick={signOut}>
+                  <LogOutIcon/>
+                </div>
+              </>
+            : <div
+                onClick={() => onOpenModal(true)}
+                className={cl.loginBtn}>Вход</div>
+            }
         </div>
       </div>
     </header>

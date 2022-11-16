@@ -1,11 +1,17 @@
+import { useSelector } from 'react-redux';
+
 import Close from '../../assets/img/svg/Close';
+import Form from '../Form/Form';
+import Spinner from '../../assets/spinner/Spinner';
+
 import cl from './Modal.module.css';
 
-const Modal = ({modal, setModal}) => {
+const Modal = ({modal, onOpenModal}) => {
+  const {authLoadingStatus} = useSelector(state => state.auth);
 
   return (
     <div
-      onClick={() => setModal(false)}
+      onClick={() => onOpenModal(false)}
       className={`${cl.modal} ${modal ? cl.active : null}`}>
       <div
         onClick={e => e.stopPropagation()}
@@ -13,19 +19,11 @@ const Modal = ({modal, setModal}) => {
         <div
           className={cl.closeBtn}>
           <Close
-            setModal={setModal}/>
+            onOpenModal={onOpenModal}/>
         </div>
-        <div className={cl.authBtns}>
-          <div className={cl.signInBtn}>Вход</div>
-          <div className={cl.signUpBtn}>Регистрация</div>
-        </div>
-        <form className={cl.authForm}>
-          <label className={cl.authLabel} htmlFor='email'>Почта *</label>
-          <input className={cl.authInput} id='email' name='email' type='email' />
-          <label className={cl.authLabel} htmlFor='password'>Пароль *</label>
-          <input className={cl.authInput} id='password' name='password' type='password' />
-          <button className={cl.submitBtn} type='submit'>Войти</button>
-        </form>
+        {authLoadingStatus === 'loading'
+          ? <Spinner/>
+          : <Form/>}
       </div>
     </div>
   );

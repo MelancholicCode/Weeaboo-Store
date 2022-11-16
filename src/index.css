@@ -43,6 +43,10 @@ input {
   outline: none;
 }
 
+button {
+  cursor: pointer;
+}
+
 .container {
   margin: 0 auto;
   padding: 0 15px;

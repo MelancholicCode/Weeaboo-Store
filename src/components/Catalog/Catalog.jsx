@@ -3,7 +3,6 @@ import Product from "../Product/Product";
 import cl from './Catalog.module.css'
 
 const Catalog = () => {
-  console.log(1)
 
   return (
     <div className={`container ${cl.catalogContainer}`}>

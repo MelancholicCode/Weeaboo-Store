@@ -1,0 +1,53 @@
+.authBtns {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+.signInBtn, .signUpBtn {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3em;
+  height: 4em;
+  width: 10em;
+}
+
+.signInBtn.active, .signUpBtn.active {
+  font-weight: 600;
+  text-decoration: dashed;
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.authLabel {
+  margin-bottom: 10px;
+}
+
+.authInput {
+  font-size: 20px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.errorMessage {
+  margin: 0 auto;
+  margin-bottom: 10px;
+  color: #ff4c4c;
+}
+
+.submitBtn {
+  height: 2em;
+  font-size: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  border: none;
+  background-color: #ff4c4c;
+  color: #fff;
+}

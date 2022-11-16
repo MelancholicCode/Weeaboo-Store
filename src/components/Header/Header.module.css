@@ -55,3 +55,15 @@
   color: #666;
   border: 1px solid #999;
 }
+
+.profileBtn {
+  margin-left: 15px;
+  cursor: pointer;
+  height: 80%;
+}
+
+.logoutBtn {
+  margin-left: 10px;
+  cursor: pointer;
+  height: 80%;
+}
