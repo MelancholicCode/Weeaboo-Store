@@ -1,16 +1,8 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "name": "Сергей",
-      "email": "email@example.com",
-      "password": "",
-      "cart": [
-
-      ]
-    }
-  ],
+  "users": [],
   "favourites": [],
+  "cart": [],
+  "orders": [],
   "products": [
     {
       "id": 1,
