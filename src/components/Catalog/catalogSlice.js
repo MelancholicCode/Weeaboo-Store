@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
   products: [],
-  productsLoadingStatus: 'idle',
-  isCatalogOver: false
+  productsLoadingStatus: 'idle'
 }
 
 const catalog = createSlice({
@@ -15,19 +15,13 @@ const catalog = createSlice({
     },
     catalogFetched: (state, action) => {
       state.productsLoadingStatus = 'idle';
-      state.products = action.payload;
+      state.products = [...state.products, ...action.payload];
     },
     catalogFetchingError: state => {
       state.productsLoadingStatus = 'error';
     },
-    addNewProducts: (state, action) => {
-      if (action.payload.length < 20) {
-        state.isCatalogOver = true;
-      }
-      state.products = [...state.products, ...action.payload];
-    },
-    resetCatalog: state => {
-      state.isCatalogOver = false;
+    clearCatalog: state => {
+      state.products = [];
     }
   }
 })
@@ -38,19 +32,14 @@ export const {
   catalogFetching,
   catalogFetched,
   catalogFetchingError,
-  addNewProducts,
-  resetCatalog
+  clearCatalog
 } = actions;
 
-export const fetchProducts = (request) => (dispatch) => {
+export const fetchProducts = (page, limit) => (dispatch) => {
   dispatch(catalogFetching());
-  request('http://localhost:3001/products?_page=1&_limit=20')
-    .then(data => dispatch(catalogFetched(data)))
+  axios.get(`http://localhost:3001/444/products?_page=${page}&_limit=${limit}`)
+    .then(res => {
+      dispatch(catalogFetched(res.data))
+    })
     .catch(() => dispatch(catalogFetchingError()));
-}
-
-export const fetchNewProducts = (request, page) => (dispatch) => {
-  request(`http://localhost:3001/products?_page=${page}&_limit=20`)
-    .then(data => dispatch(addNewProducts(data)))
-    .catch(err => console.error(err));
 }

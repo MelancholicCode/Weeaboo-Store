@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
 import Bookmark from "../../assets/img/svg/Bookmark";
+import { stringTrim } from "../../utils/string";
 
 import cl from './Product.module.css'
 
-const Product = () => {
-
+const Product = ({product}) => {
   return (
     <li className={cl.productItem}>
       <Link
@@ -13,11 +13,11 @@ const Product = () => {
         // Добавить слаг
         to={`/catalog/product-page`}>
         <div className={cl.productPoster}>
-          <img height='100%' src={"https://img-gorod.ru/29/426/2942674_detail.jpg"} alt=""/>
+          <img height='100%' src={product.poster} alt=""/>
         </div>
-        <p className={cl.productName}>Имя товара</p>
+        <p className={cl.productName}>{stringTrim(product.title, 30)}</p>
       </Link>
-      <p className={cl.price}>1337 ₽</p>
+      <p className={cl.price}>{product.price} ₽</p>
       <div className={cl.btns}>
         {/* <Link to='/cart'>
           <div className='buy-btn good-btn'>

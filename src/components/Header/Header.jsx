@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeAccess, getAccess, setModal } from '../Form/authSlice';
-import { useHttp } from '../../hooks/useHttp';
 import Logo from '../../assets/img/svg/Logo';
 import Cart from '../../assets/img/svg/Cart';
 import Search from '../Search/Search';
@@ -17,13 +16,13 @@ import cl from './Header.module.css';
 const Header = () => {
   const dispatch = useDispatch();
   const {signedIn} = useSelector(state => state.auth);
-  const {request} = useHttp();
 
   useEffect(() => {
     const user = localStorage.getItem('user');
     const accessToken = localStorage.getItem('accessToken');
+    
     if (user && accessToken) {
-      dispatch(getAccess(request, user, accessToken));
+      dispatch(getAccess(user, accessToken));
     } else {
       dispatch(setModal(true));
     }

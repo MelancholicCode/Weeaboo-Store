@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
   user: {},
@@ -47,28 +48,30 @@ export const {
   setAuthIdleStatus
 } = actions;
 
-export const authUser = (request, user, route) => (dispatch) => {
+export const authUser = (user, route) => (dispatch) => {
   dispatch(() => getUserLoading())
-  request(`http://localhost:3001/${route}`, 'POST', JSON.stringify(user))
-    .then(data => {
-      localStorage.setItem('accessToken', data.accessToken)
-      localStorage.setItem('user', JSON.stringify(data.user))
-      dispatch(getUserData(data.user))
+  axios.post(`http://localhost:3001/${route}`, user)
+    .then(res => {
+      localStorage.setItem('accessToken', res.data.accessToken)
+      localStorage.setItem('user', JSON.stringify(res.data.user))
+      dispatch(getUserData(res.data.user))
     })
     .catch(() => dispatch(getUserError()))
 }
 
-export const getAccess = (request, user, accessToken) => (dispatch) => {
+export const getAccess = (user, accessToken) => (dispatch) => {
   const userId = JSON.parse(user).id
 
   dispatch(() => getUserLoading())
-  request(`http://localhost:3001/600/users/${userId}`, 'GET', null, {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${accessToken}`
+  axios.get(`http://localhost:3001/600/users/${userId}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`
+    }
   })
-    .then(user => {
-      localStorage.setItem('user', JSON.stringify(user))
-      dispatch(getUserData(user))
+    .then(res => {
+      localStorage.setItem('user', JSON.stringify(res.data))
+      dispatch(getUserData(res.data))
     })
     .catch((err) => {
       console.error(err)

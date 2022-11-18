@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHttp } from '../../hooks/useHttp'
 import { authUser, setAuthIdleStatus } from './authSlice';
 
 import cl from './Form.module.css';
@@ -10,8 +9,7 @@ const Form = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
-  
-  const {request} = useHttp()
+
   const {authLoadingStatus} = useSelector(state => state.auth);
   const dispatch = useDispatch();
 
@@ -19,10 +17,10 @@ const Form = () => {
     e.preventDefault();
     if (isSignUp) {
       const user = {name, email, password};
-      dispatch(authUser(request, user, 'signup'));
+      dispatch(authUser(user, 'signup'));
     } else {
       const  user = {email, password};
-      dispatch(authUser(request, user, 'signin'));
+      dispatch(authUser(user, 'signin'));
     }
     setName('');
     setEmail('');
