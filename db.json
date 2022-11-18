@@ -5,11 +5,6 @@
       "password": "$2a$10$P008rVmX3UPx1MSK9lFDU.7XQ9/X1EJLK9cbyPuzx2zgEaIVxlvn2",
       "name": "Сергей",
       "id": 1
-    },
-    {
-      "email": "email@examplm",
-      "password": "$2a$10$pNeEWXFT00mEcdloRN8Lcu1RopHYMVHCN3rqkI3Z815Fgy4h6yULO",
-      "id": 2
     }
   ],
   "favourites": [],

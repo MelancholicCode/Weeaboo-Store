@@ -6,8 +6,8 @@ import Spinner from '../../assets/spinner/Spinner';
 
 import cl from './Modal.module.css';
 
-const Modal = ({modal, onOpenModal}) => {
-  const {authLoadingStatus} = useSelector(state => state.auth);
+const Modal = ({onOpenModal}) => {
+  const {authLoadingStatus, modal} = useSelector(state => state.auth);
 
   return (
     <div

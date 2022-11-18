@@ -1,36 +1,45 @@
 import { Link } from 'react-router-dom';
 
-import Logo from '../../assets/img/Logo/Logo';
-import Cart from '../../assets/img/svg/Cart';
-import Search from '../Search/Search';
-
-import cl from './Header.module.css';
-import Bookmark from '../../assets/img/svg/Bookmark';
 import { useEffect } from 'react';
-import Modal from '../Modal/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeAccess, getAccess, setModal } from '../Form/authSlice';
+import { useHttp } from '../../hooks/useHttp';
+import Logo from '../../assets/img/svg/Logo';
+import Cart from '../../assets/img/svg/Cart';
+import Search from '../Search/Search';
+import Bookmark from '../../assets/img/svg/Bookmark';
+import Modal from '../Modal/Modal';
 import LogOutIcon from '../../assets/img/svg/LogOutIcon';
 import ProfileIcon from '../../assets/img/svg/ProfileIcon';
 
+import cl from './Header.module.css';
+
 const Header = () => {
   const dispatch = useDispatch();
-  const {signedIn, modal} = useSelector(state => state.auth);
-
-  console.log(modal)
+  const {signedIn} = useSelector(state => state.auth);
+  const {request} = useHttp();
 
   useEffect(() => {
-    if (localStorage.getItem('accessToken')) {
-      dispatch(getAccess());
+    const user = localStorage.getItem('user');
+    const accessToken = localStorage.getItem('accessToken');
+    if (user && accessToken) {
+      dispatch(getAccess(request, user, accessToken));
+    } else {
+      dispatch(setModal(true));
     }
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
     if (signedIn) {
       dispatch(setModal(false));
     }
     // eslint-disable-next-line
-  }, [signedIn]);
+  }, [signedIn])
 
   const signOut = () => {
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('user');
     dispatch(closeAccess());
   }
 
@@ -41,7 +50,6 @@ const Header = () => {
   return (
     <header className={cl.Header}>
       <Modal
-        modal={modal}
         onOpenModal={onOpenModal}/>
       <div className={`container ${cl.headerContainer}`}>
         <Link to="/">
@@ -63,13 +71,15 @@ const Header = () => {
                 <div className={cl.profileBtn}>
                   <ProfileIcon/>
                 </div>
-                <div className={cl.logoutBtn} onClick={signOut}>
-                  <LogOutIcon/>
-                </div>
+                  <Link to='/' className={cl.logoutBtn} onClick={signOut}>
+                    <LogOutIcon/>
+                  </Link>
               </>
             : <div
                 onClick={() => onOpenModal(true)}
-                className={cl.loginBtn}>Вход</div>
+                className={cl.loginBtn}>
+                  Вход
+              </div>
             }
         </div>
       </div>

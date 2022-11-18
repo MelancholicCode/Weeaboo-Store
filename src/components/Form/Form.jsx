@@ -6,14 +6,14 @@ import { authUser, setAuthIdleStatus } from './authSlice';
 import cl from './Form.module.css';
 
 const Form = () => {
-  const {request} = useHttp()
-  const dispatch = useDispatch();
-
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
+  
+  const {request} = useHttp()
   const {authLoadingStatus} = useSelector(state => state.auth);
+  const dispatch = useDispatch();
 
   const onSubmitForm = (e) => {
     e.preventDefault();
@@ -52,17 +52,20 @@ const Form = () => {
           <>
             <label className={cl.authLabel} htmlFor='name'>Имя</label>
             <input
+              required
               value={name}
               onChange={e => setName(e.target.value)}
               className={cl.authInput} id='name' name='name' type='text' />
           </>}
         <label className={cl.authLabel} htmlFor='email'>Почта</label>
         <input
+          required
           value={email}
           onChange={e => setEmail(e.target.value)}
           className={cl.authInput} id='email' name='email' type='email' />
         <label className={cl.authLabel} htmlFor='password'>Пароль</label>
         <input
+          required
           value={password}
           onChange={e => setPassword(e.target.value)}
           className={cl.authInput} id='password' name='password' type='password' />

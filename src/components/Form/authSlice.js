@@ -16,14 +16,12 @@ const authSlice = createSlice({
     },
     getUserData: (state, action) => {
       state.user = action.payload;
-      state.authLoadingStatus = 'idle';
       state.signedIn = true;
+      state.authLoadingStatus = 'idle';
     },
     getUserError: state => {
       state.authLoadingStatus = 'error';
-    },
-    getAccess: state => {
-      state.signedIn = true;
+      state.signedIn = false;
     },
     closeAccess: state => {
       state.signedIn = false;
@@ -45,7 +43,6 @@ export const {
   getUserData,
   getUserError,
   setModal,
-  getAccess,
   closeAccess,
   setAuthIdleStatus
 } = actions;
@@ -55,7 +52,28 @@ export const authUser = (request, user, route) => (dispatch) => {
   request(`http://localhost:3001/${route}`, 'POST', JSON.stringify(user))
     .then(data => {
       localStorage.setItem('accessToken', data.accessToken)
+      localStorage.setItem('user', JSON.stringify(data.user))
       dispatch(getUserData(data.user))
     })
     .catch(() => dispatch(getUserError()))
+}
+
+export const getAccess = (request, user, accessToken) => (dispatch) => {
+  const userId = JSON.parse(user).id
+
+  dispatch(() => getUserLoading())
+  request(`http://localhost:3001/600/users/${userId}`, 'GET', null, {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${accessToken}`
+  })
+    .then(user => {
+      localStorage.setItem('user', JSON.stringify(user))
+      dispatch(getUserData(user))
+    })
+    .catch((err) => {
+      console.error(err)
+      localStorage.removeItem('user')
+      localStorage.removeItem('accessToken')
+      dispatch(setModal(true))
+    });
 }
