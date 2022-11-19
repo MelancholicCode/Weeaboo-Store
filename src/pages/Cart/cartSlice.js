@@ -19,9 +19,6 @@ const cartSlice = createSlice({
     cartFetchingError: state => {
       state.goodsLoadingStatus = 'loading';
     },
-    addGood: (state, action) => {
-      state.goods.push(action.payload);
-    },
     deleteGood: (state, action) => {
       state.goods = state.goods.filter(item => item.id !== action.payload);
     },
@@ -42,7 +39,6 @@ export const {
   cartFetching,
   cartFetched,
   cartFetchingError,
-  addGood,
   deleteGood,
   changeCount
 } = actions;
@@ -52,5 +48,4 @@ export const fetchGoods = (request) => (dispatch) => {
   request('http://localhost:3001/cart')
     .then(data => dispatch(cartFetched(data)))
     .catch(() => dispatch(cartFetchingError()));
-
 }

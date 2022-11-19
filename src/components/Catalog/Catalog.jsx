@@ -9,8 +9,8 @@ import { calcPages } from "../../utils/pages";
 import cl from './Catalog.module.css'
 
 const Catalog = () => {
+  const limit = 20;
   const dispatch = useDispatch();
-  const [limit, setLimit] = useState(20);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [catalogIsOver, setCatalogIsOver] = useState(false);

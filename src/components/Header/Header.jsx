@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { closeAccess, getAccess, setModal } from '../Form/authSlice';
 import Logo from '../../assets/img/svg/Logo';
 import Cart from '../../assets/img/svg/Cart';
@@ -16,6 +17,7 @@ import cl from './Header.module.css';
 const Header = () => {
   const dispatch = useDispatch();
   const {signedIn} = useSelector(state => state.auth);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const user = localStorage.getItem('user');
@@ -46,6 +48,14 @@ const Header = () => {
     dispatch(setModal(value))
   }
 
+  const checkPrivateLink = (route) => {
+    if (signedIn) {
+      navigate(route)
+    } else {
+      onOpenModal(true);
+    }
+  }
+
   return (
     <header className={cl.Header}>
       <Modal
@@ -56,15 +66,18 @@ const Header = () => {
         </Link>
         <Search/>
         <div className={cl.headerLinkBtns}>
-          <div>
+          <div
+            onClick={() => checkPrivateLink('/cart')}>
             <Bookmark
               color='inherit'/>
-            <p className={`${cl.count} ${cl.favouritesCount}`}>2</p>
+            {signedIn && <p className={`${cl.count} ${cl.favouritesCount}`}>2</p>}
           </div>
-          <Link className={cl.cartBtn} to="/cart">
+          <div
+            className={cl.cartBtn}
+            onClick={() => checkPrivateLink('/cart')}>
             <Cart/>
-            <p className={`${cl.count} ${cl.cartCount}`}>3</p>
-          </Link>
+            {signedIn && <p className={`${cl.count} ${cl.cartCount}`}>3</p>}
+          </div>
           {signedIn
             ? <>
                 <div className={cl.profileBtn}>
