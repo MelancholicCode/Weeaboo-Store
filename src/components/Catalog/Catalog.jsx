@@ -39,8 +39,6 @@ const Catalog = () => {
       return <p>Товаров нет</p>
     }
 
-    console.log(arr)
-
     return arr.map(item => (
       <Product
         key={item.id}

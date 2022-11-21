@@ -27,6 +27,15 @@ const cartSlice = createSlice({
     deleteGoodInState: (state, action) => {
       state.goods = state.goods.filter(item => item.id !== action.payload);
     },
+    changeCountInState: (state, action) => {
+      state.goods = state.goods.map(item => {
+        if (item.id === action.payload.goodId) {
+          item.count = action.payload.count;
+          return item;
+        }
+        return item;
+      })
+    },
     clearCart: state => {
       state.goods = []
     },
@@ -45,6 +54,7 @@ export const {
   cartFetchingError,
   addGoodInState,
   deleteGoodInState,
+  changeCountInState,
   clearCart,
   setIdleStatus,
 } = actions;
@@ -60,7 +70,6 @@ export const fetchGoods = (userId, accessToken) => (dispatch) => {
       dispatch(cartFetched(data))
     })
     .catch((err) => {
-      console.log(err)
       switch (err.request.status) {
         case 403:
           dispatch(setIdleStatus(true))
@@ -94,7 +103,6 @@ export const addGood = (product, userId, accessToken) => (dispatch) => {
 }
 
 export const deleteGood = (goodId, accessToken) => (dispatch) => {
-  console.log(goodId);
   axios.delete(`http://localhost:3001/600/cart/${goodId}`, {
     headers: {
       'Content-Type': 'application/json',
@@ -103,7 +111,6 @@ export const deleteGood = (goodId, accessToken) => (dispatch) => {
   })
     .then(() => dispatch(deleteGoodInState(goodId)))
     .catch((err) => {
-
       switch (err.request.status) {
         case 404:
           console.log('Товар не найден: корзина')
@@ -124,6 +131,7 @@ export const changeCount = (goodId, count, accessToken) => (dispatch) => {
       'Authorization': `Bearer ${accessToken}`
     }
   })
+    .then(() => dispatch(changeCountInState({goodId, count})))
     .catch((err) => {
       switch (err.request.status) {
         case 401:

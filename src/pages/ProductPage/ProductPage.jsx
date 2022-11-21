@@ -11,8 +11,6 @@ const ProductPage = () => {
   const [product, setProduct] = useState(null);
   const [loadingStatus, setLoadingStatus] = useState('idle');
 
-  console.log(slug)
-
   useEffect(() => {
     setLoadingStatus('loading');
     axios.get(`http://localhost:3001/444/products?slug=${slug}`)

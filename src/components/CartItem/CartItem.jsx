@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -11,14 +10,9 @@ import cl from './CartItem.module.css';
 
 const CartItem = ({good}) => {
   const dispatch = useDispatch()
-  const [goodCount, setGoodCount] = useState(good.count);
-
-  console.log(good)
 
   const onDeleteGood = () => {
     const accessToken = getAccessToken();
-
-    console.log(good);
 
     if (accessToken) {
       dispatch(deleteGood(good.id, accessToken));
@@ -26,10 +20,9 @@ const CartItem = ({good}) => {
   }
 
   const onChangeCount = (count) => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = getAccessToken();
 
     if (accessToken && count >= 1) {
-      setGoodCount(count);
       dispatch(changeCount(good.id, count, accessToken));
     }
 
@@ -57,14 +50,14 @@ const CartItem = ({good}) => {
       <div className={cl.productButtons}>
         <div className={cl.leftButtons}>
           <div
-            onClick={() => onChangeCount(goodCount - 1)}
+            onClick={() => onChangeCount(good.count - 1)}
             className={cl.countButton}
           >
             -
           </div>
-          <div className={cl.countButton}>{goodCount}</div>
+          <div className={cl.countButton}>{good.count}</div>
           <div
-          onClick={() => onChangeCount(goodCount + 1)}
+          onClick={() => onChangeCount(good.count + 1)}
             className={cl.countButton}
           >
             +
