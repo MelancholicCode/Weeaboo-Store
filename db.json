@@ -5,10 +5,87 @@
       "password": "$2a$10$P008rVmX3UPx1MSK9lFDU.7XQ9/X1EJLK9cbyPuzx2zgEaIVxlvn2",
       "name": "Сергей",
       "id": 1
+    },
+    {
+      "email": "email2@example.com",
+      "password": "$2a$10$LKLn4cDdr7NCUroK00obDu0WejzSaaEhrkZyWtUXoLwT4mOxYy616",
+      "name": "Андрей",
+      "id": 2
     }
   ],
   "favourites": [],
-  "cart": [],
+  "cart": [
+    {
+      "productId": 4,
+      "title": "Очень приятно, бог. Том 1",
+      "author": "Джульетта Судзуки",
+      "poster": "https://img-gorod.ru/26/696/2669630_detail.jpg",
+      "count": 5,
+      "price": 518,
+      "userId": 1,
+      "id": 5
+    },
+    {
+      "productId": 8,
+      "title": "Heikala. Рисуем в стиле аниме и манга",
+      "author": "Хейкала",
+      "poster": "https://img-gorod.ru/29/223/2922372_detail.jpg",
+      "count": 3,
+      "price": 1280,
+      "userId": 1,
+      "id": 6
+    },
+    {
+      "productId": 6,
+      "title": "Токийский гуль:re 8. Книга 15-16. Манга",
+      "author": "Исида С.",
+      "poster": "https://img-gorod.ru/28/971/2897149_detail.jpg",
+      "count": 1,
+      "price": 827,
+      "userId": 1,
+      "id": 7
+    },
+    {
+      "productId": 4,
+      "title": "Очень приятно, бог. Том 1",
+      "author": "Джульетта Судзуки",
+      "poster": "https://img-gorod.ru/26/696/2669630_detail.jpg",
+      "count": 3,
+      "price": 518,
+      "userId": 2,
+      "id": 8
+    },
+    {
+      "productId": 22,
+      "title": "Человек-бензопила. Книга 4. Во сне. Настоящая жесть: манга",
+      "author": "Фудзимото Т.",
+      "poster": "https://img-gorod.ru/29/121/2912150_detail.jpg",
+      "count": 2,
+      "price": 926,
+      "userId": 2,
+      "id": 10
+    },
+    {
+      "productId": 1,
+      "title": "Naruto. Наруто. Книга 1. Наруто Удзумаки",
+      "author": "Масаси Кисимото",
+      "poster": "https://img-gorod.ru/28/333/2833354_detail.jpg",
+      "count": 1,
+      "price": 926,
+      "userId": 2,
+      "id": 11
+    },
+    {
+      "productId": 3,
+      "title": "Человек-бензопила. Книга 6. Вперед, Человек-бензопила!",
+      "author": "Тацуки Фудзимото",
+      "poster": "https://img-gorod.ru/29/448/2944827_detail.jpg",
+      "count": 1,
+      "price": 589,
+      "userId": 2,
+      "id": 12
+    }
+  ],
   "orders": [],
   "products": [
     {

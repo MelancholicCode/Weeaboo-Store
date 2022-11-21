@@ -1,43 +1,51 @@
-import axios from "axios";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import Bookmark from "../../assets/img/svg/Bookmark";
+import { addGood } from "../../pages/Cart/cartSlice";
 import { stringTrim } from "../../utils/string";
 import { setModal } from "../Form/authSlice";
 
 import cl from './Product.module.css'
 
 const Product = ({product}) => {
+  const [isGood, setIsGood] = useState(false);
   const {signedIn} = useSelector(state => state.auth);
+  const {goods} = useSelector(state => state.cart);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    goods.forEach(item => {
+      if (item.productId === product.id) {
+        setIsGood(true);
+      }
+    })
+    // eslint-disable-next-line
+  }, [goods]);
+
+  useEffect(() => {
+    if (!signedIn) {
+      setIsGood(false);
+    }
+  }, [signedIn])
+
   const checkAuth = () => {
-    // TODO Заменить конструкцию на thunk
     if (signedIn) {
       const accessToken = localStorage.getItem('accessToken');
       const userId = JSON.parse(localStorage.getItem('user')).id;
+
+      const good = {
+        productId: product.id,
+        title: product.title,
+        author: product.author,
+        poster: product.poster,
+        count: 1,
+        price: product.price
+      }
       
-      axios.post('http://localhost:3001/600/cart', {...product, userId, count: 1}, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`
-        }
-      })
-        .then(() => console.log('Добавлен товар'))
-        .catch((err) => {
-          console.log(err)
-          switch (err.request.status) {
-            case 500:
-              console.log('Товар уже добавлен')
-              break
-            case 401:
-              console.log('Ошибка авторизации')
-              break
-            default:
-              console.log('Что-то пошло не так')
-          }
-        });
+      dispatch(addGood(good, userId, accessToken));
+
       return
     }
     dispatch(setModal(true));
@@ -47,8 +55,7 @@ const Product = ({product}) => {
     <li className={cl.productItem}>
       <Link
         className={cl.productContent}
-        // Добавить слаг
-        to={`/catalog/product-page`}>
+        to={`/catalog/${product.slug}`}>
         <div className={cl.productPoster}>
           <img height='100%' src={product.poster} alt=""/>
         </div>
@@ -56,16 +63,15 @@ const Product = ({product}) => {
       </Link>
       <p className={cl.price}>{product.price} ₽</p>
       <div className={cl.btns}>
-        {/* <Link to='/cart'>
-          <div className='buy-btn good-btn'>
-            В корзину
-          </div>
-        </Link> */}
-        <div
-          onClick={checkAuth}
-          className={cl.buyBtn}
-          >Купить
-        </div>
+        {isGood
+          ? <Link className={`${cl.buyBtn} ${cl.goodBtn}`} to='/cart'>
+              В корзину
+            </Link>
+          : <div
+              onClick={checkAuth}
+              className={cl.buyBtn}
+              >Купить
+            </div>}
         <div
           className={cl.favourite}
           >

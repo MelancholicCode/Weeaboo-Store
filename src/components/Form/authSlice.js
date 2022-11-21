@@ -59,9 +59,7 @@ export const authUser = (user, route) => (dispatch) => {
     .catch(() => dispatch(getUserError()))
 }
 
-export const getAccess = (user, accessToken) => (dispatch) => {
-  const userId = JSON.parse(user).id
-
+export const getAccess = (userId, accessToken) => (dispatch) => {
   dispatch(() => getUserLoading())
   axios.get(`http://localhost:3001/600/users/${userId}`, {
     headers: {
@@ -74,7 +72,7 @@ export const getAccess = (user, accessToken) => (dispatch) => {
       dispatch(getUserData(res.data))
     })
     .catch((err) => {
-      console.error(err)
+      console.error(err, 'Ошибка доступа')
       localStorage.removeItem('user')
       localStorage.removeItem('accessToken')
       dispatch(setModal(true))

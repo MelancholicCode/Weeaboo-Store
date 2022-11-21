@@ -19,6 +19,7 @@
 }
 
 .count {
+  cursor: pointer;
   position: absolute;
   color: #ff4c4c;
   text-align: center;

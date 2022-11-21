@@ -1,11 +1,34 @@
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import Bookmark from '../../../assets/img/svg/Bookmark';
-import Trash from '../../../assets/img/svg/Trash';
+import Bookmark from '../../assets/img/svg/Bookmark';
+import Trash from '../../assets/img/svg/Trash';
+import { changeCount, deleteGood } from '../../pages/Cart/cartSlice';
 
 import cl from './CartItem.module.css';
 
-const CartItem = () => {
+const CartItem = ({good}) => {
+  const dispatch = useDispatch()
+  const [goodCount, setGoodCount] = useState(good.count);
+
+  const onDeleteGood = () => {
+    const accessToken = localStorage.getItem('accessToken');
+
+    if (accessToken) {
+      dispatch(deleteGood(good.id, accessToken));
+    }
+  }
+
+  const onChangeCount = (count) => {
+    const accessToken = localStorage.getItem('accessToken');
+
+    if (accessToken && count >= 1) {
+      setGoodCount(count);
+      dispatch(changeCount(good.id, count, accessToken));
+    }
+
+  }
 
   return (
     <li className={cl.cartListItem}>
@@ -15,35 +38,37 @@ const CartItem = () => {
           // Добавить слаг
           to={`/catalog/product-page`}>
           <div className={cl.productCardImage}>
-            <img height="100%" width="100%" src={"https://img-gorod.ru/29/426/2942674_detail.jpg"} alt="" />
+            <img height="100%" width="100%" src={good.poster} alt="" />
           </div>
         </Link>
         <div className={cl.productCardDescr}>
           <Link
             className="product-content"
             // Добавить слаг
-            to={`/catalog/product-page`}>  
-            <p className={cl.goodName}>Имя товара</p>
+            to={`/catalog/product-page`}>
+            <p className={cl.goodName}>{good.title}</p>
           </Link>
-          <p className={cl.goodAuthor}>Автор</p>
+          <p className={cl.goodAuthor}>{good.author}</p>
         </div>
       </div>
       <div className={cl.productButtons}>
         <div className={cl.leftButtons}>
           <div
+            onClick={() => onChangeCount(goodCount - 1)}
             className={cl.countButton}
           >
             -
           </div>
-          <div className={cl.countButton}>1</div>
+          <div className={cl.countButton}>{goodCount}</div>
           <div
+          onClick={() => onChangeCount(goodCount + 1)}
             className={cl.countButton}
           >
             +
           </div>
         </div>
         <p className={cl.price}>
-          1337 ₽
+          {good.price} ₽
         </p>
         <div className={cl.rightButtons}>
           <div
@@ -55,6 +80,7 @@ const CartItem = () => {
             <p>Закладки</p>
           </div>
           <div
+            onClick={onDeleteGood}
             className={cl.delete}>
             <div className={cl.deleteIcon}>
               <Trash/>
