@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Bookmark from '../../assets/img/svg/Bookmark';
 import Trash from '../../assets/img/svg/Trash';
 import { changeCount, deleteGood } from '../../pages/Cart/cartSlice';
+import { getAccessToken } from '../../utils/auth';
 
 import cl from './CartItem.module.css';
 
@@ -12,8 +13,12 @@ const CartItem = ({good}) => {
   const dispatch = useDispatch()
   const [goodCount, setGoodCount] = useState(good.count);
 
+  console.log(good)
+
   const onDeleteGood = () => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = getAccessToken();
+
+    console.log(good);
 
     if (accessToken) {
       dispatch(deleteGood(good.id, accessToken));
@@ -35,8 +40,7 @@ const CartItem = ({good}) => {
       <div className={cl.productCard}>
         <Link
           className="product-content"
-          // Добавить слаг
-          to={`/catalog/product-page`}>
+          to={`/catalog/${good.slug}`}>
           <div className={cl.productCardImage}>
             <img height="100%" width="100%" src={good.poster} alt="" />
           </div>
@@ -44,8 +48,7 @@ const CartItem = ({good}) => {
         <div className={cl.productCardDescr}>
           <Link
             className="product-content"
-            // Добавить слаг
-            to={`/catalog/product-page`}>
+            to={`/catalog/${good.slug}`}>
             <p className={cl.goodName}>{good.title}</p>
           </Link>
           <p className={cl.goodAuthor}>{good.author}</p>

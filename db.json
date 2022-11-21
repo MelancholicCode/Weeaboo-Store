@@ -20,36 +20,6 @@
       "title": "Очень приятно, бог. Том 1",
       "author": "Джульетта Судзуки",
       "poster": "https://img-gorod.ru/26/696/2669630_detail.jpg",
-      "count": 5,
-      "price": 518,
-      "userId": 1,
-      "id": 5
-    },
-    {
-      "productId": 8,
-      "title": "Heikala. Рисуем в стиле аниме и манга",
-      "author": "Хейкала",
-      "poster": "https://img-gorod.ru/29/223/2922372_detail.jpg",
-      "count": 3,
-      "price": 1280,
-      "userId": 1,
-      "id": 6
-    },
-    {
-      "productId": 6,
-      "title": "Токийский гуль:re 8. Книга 15-16. Манга",
-      "author": "Исида С.",
-      "poster": "https://img-gorod.ru/28/971/2897149_detail.jpg",
-      "count": 1,
-      "price": 827,
-      "userId": 1,
-      "id": 7
-    },
-    {
-      "productId": 4,
-      "title": "Очень приятно, бог. Том 1",
-      "author": "Джульетта Судзуки",
-      "poster": "https://img-gorod.ru/26/696/2669630_detail.jpg",
       "count": 3,
       "price": 518,
       "userId": 2,
@@ -84,6 +54,28 @@
       "price": 589,
       "userId": 2,
       "id": 12
+    },
+    {
+      "productId": 2,
+      "title": "Торадора! Тигр и Дракон. Том 9",
+      "author": "Ююко Такэмия",
+      "poster": "https://img-gorod.ru/27/980/2798064_detail.jpg",
+      "price": 415,
+      "slug": "toradora-tigr-i-drakon-tom-9",
+      "count": 1,
+      "userId": 1,
+      "id": 13
+    },
+    {
+      "productId": 1,
+      "title": "Naruto. Наруто. Книга 1. Наруто Удзумаки",
+      "author": "Масаси Кисимото",
+      "poster": "https://img-gorod.ru/28/333/2833354_detail.jpg",
+      "price": 926,
+      "slug": "naruto-naruto-kniga-1-naruto-udzumaki",
+      "count": 1,
+      "userId": 1,
+      "id": 14
     }
   ],
   "orders": [],

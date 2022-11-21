@@ -56,8 +56,8 @@ export const fetchGoods = (userId, accessToken) => (dispatch) => {
       "Authorization": `Bearer ${accessToken}`
     }
   })
-    .then(res => {
-      dispatch(cartFetched(res.data))
+    .then(({data}) => {
+      dispatch(cartFetched(data))
     })
     .catch((err) => {
       console.log(err)
@@ -78,7 +78,7 @@ export const addGood = (product, userId, accessToken) => (dispatch) => {
       'Authorization': `Bearer ${accessToken}`
     }
   })
-    .then(() => dispatch(addGoodInState(product)))
+    .then(({data}) => dispatch(addGoodInState(data)))
     .catch((err) => {
       switch (err.request.status) {
         case 500:
@@ -94,6 +94,7 @@ export const addGood = (product, userId, accessToken) => (dispatch) => {
 }
 
 export const deleteGood = (goodId, accessToken) => (dispatch) => {
+  console.log(goodId);
   axios.delete(`http://localhost:3001/600/cart/${goodId}`, {
     headers: {
       'Content-Type': 'application/json',

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import Bookmark from "../../assets/img/svg/Bookmark";
 import { addGood } from "../../pages/Cart/cartSlice";
+import { getAccessToken, getUser } from "../../utils/auth";
 import { stringTrim } from "../../utils/string";
 import { setModal } from "../Form/authSlice";
 
@@ -32,16 +33,17 @@ const Product = ({product}) => {
 
   const checkAuth = () => {
     if (signedIn) {
-      const accessToken = localStorage.getItem('accessToken');
-      const userId = JSON.parse(localStorage.getItem('user')).id;
+      const accessToken = getAccessToken();
+      const userId = getUser().id;
 
       const good = {
         productId: product.id,
         title: product.title,
         author: product.author,
         poster: product.poster,
-        count: 1,
-        price: product.price
+        price: product.price,
+        slug: product.slug,
+        count: 1
       }
       
       dispatch(addGood(good, userId, accessToken));
