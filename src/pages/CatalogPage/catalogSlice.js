@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { calcPages } from "../../utils/pages";
 
 const initialState = {
   products: [],
-  productsLoadingStatus: 'idle'
+  productsLoadingStatus: 'idle',
+  catalogPages: 0
 }
 
 const catalog = createSlice({
@@ -22,6 +24,9 @@ const catalog = createSlice({
     },
     clearCatalog: state => {
       state.products = [];
+    },
+    setCatalogPages: (state, action) => {
+      state.catalogPages = action.payload;
     }
   }
 })
@@ -32,14 +37,17 @@ export const {
   catalogFetching,
   catalogFetched,
   catalogFetchingError,
-  clearCatalog
+  clearCatalog,
+  setCatalogPages
 } = actions;
 
 export const fetchProducts = (page, limit) => (dispatch) => {
   dispatch(catalogFetching());
   axios.get(`http://localhost:3001/444/products?_page=${page}&_limit=${limit}`)
     .then(res => {
-      dispatch(catalogFetched(res.data))
+      console.log(res)
+      dispatch(setCatalogPages(calcPages(res, limit)));
+      dispatch(catalogFetched(res.data));
     })
     .catch(() => dispatch(catalogFetchingError()));
 }

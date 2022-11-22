@@ -39,7 +39,7 @@ const cartSlice = createSlice({
     clearCart: state => {
       state.goods = []
     },
-    setIdleStatus: state => {
+    setCartIdleStatus: state => {
       state.goodsLoadingStatus = 'idle';
     }
   }
@@ -56,7 +56,7 @@ export const {
   deleteGoodInState,
   changeCountInState,
   clearCart,
-  setIdleStatus,
+  setCartIdleStatus,
 } = actions;
 
 export const fetchGoods = (userId, accessToken) => (dispatch) => {
@@ -72,7 +72,7 @@ export const fetchGoods = (userId, accessToken) => (dispatch) => {
     .catch((err) => {
       switch (err.request.status) {
         case 403:
-          dispatch(setIdleStatus(true))
+          dispatch(setCartIdleStatus(true))
           break;
         default:
           console.log('Что-то пошло не так')

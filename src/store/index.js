@@ -1,7 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import catalog from "../components/Catalog/catalogSlice";
+import catalog from "../pages/CatalogPage/catalogSlice";
 import cart from "../pages/Cart/cartSlice";
 import product from "../pages/ProductPage/productSlice";
+import favourites from "../pages/FavouritesPage/favouritesSlice";
 
 import auth from "../components/Form/authSlice";
 
@@ -10,7 +11,8 @@ const store = configureStore({
     auth,
     catalog,
     cart,
-    product
+    product,
+    favourites
   },
   devTools: process.env.NODE_ENV !== 'production'
 });

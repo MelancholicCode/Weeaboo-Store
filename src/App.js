@@ -1,7 +1,6 @@
 import Header from "./components/Header/Header";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Catalog from "./components/Catalog/Catalog";
 import Cart from "./pages/Cart/Cart";
 import ProductPage from "./pages/ProductPage/ProductPage";
 import { useEffect } from "react";
@@ -9,6 +8,7 @@ import { getAccess, setModal } from "./components/Form/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGoods } from "./pages/Cart/cartSlice";
 import { getAccessToken, getUser } from "./utils/auth";
+import CatalogPage from "./pages/CatalogPage/CatalogPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,7 +41,7 @@ function App() {
         <Header/>
         <Routes>
           <Route path="/" element={
-            <Catalog/>
+            <CatalogPage/>
             }/>
           <Route path="/cart" element={
             <Cart/>

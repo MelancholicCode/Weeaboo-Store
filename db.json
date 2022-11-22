@@ -16,17 +16,6 @@
   "favourites": [],
   "cart": [
     {
-      "productId": 3,
-      "title": "Человек-бензопила. Книга 6. Вперед, Человек-бензопила!",
-      "author": "Тацуки Фудзимото",
-      "poster": "https://img-gorod.ru/29/448/2944827_detail.jpg",
-      "price": 589,
-      "slug": "chelovek-benzopila-kniga-6-vpered-chelovek-benzopila",
-      "count": 4,
-      "userId": 2,
-      "id": 17
-    },
-    {
       "productId": 4,
       "title": "Очень приятно, бог. Том 1",
       "author": "Джульетта Судзуки",
@@ -38,15 +27,37 @@
       "id": 18
     },
     {
-      "productId": 2,
-      "title": "Торадора! Тигр и Дракон. Том 9",
-      "author": "Ююко Такэмия",
-      "poster": "https://img-gorod.ru/27/980/2798064_detail.jpg",
-      "price": 415,
-      "slug": "toradora-tigr-i-drakon-tom-9",
+      "productId": 1,
+      "title": "Naruto. Наруто. Книга 1. Наруто Удзумаки",
+      "author": "Масаси Кисимото",
+      "poster": "https://img-gorod.ru/28/333/2833354_detail.jpg",
+      "price": 926,
+      "slug": "naruto-naruto-kniga-1-naruto-udzumaki",
+      "count": 2,
+      "userId": 2,
+      "id": 22
+    },
+    {
+      "productId": 10,
+      "title": "Убийца гоблинов, том 3 (манга)",
+      "author": "Кагю К.",
+      "poster": "https://img-gorod.ru/29/577/2957762_detail.jpg",
+      "price": 792,
+      "slug": "ubiitsa-ghoblinov-tom-3-mangha",
       "count": 1,
+      "userId": 2,
+      "id": 26
+    },
+    {
+      "productId": 3,
+      "title": "Человек-бензопила. Книга 6. Вперед, Человек-бензопила!",
+      "author": "Тацуки Фудзимото",
+      "poster": "https://img-gorod.ru/29/448/2944827_detail.jpg",
+      "price": 589,
+      "slug": "chelovek-benzopila-kniga-6-vpered-chelovek-benzopila",
+      "count": 4,
       "userId": 1,
-      "id": 19
+      "id": 27
     },
     {
       "productId": 4,
@@ -57,7 +68,18 @@
       "slug": "ochien-priiatno-bogh-tom-1",
       "count": 1,
       "userId": 1,
-      "id": 20
+      "id": 28
+    },
+    {
+      "productId": 1,
+      "title": "Naruto. Наруто. Книга 1. Наруто Удзумаки",
+      "author": "Масаси Кисимото",
+      "poster": "https://img-gorod.ru/28/333/2833354_detail.jpg",
+      "price": 926,
+      "slug": "naruto-naruto-kniga-1-naruto-udzumaki",
+      "count": 1,
+      "userId": 1,
+      "id": 29
     },
     {
       "productId": 7,
@@ -68,7 +90,18 @@
       "slug": "death-note-black-edition-kniga-2-manga",
       "count": 1,
       "userId": 1,
-      "id": 21
+      "id": 30
+    },
+    {
+      "productId": 2,
+      "title": "Торадора! Тигр и Дракон. Том 9",
+      "author": "Ююко Такэмия",
+      "poster": "https://img-gorod.ru/27/980/2798064_detail.jpg",
+      "price": 415,
+      "slug": "toradora-tigr-i-drakon-tom-9",
+      "count": 1,
+      "userId": 1,
+      "id": 31
     }
   ],
   "orders": [],
