@@ -13,7 +13,35 @@
       "id": 2
     }
   ],
-  "favourites": [],
+  "favourites": [
+    {
+      "productId": 4,
+      "title": "Очень приятно, бог. Том 1",
+      "poster": "https://img-gorod.ru/26/696/2669630_detail.jpg",
+      "price": 518,
+      "slug": "ochien-priiatno-bogh-tom-1",
+      "userId": 1,
+      "id": 2
+    },
+    {
+      "productId": 2,
+      "title": "Торадора! Тигр и Дракон. Том 9",
+      "poster": "https://img-gorod.ru/27/980/2798064_detail.jpg",
+      "price": 415,
+      "slug": "toradora-tigr-i-drakon-tom-9",
+      "userId": 1,
+      "id": 3
+    },
+    {
+      "productId": 1,
+      "title": "Naruto. Наруто. Книга 1. Наруто Удзумаки",
+      "poster": "https://img-gorod.ru/28/333/2833354_detail.jpg",
+      "price": 926,
+      "slug": "naruto-naruto-kniga-1-naruto-udzumaki",
+      "userId": 1,
+      "id": 4
+    }
+  ],
   "cart": [
     {
       "productId": 1,
@@ -47,6 +75,28 @@
       "count": 3,
       "userId": 2,
       "id": 29
+    },
+    {
+      "productId": 10,
+      "title": "Убийца гоблинов, том 3 (манга)",
+      "poster": "https://img-gorod.ru/29/577/2957762_detail.jpg",
+      "price": 792,
+      "slug": "ubiitsa-ghoblinov-tom-3-mangha",
+      "author": "Кагю К.",
+      "count": 1,
+      "userId": 1,
+      "id": 30
+    },
+    {
+      "productId": 11,
+      "title": "Манга Магическая уборка. Японское искусство наведения порядка дома, на работе и в личной жизни",
+      "poster": "https://img-gorod.ru/29/183/2918341_detail.jpg",
+      "price": 525,
+      "slug": "manga-magicheskaya-uborka-yaponskoe-iskusstvo-navedeniya-poryadka-doma-na-rabote-i-v-lichnoy-zhizni",
+      "author": "Кондо М.",
+      "count": 1,
+      "userId": 1,
+      "id": 31
     }
   ],
   "orders": [],
