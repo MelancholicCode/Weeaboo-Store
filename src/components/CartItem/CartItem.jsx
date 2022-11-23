@@ -1,15 +1,31 @@
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import Bookmark from '../../assets/img/svg/Bookmark';
 import Trash from '../../assets/img/svg/Trash';
 import { changeCount, deleteGood } from '../../pages/Cart/cartSlice';
-import { getAccessToken } from '../../utils/auth';
+import { addFavourite, deleteFavourite } from '../../pages/FavouritesPage/favouritesSlice';
+import { getAccessToken, getUser } from '../../utils/auth';
 
 import cl from './CartItem.module.css';
 
 const CartItem = ({good}) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const {favourites} = useSelector(state => state.favourites);
+  const {signedIn} = useSelector(state => state.auth);
+  const [isFavourite, setIsFavourite] = useState(false);
+  const [currentFavourite, setCurrentFavourite] = useState(false);
+
+  useEffect(() => {
+    setIsFavourite(false);
+    favourites.forEach(item => {
+      if (item.productId === good.productId) {
+        setIsFavourite(true);
+        setCurrentFavourite(item);
+      }
+    })
+  }, [favourites])
 
   const onDeleteGood = () => {
     const accessToken = getAccessToken();
@@ -25,7 +41,26 @@ const CartItem = ({good}) => {
     if (accessToken && count >= 1) {
       dispatch(changeCount(good.id, count, accessToken));
     }
+  }
 
+  const onChangeFavourite = () => {
+    if (signedIn) {
+      const accessToken = getAccessToken();
+      const userId = getUser().id;
+
+      const item = {
+        productId: good.productId,
+        title: good.title,
+        poster: good.poster,
+        price: good.price,
+        slug: good.slug,
+      }
+      if (isFavourite) {
+        dispatch(deleteFavourite(currentFavourite.id, accessToken));
+      } else {
+        dispatch(addFavourite(item, userId, accessToken));
+      }
+    }
   }
 
   return (
@@ -68,10 +103,11 @@ const CartItem = ({good}) => {
         </p>
         <div className={cl.rightButtons}>
           <div
+            onClick={onChangeFavourite}
             className={cl.favourite}>
             <div className={cl.favouriteIcon}>
               <Bookmark
-                color={'#ff4c4c'}/>
+                color={isFavourite ? '#ff4c4c' : '#ddd'}/>
             </div>
             <p>Закладки</p>
           </div>

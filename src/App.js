@@ -9,30 +9,32 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchGoods } from "./pages/Cart/cartSlice";
 import { getAccessToken, getUser } from "./utils/auth";
 import CatalogPage from "./pages/CatalogPage/CatalogPage";
+import { fetchFavourites } from "./pages/FavouritesPage/favouritesSlice";
+import FavouritesPage from "./pages/FavouritesPage/FavouritesPage";
 
 function App() {
   const dispatch = useDispatch();
   const {signedIn} = useSelector(state => state.auth);
 
+  const user = getUser();
+  const accessToken = getAccessToken();
+
   useEffect(() => {
-    const user = getUser();
-    const accessToken = getAccessToken();
-    
     if (user && accessToken) {
       dispatch(getAccess(user.id, accessToken));
     } else {
       dispatch(setModal(true));
     }
+    // eslint-disable-next-line
   }, [dispatch]);
 
   useEffect(() => {
     if (signedIn) {
-      const userId = getUser().id;
-      const accessToken = getAccessToken();
-
-      dispatch(fetchGoods(userId, accessToken));
+      dispatch(fetchFavourites(user.id, accessToken));
+      dispatch(fetchGoods(user.id, accessToken));
       dispatch(setModal(false));
     }
+    // eslint-disable-next-line
   }, [dispatch, signedIn])
   
   return (
@@ -42,7 +44,10 @@ function App() {
         <Routes>
           <Route path="/" element={
             <CatalogPage/>
-            }/>
+          }/>
+            <Route path="/favourites" element={
+            <FavouritesPage/>
+          }/>
           <Route path="/cart" element={
             <Cart/>
           }/>

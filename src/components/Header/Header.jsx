@@ -13,6 +13,7 @@ import ProfileIcon from '../../assets/img/svg/ProfileIcon';
 import Bookmark from '../../assets/img/svg/Bookmark';
 
 import cl from './Header.module.css';
+import { clearFavourites } from '../../pages/FavouritesPage/favouritesSlice';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const Header = () => {
     localStorage.removeItem('user');
     dispatch(closeAccess());
     dispatch(clearCart());
+    dispatch(clearFavourites());
   }
 
   const onOpenModal = (value) => {
@@ -53,7 +55,6 @@ const Header = () => {
             onClick={() => checkPrivateLink('/favourites')}>
             <Bookmark
               color='inherit'/>
-            {signedIn && <p className={`${cl.count} ${cl.favouritesCount}`}>2</p>}
           </div>
           <div
             className={cl.cartBtn}

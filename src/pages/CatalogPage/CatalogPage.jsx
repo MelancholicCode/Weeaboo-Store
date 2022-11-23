@@ -34,6 +34,7 @@ const CatalogPage = () => {
         catalogIsOver={catalogIsOver}
         products={products}
         productsLoadingStatus={productsLoadingStatus}
+        pageTitle='catalog'
       />
     </div>
   );

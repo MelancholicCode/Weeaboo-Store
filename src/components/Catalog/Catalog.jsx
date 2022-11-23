@@ -3,7 +3,7 @@ import Product from "../Product/Product";
 
 import cl from './Catalog.module.css'
 
-const Catalog = ({setPage, catalogIsOver, products, productsLoadingStatus, page}) => {
+const Catalog = ({setPage, catalogIsOver, products, productsLoadingStatus, page, pageTitle}) => {
 
   const renderItems = (arr) => {
     if (arr.length === 0) {
@@ -14,6 +14,7 @@ const Catalog = ({setPage, catalogIsOver, products, productsLoadingStatus, page}
       <Product
         key={item.id}
         product={item}
+        pageTitle={pageTitle}
       />
     ));
   }
@@ -30,9 +31,11 @@ const Catalog = ({setPage, catalogIsOver, products, productsLoadingStatus, page}
         {renderItems(products)}
       </ul>
       {products.length && productsLoadingStatus === 'loading'
-        && <Spinner/>}
-      {!catalogIsOver &&
-        <div onClick={() => setPage(page + 1)} className={cl.loadNewBtn}>Загрузить еще...</div>}
+        ? <Spinner/>
+        : null}
+      {!catalogIsOver && products.length && pageTitle === 'catalog'
+        ? <div onClick={() => setPage(page + 1)} className={cl.loadNewBtn}>Загрузить еще...</div>
+        : null}
     </>
   );
 };

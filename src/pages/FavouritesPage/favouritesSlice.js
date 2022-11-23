@@ -1,12 +1,10 @@
 import axios from "axios";
 import { createSlice } from "@reduxjs/toolkit";
 import { closeAccess } from "../../components/Form/authSlice";
-import { calcPages } from "../../utils/pages";
 
 const initialState = {
   favourites: [],
   favouritesLoadingStatus: 'idle',
-  favouritesPages: 0
 }
 
 const favourites = createSlice({
@@ -26,14 +24,10 @@ const favourites = createSlice({
     clearFavourites: state => {
       state.favourites = []
     },
-    setFavouritesPages: (state, action) => {
-      state.favouritesPages = action.payload;
-    },
-    setIdleStatus: state => {
+    setFavouritesIdleStatus: state => {
       state.favouritesLoadingStatus = 'idle';
     },
     addFavouriteInState: (state, action) => {
-      console.log(action.payload)
       state.favourites.push(action.payload);
     },
     deleteFavouriteInState: (state, action) => {
@@ -55,15 +49,15 @@ export const {
   setFavouritesPages
 } = actions;
 
-export const fetchFavourites = (userId, accessToken, page, limit) => (dispatch) => {
+export const fetchFavourites = (userId, accessToken) => (dispatch) => {
   dispatch(favouritesFetching());
-  axios.get(`http://localhost:3001/600/favourites?userId=${userId}&_page=${page}&_limit=${limit}`, {
+  axios.get(`http://localhost:3001/600/favourites?userId=${userId}`, {
     headers: {
+      'Content-Type': 'application/json',
       "Authorization": `Bearer ${accessToken}`
     }
   })
     .then(res => {
-      dispatch(setFavouritesPages(calcPages(res, limit)));
       dispatch(favouritesFetched(res.data))
     })
     .catch(err => {
