@@ -1,4 +1,4 @@
-import Spinner from '../../assets/spinner/Spinner';
+import Spinner from '../../assets/img/spinner/Spinner';
 import Product from "../Product/Product";
 
 import cl from './Catalog.module.css'

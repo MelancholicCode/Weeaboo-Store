@@ -2,7 +2,7 @@ import CartItem from '../../components/CartItem/CartItem';
 
 import cl from './Cart.module.css';
 import { useSelector } from 'react-redux';
-import Spinner from '../../assets/spinner/Spinner';
+import Spinner from "../../assets/img/spinner/Spinner";
 
 const Cart = () => {
   const {goods, goodsLoadingStatus} = useSelector(state => state.cart);

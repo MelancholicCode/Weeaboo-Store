@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Catalog from '../../components/Catalog/Catalog';
-import { clearCatalog, fetchProducts } from './catalogSlice';
+import { clearCatalog, fetchProducts, setSearchQuery } from './catalogSlice';
 
 import cl from './CatalogPage.module.css';
 
@@ -11,20 +11,33 @@ const CatalogPage = () => {
   const [catalogIsOver, setCatalogIsOver] = useState(false);
   const dispatch = useDispatch();
   const {catalogPages} = useSelector(state => state.catalog);
-  const {products, productsLoadingStatus} = useSelector(state => state.catalog);
+  const {products, productsLoadingStatus, searchQuery} = useSelector(state => state.catalog);
 
   useEffect(() => {
-    return () => dispatch(clearCatalog());
+    return () => {
+      dispatch(clearCatalog());
+      dispatch(setSearchQuery(''));
+    }
     // eslint-disable-next-line
   }, [])
 
   useEffect(() => {
-    dispatch(fetchProducts(page, limit));
-    if (page === catalogPages) {
-      setCatalogIsOver(true);
+    if (!searchQuery.length) {
+      dispatch(fetchProducts(page, limit));
+    } else {
+      setPage(1);
+      dispatch(fetchProducts(page, limit, searchQuery))
     }
     // eslint-disable-next-line
-  }, [page]);
+  }, [page, searchQuery]);
+
+  useEffect(() => {
+    if (page === catalogPages) {
+      setCatalogIsOver(true);
+    } else if (page < catalogPages) {
+      setCatalogIsOver(false);
+    }
+  }, [page, catalogPages]);
 
   return (
     <div className={`container ${cl.catalogContainer}`}>

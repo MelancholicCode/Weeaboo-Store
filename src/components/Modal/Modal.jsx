@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 
 import Close from '../../assets/img/svg/Close';
 import Form from '../Form/Form';
-import Spinner from '../../assets/spinner/Spinner';
+import Spinner from "../../assets/img/spinner/Spinner";
 
 import cl from './Modal.module.css';
 

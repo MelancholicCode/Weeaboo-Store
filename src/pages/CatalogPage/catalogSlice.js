@@ -5,7 +5,8 @@ import { calcPages } from "../../utils/pages";
 const initialState = {
   products: [],
   productsLoadingStatus: 'idle',
-  catalogPages: 0
+  catalogPages: null,
+  searchQuery: ''
 }
 
 const catalog = createSlice({
@@ -23,10 +24,14 @@ const catalog = createSlice({
       state.productsLoadingStatus = 'error';
     },
     clearCatalog: state => {
+      console.log(state.products)
       state.products = [];
     },
     setCatalogPages: (state, action) => {
       state.catalogPages = action.payload;
+    },
+    setSearchQuery: (state, action) => {
+      state.searchQuery = action.payload;
     }
   }
 })
@@ -38,14 +43,19 @@ export const {
   catalogFetched,
   catalogFetchingError,
   clearCatalog,
-  setCatalogPages
+  setCatalogPages,
+  setSearchQuery
 } = actions;
 
-export const fetchProducts = (page, limit) => (dispatch) => {
+export const fetchProducts = (page, limit, query) => (dispatch) => {
+  let searchTerm;
+  if (query) {
+    searchTerm = `&q=${query}`
+  }
   dispatch(catalogFetching());
-  axios.get(`http://localhost:3001/444/products?_page=${page}&_limit=${limit}`)
+  axios.get(`http://localhost:3001/444/products?_page=${page}&_limit=${limit}${searchTerm}`)
     .then(res => {
-      console.log(res)
+      console.log(res, calcPages(res, limit))
       dispatch(setCatalogPages(calcPages(res, limit)));
       dispatch(catalogFetched(res.data));
     })

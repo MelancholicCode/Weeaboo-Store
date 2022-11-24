@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Spinner from "../../assets/spinner/Spinner";
+import Spinner from "../../assets/img/spinner/Spinner";
 import ProductCard from "./ProductCard/ProductCard";
 
 import cl from './ProductPage.module.css'

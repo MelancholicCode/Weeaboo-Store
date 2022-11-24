@@ -25,6 +25,7 @@ const CartItem = ({good}) => {
         setCurrentFavourite(item);
       }
     })
+    // eslint-disable-next-line
   }, [favourites])
 
   const onDeleteGood = () => {
