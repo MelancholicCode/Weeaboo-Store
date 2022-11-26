@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import Bookmark from "../../assets/img/svg/Bookmark";
+import BookmarkIcon from "../../assets/img/svg/BookmarkIcon";
 import { addGood } from "../../pages/Cart/cartSlice";
 import { addFavourite, deleteFavourite } from "../../pages/FavouritesPage/favouritesSlice";
 import { getAccessToken, getUser } from "../../utils/auth";
@@ -111,7 +111,7 @@ const Product = ({product, pageTitle}) => {
           onClick={() => onAddProduct('favourites')}
           className={cl.favourite}
           >
-          <Bookmark
+          <BookmarkIcon
             color={isFavourite ? '#ff4c4c' : '#ddd'}/>
         </div>
       </div>

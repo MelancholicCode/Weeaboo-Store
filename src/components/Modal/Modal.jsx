@@ -1,13 +1,19 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Close from '../../assets/img/svg/Close';
 import Form from '../Form/Form';
 import Spinner from "../../assets/img/spinner/Spinner";
 
 import cl from './Modal.module.css';
+import { setModal } from '../Form/authSlice';
 
-const Modal = ({onOpenModal}) => {
+const Modal = () => {
+  const dispatch = useDispatch();
   const {authLoadingStatus, modal} = useSelector(state => state.auth);
+
+  const onOpenModal = (value) => {
+    dispatch(setModal(value));
+  }
 
   return (
     <div
@@ -17,9 +23,9 @@ const Modal = ({onOpenModal}) => {
         onClick={e => e.stopPropagation()}
         className={cl.modalContent}>
         <div
+          onClick={() => onOpenModal(false)}
           className={cl.closeBtn}>
-          <Close
-            onOpenModal={onOpenModal}/>
+          <Close/>
         </div>
         {authLoadingStatus === 'loading'
           ? <Spinner/>

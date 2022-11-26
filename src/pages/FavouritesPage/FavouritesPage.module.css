@@ -1,0 +1,9 @@
+.FavouritesPage {
+  padding-top: 90px;
+}
+
+@media (max-width: 480px) {
+  .FavouritesPage {
+    padding-top: 65px;
+  }
+}

@@ -13,7 +13,26 @@
       "id": 2
     }
   ],
-  "favourites": [],
+  "favourites": [
+    {
+      "productId": 1,
+      "title": "Naruto. Наруто. Книга 1. Наруто Удзумаки",
+      "poster": "https://img-gorod.ru/28/333/2833354_detail.jpg",
+      "price": 926,
+      "slug": "naruto-naruto-kniga-1-naruto-udzumaki",
+      "userId": 1,
+      "id": 1
+    },
+    {
+      "productId": 2,
+      "title": "Торадора! Тигр и Дракон. Том 9",
+      "poster": "https://img-gorod.ru/27/980/2798064_detail.jpg",
+      "price": 415,
+      "slug": "toradora-tigr-i-drakon-tom-9",
+      "userId": 1,
+      "id": 2
+    }
+  ],
   "cart": [
     {
       "productId": 1,
@@ -47,6 +66,72 @@
       "count": 3,
       "userId": 2,
       "id": 29
+    },
+    {
+      "productId": 1,
+      "title": "Naruto. Наруто. Книга 1. Наруто Удзумаки",
+      "poster": "https://img-gorod.ru/28/333/2833354_detail.jpg",
+      "price": 926,
+      "slug": "naruto-naruto-kniga-1-naruto-udzumaki",
+      "author": "Масаси Кисимото",
+      "count": 1,
+      "userId": 1,
+      "id": 30
+    },
+    {
+      "productId": 4,
+      "title": "Очень приятно, бог. Том 1",
+      "poster": "https://img-gorod.ru/26/696/2669630_detail.jpg",
+      "price": 518,
+      "slug": "ochien-priiatno-bogh-tom-1",
+      "author": "Джульетта Судзуки",
+      "count": 1,
+      "userId": 1,
+      "id": 31
+    },
+    {
+      "productId": 3,
+      "title": "Человек-бензопила. Книга 6. Вперед, Человек-бензопила!",
+      "poster": "https://img-gorod.ru/29/448/2944827_detail.jpg",
+      "price": 589,
+      "slug": "chelovek-benzopila-kniga-6-vpered-chelovek-benzopila",
+      "author": "Тацуки Фудзимото",
+      "count": 1,
+      "userId": 1,
+      "id": 32
+    },
+    {
+      "productId": 2,
+      "title": "Торадора! Тигр и Дракон. Том 9",
+      "poster": "https://img-gorod.ru/27/980/2798064_detail.jpg",
+      "price": 415,
+      "slug": "toradora-tigr-i-drakon-tom-9",
+      "author": "Ююко Такэмия",
+      "count": 1,
+      "userId": 1,
+      "id": 33
+    },
+    {
+      "productId": 11,
+      "title": "Манга Магическая уборка. Японское искусство наведения порядка дома, на работе и в личной жизни",
+      "poster": "https://img-gorod.ru/29/183/2918341_detail.jpg",
+      "price": 525,
+      "slug": "manga-magicheskaya-uborka-yaponskoe-iskusstvo-navedeniya-poryadka-doma-na-rabote-i-v-lichnoy-zhizni",
+      "author": "Кондо М.",
+      "count": 1,
+      "userId": 1,
+      "id": 34
+    },
+    {
+      "productId": 6,
+      "title": "Токийский гуль:re 8. Книга 15-16. Манга",
+      "poster": "https://img-gorod.ru/28/971/2897149_detail.jpg",
+      "price": 827,
+      "slug": "tokiyskiy-gul-re-8-kniga-15-16-manga",
+      "author": "Исида С.",
+      "count": 1,
+      "userId": 1,
+      "id": 35
     }
   ],
   "orders": [],

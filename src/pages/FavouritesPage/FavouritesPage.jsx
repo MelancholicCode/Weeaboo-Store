@@ -7,7 +7,7 @@ const FavouritesPage = () => {
   const {favourites, favouritesLoadingStatus} = useSelector(state => state.favourites);
 
   return (
-    <div className={`container ${cl.catalogContainer}`}>
+    <div className={`container ${cl.FavouritesPage}`}>
       <Catalog
         products={favourites}
         productsLoadingStatus={favouritesLoadingStatus}

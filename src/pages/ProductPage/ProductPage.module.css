@@ -1,5 +1,11 @@
 .ProductPage {
-  padding: 20px 0 80px;
+  padding: 110px 15px 80px;
+}
+
+@media (max-width: 480px) {
+  .ProductPage {
+    padding-top: 85px;
+  }
 }
 
 .productTitle {
@@ -8,4 +14,24 @@
 
 .productDescr {
   line-height: 1.8em;
+}
+
+@media (max-width: 768px) {
+  .productTitle {
+    font-size: 18px;
+  }
+
+  .productDescr {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .productTitle {
+    font-size: 16px;
+  }
+
+  .productDescr {
+    font-size: 12px;
+  }
 }

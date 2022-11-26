@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import Bookmark from '../../assets/img/svg/Bookmark';
+import Bookmark from '../../assets/img/svg/BookmarkIcon';
 import Trash from '../../assets/img/svg/Trash';
 import { changeCount, deleteGood } from '../../pages/Cart/cartSlice';
 import { addFavourite, deleteFavourite } from '../../pages/FavouritesPage/favouritesSlice';
@@ -66,24 +66,23 @@ const CartItem = ({good}) => {
 
   return (
     <li className={cl.cartListItem}>
-      <div className={cl.productCard}>
+      <Link
+        className={cl.productCardImage}
+        to={`/catalog/${good.slug}`}>
+        <img height="100%" width="100%" src={good.poster} alt="" />
+      </Link>
+      <div className={cl.productCardDescr}>
         <Link
           className="product-content"
           to={`/catalog/${good.slug}`}>
-          <div className={cl.productCardImage}>
-            <img height="100%" width="100%" src={good.poster} alt="" />
-          </div>
+          <p className={cl.goodName}>{good.title}</p>
         </Link>
-        <div className={cl.productCardDescr}>
-          <Link
-            className="product-content"
-            to={`/catalog/${good.slug}`}>
-            <p className={cl.goodName}>{good.title}</p>
-          </Link>
-          <p className={cl.goodAuthor}>{good.author}</p>
-        </div>
+        <p className={cl.goodAuthor}>{good.author}</p>
       </div>
       <div className={cl.productButtons}>
+        <p className={cl.price}>
+          {good.price} ₽
+        </p>
         <div className={cl.leftButtons}>
           <div
             onClick={() => onChangeCount(good.count - 1)}
@@ -99,14 +98,11 @@ const CartItem = ({good}) => {
             +
           </div>
         </div>
-        <p className={cl.price}>
-          {good.price} ₽
-        </p>
         <div className={cl.rightButtons}>
           <div
             onClick={onChangeFavourite}
-            className={cl.favourite}>
-            <div className={cl.favouriteIcon}>
+            className={cl.productBtn}>
+            <div className={cl.btnIcon}>
               <Bookmark
                 color={isFavourite ? '#ff4c4c' : '#ddd'}/>
             </div>
@@ -114,8 +110,8 @@ const CartItem = ({good}) => {
           </div>
           <div
             onClick={onDeleteGood}
-            className={cl.delete}>
-            <div className={cl.deleteIcon}>
+            className={cl.productBtn}>
+            <div className={cl.btnIcon}>
               <Trash/>
             </div>
             <p>Удалить</p>

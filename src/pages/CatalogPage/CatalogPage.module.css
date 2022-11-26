@@ -1,0 +1,9 @@
+.CatalogPage {
+  padding-top: 90px;
+}
+
+@media (max-width: 480px) {
+  .CatalogPage {
+    padding-top: 65px;
+  }
+}

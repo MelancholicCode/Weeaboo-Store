@@ -40,7 +40,7 @@ const CatalogPage = () => {
   }, [page, catalogPages]);
 
   return (
-    <div className={`container ${cl.catalogContainer}`}>
+    <div className={`container ${cl.CatalogPage}`}>
       <Catalog
         page={page}
         setPage={setPage}

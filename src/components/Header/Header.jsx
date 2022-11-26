@@ -4,22 +4,30 @@ import { useNavigate } from 'react-router-dom';
 import { closeAccess, setModal } from '../Form/authSlice';
 import { clearCart } from '../../pages/Cart/cartSlice';
 import Search from '../Search/Search';
-import Modal from '../Modal/Modal';
 
-import Cart from '../../assets/img/svg/Cart';
+import CartIcon from '../../assets/img/svg/CartIcon';
+import BookmarkIcon from '../../assets/img/svg/BookmarkIcon';
 import Logo from '../../assets/img/svg/Logo';
 import LogOutIcon from '../../assets/img/svg/LogOutIcon';
 import ProfileIcon from '../../assets/img/svg/ProfileIcon';
-import Bookmark from '../../assets/img/svg/Bookmark';
 
 import cl from './Header.module.css';
 import { clearFavourites } from '../../pages/FavouritesPage/favouritesSlice';
+import { useEffect } from 'react';
 
-const Header = () => {
+const Header = ({menuActive, setMenuActive}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const goodsLength = useSelector(state => state.cart.goods.length)
-  const {signedIn} = useSelector(state => state.auth);
+  const {signedIn, modal} = useSelector(state => state.auth);
+
+  useEffect(() => {
+    if (modal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [modal])
 
   const signOut = () => {
     localStorage.removeItem('accessToken');
@@ -33,6 +41,11 @@ const Header = () => {
     dispatch(setModal(value))
   }
 
+  const onOpenMenu = () => {
+    setMenuActive(true);
+    document.body.style.overflow = 'hidden';
+  }
+
   const checkPrivateLink = (route) => {
     if (signedIn) {
       navigate(route)
@@ -43,35 +56,34 @@ const Header = () => {
 
   return (
     <header className={cl.Header}>
-      <Modal
-        onOpenModal={onOpenModal}/>
       <div className={`container ${cl.headerContainer}`}>
-        <Link to="/">
+        <Link className={cl.logo} to="/">
           <Logo/>
         </Link>
         <Search/>
         <div className={cl.headerLinkBtns}>
           <div
+            className={cl.favourite}
             onClick={() => checkPrivateLink('/favourites')}>
-            <Bookmark
+            <BookmarkIcon
               color='inherit'/>
           </div>
           <div
             className={cl.cartBtn}
             onClick={() => checkPrivateLink('/cart')}>
-            <Cart/>
+            <CartIcon/>
             {signedIn && goodsLength
               ? <p className={`${cl.count} ${cl.cartCount}`}>{goodsLength}</p>
               : null}
           </div>
           {signedIn
             ? <>
-                <div className={cl.profileBtn}>
-                  <ProfileIcon/>
-                </div>
-                  <Link to='/' className={cl.logoutBtn} onClick={signOut}>
-                    <LogOutIcon/>
-                  </Link>
+              <div className={cl.profileBtn}>
+                <ProfileIcon/>
+              </div>
+              <Link className={cl.logoutBtn} to='/' onClick={signOut}>
+                <LogOutIcon/>
+              </Link>
               </>
             : <div
                 onClick={() => onOpenModal(true)}
@@ -79,6 +91,11 @@ const Header = () => {
                   Вход
               </div>
             }
+        </div>
+        <div
+            onClick={onOpenMenu}
+            className={cl.burgerBtn}>
+            <span/>
         </div>
       </div>
     </header>

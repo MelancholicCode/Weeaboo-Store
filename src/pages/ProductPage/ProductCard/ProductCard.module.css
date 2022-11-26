@@ -1,19 +1,20 @@
 .productCard {
-  display: flex;
+  display: grid;
+  grid-template-areas: 'img descr descr . . .'
+                        'img price price . . .';
+  margin-bottom: 20px;
 }
 
 .productCardImage {
-  width: 30%;
-  height: 40%;
-}
-
-.rightBlock {
-  margin-left: 50px;
+  margin: auto 0;
+  margin-right: 30px;
+  grid-area: img;
+  height: 400px;
+  width: 250px;
 }
 
 .productCardDescr {
-  margin-left: 50px;
-  margin-top: 50px;
+  grid-area: descr;
 }
 
 .productName {
@@ -25,14 +26,14 @@
 }
 
 .purchaseBlock {
+  grid-area: price;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 50px 30px;
-  width: 200px;
+  max-width: 200px;
   margin-top: 10%;
-  margin-left: 50px;
   background-color: #ddd;
 }
 
@@ -45,8 +46,8 @@
 .productBtn {
   cursor: pointer;
   text-align: center;
-  height: 50px;
-  width: 150px;
+  padding: 1em 1em;
+  width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,4 +61,57 @@
   background-color: #fff;
   color: #ff3636;
   border: 1px solid #ff3636;
+}
+
+@media (max-width: 768px) {
+  .productCardImage {
+    height: 300px;
+    width: 200px;
+  }
+
+  .productName {
+    font-size: 18px;
+  }
+
+  .purchaseBlock {
+    padding: 20px;
+    max-width: 150px;
+  }
+
+  .productPrice {
+    font-size: 18px;
+  }
+
+  .productBtn {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .productCardImage {
+    height: 180px;
+    width: 120px;
+    margin-right: 15px;
+  }
+  
+  .productName {
+    font-size: 14px;
+  }
+
+  .productAuthor {
+    font-size: 14px;
+  }
+
+  .purchaseBlock {
+    padding: 15px;
+    max-width: 120px;
+  }
+
+  .productPrice {
+    font-size: 16px;
+  }
+
+  .productBtn {
+    font-size: 10px;
+  }
 }

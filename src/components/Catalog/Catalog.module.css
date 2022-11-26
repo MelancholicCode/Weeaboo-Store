@@ -1,9 +1,6 @@
-.catalogContainer {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
 .productsList {
+  width: 100%;
+  padding: 20px 0;
   display: grid;
   gap: 10px 0;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -20,4 +17,19 @@
   background-color: #ff3636;
   border-radius: 5px;
   text-align: center;
+}
+
+@media (max-width: 1024px) {
+  .productsList {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .loadNewBtn {
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 10px;
+    width: 90px;
+  }
 }

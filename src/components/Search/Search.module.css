@@ -1,9 +1,14 @@
+.search {
+  margin-right: 40px;
+  width: 400px;
+}
+
 .searchInput {
   border-radius: 5px;
   outline: none;
   background-color: #fff;
-  border: 1px solid #999;
-  width: 400px;
+  border: 1px solid #000;
+  width: 100%;
   font-family: 'Montserrat';
   font-size: 20px;
   padding: 10px;
@@ -11,5 +16,18 @@
 
 .searchInput:disabled {
   background-color: #ddd;
-  border: 1px solid #999;
+  border: 1px solid #000;
+}
+
+@media (max-width: 768px) {
+  .searchInput {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .searchInput {
+    font-size: 14px;
+    padding: 6px;
+  }
 }

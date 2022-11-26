@@ -1,7 +1,9 @@
 .Header {
+  position: fixed;
   width: 100%;
-  height: 100px;
-  background: linear-gradient(60deg, #ff4c4c, #ff7c7c);
+  height: 90px;
+  background-color: #fff;
+  box-shadow: 0 0 5px #000;
 }
 
 .headerContainer {
@@ -9,6 +11,13 @@
   justify-content: space-between;
   align-items: center;
   height: 100%;
+}
+
+.logo {
+  width: 130px;
+  height: 100px;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 .headerLinkBtns {
@@ -24,23 +33,15 @@
   color: #ff4c4c;
   text-align: center;
   font-weight: 600;
-  width: 20px;
-  height: 20px;
+  font-size: 14;
+  width: 18px;
+  height: 18px;
   background-color: #fff;
   border-radius: 15px;
 }
 
-.favouritesCount {
-  transform: translate(1.6em, -1.3em);
-}
-
 .cartCount {
-  transform: translate(0.6em, -1.4em);
-}
-
-.cartBtn {
-  margin-left: 20px;
-  width: max-content;
+  transform: translate(0.7em, -1.6em);
 }
 
 .loginBtn {
@@ -53,18 +54,118 @@
   width: 100px;
   border-radius: 10px;
   background-color: #fff;
-  color: #666;
-  border: 1px solid #999;
+  color: #000;
+  border: 1px solid #000;
+}
+
+.favourite {
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+}
+
+.cartBtn {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  margin-left: 20px;
 }
 
 .profileBtn {
   margin-left: 15px;
   cursor: pointer;
-  height: 80%;
+  width: 35px;
+  height: 35px;
 }
 
 .logoutBtn {
   margin-left: 10px;
   cursor: pointer;
-  height: 80%;
+  width: 35px;
+  height: 35px;
+}
+
+.burgerBtn {
+  cursor: pointer;
+  display: none;
+  width: 30px;
+  height: 20px;
+  position: relative;
+}
+
+.burgerBtn::before {
+  content: '';
+  position: absolute;
+  top: 9px;
+  width: 30px;
+  height: 3px;
+  background-color: black;
+}
+
+.burgerBtn span {
+  position: absolute;
+  top: 0;
+  width: 30px;
+  height: 3px;
+  background-color: black;
+}
+
+.burgerBtn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 30px;
+  height: 3px;
+  background-color: black;
+}
+
+@media (max-width: 768px) {
+  .logo {
+    width: 90px;
+    height: 70px;
+  }
+  
+  .headerLinkBtns {
+    display: none;
+  }
+  
+  .burgerBtn {
+    display: block;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    width: 100px;
+    height: 50px;
+  }
+  
+  .headerLinkBtns {
+    display: none;
+  }
+  
+  .burgerBtn {
+    display: block;
+  }
+}
+
+@media (max-width: 480px) {
+  .Header {
+    height: 65px;
+  }
+
+  .burgerBtn {
+    width: 25px;
+    height: 18px;
+  }
+
+  .burgerBtn::before,
+  .burgerBtn::after,
+  .burgerBtn span {
+    width: 25px;
+  }
+
+  .burgerBtn::before {
+    top: 8px;
+  }
 }

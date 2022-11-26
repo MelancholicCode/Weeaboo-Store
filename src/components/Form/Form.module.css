@@ -12,7 +12,7 @@
   align-items: center;
   font-size: 1.3em;
   height: 4em;
-  width: 10em;
+  width: 100%;
 }
 
 .signInBtn.active, .signUpBtn.active {
@@ -50,4 +50,39 @@
   border: none;
   background-color: #ff4c4c;
   color: #fff;
+}
+
+@media (max-width: 1024px) {
+  .signInBtn, .signUpBtn {
+    font-size: 1.2em;
+    height: 3.5em;
+  }
+
+  .authLabel {
+    font-size: 14px;
+  }
+
+  .authInput {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .submitBtn {
+    font-size: 18px;
+  }
+}
+@media (max-width: 768px) {
+  .signInBtn, .signUpBtn {
+    font-size: 0.8em;
+    height: 3em;
+  }
+
+  .submitBtn {
+    font-size: 16px;
+  }
+
+  .authInput {
+    padding: 6px;
+  }
 }

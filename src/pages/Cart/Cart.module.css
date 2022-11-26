@@ -1,8 +1,14 @@
 .Cart {
+  padding-top: 90px;
   display: flex;
   justify-content: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px inherit;
+}
+
+@media (max-width: 480px) {
+  .Cart {
+    padding-top: 65px;
+  }
 }
 
 .cartList {
@@ -15,4 +21,10 @@
   font-size: 28px;
   padding-top: 20px;
   padding-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .Cart {
+    padding: 15px inherit;
+  }
 }
