@@ -39,7 +39,7 @@ const CartItem = ({good}) => {
   const onChangeCount = (count) => {
     const accessToken = getAccessToken();
 
-    if (accessToken && count >= 1) {
+    if (accessToken && count >= 1 && count <= 30) {
       dispatch(changeCount(good.id, count, accessToken));
     }
   }

@@ -16,12 +16,29 @@ import FavouritesPage from "./pages/FavouritesPage/FavouritesPage";
 import Menu from "./components/Menu/Menu";
 import ProfileIcon from "./assets/img/svg/ProfileIcon";
 import BookmarkIcon from "./assets/img/svg/BookmarkIcon";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 
 function App() {
   const [menuActive, setMenuActive] = useState(false);
   const dispatch = useDispatch();
   const {signedIn} = useSelector(state => state.auth);
-  const menuItems = [{title: 'Профиль', path: '/', icon: <ProfileIcon/>}, {title: 'Корзина', path: '/cart', icon: <CartIcon/>}, {title: 'Избранное', path: '/favourites', icon: <BookmarkIcon/>}]
+  const menuItems = [
+    {
+      title: 'Профиль',
+      path: '/profile',
+      icon: <ProfileIcon/>
+    },
+    {
+      title: 'Корзина',
+      path: '/cart',
+      icon: <CartIcon/>
+    },
+    {
+      title: 'Избранное',
+      path: '/favourites',
+      icon: <BookmarkIcon/>
+    }
+  ]
 
   const user = getUser();
   const accessToken = getAccessToken();
@@ -65,6 +82,9 @@ function App() {
           }/>
           <Route path="/cart" element={
             <Cart/>
+          }/>
+          <Route path="/profile" element={
+            <ProfilePage/>
           }/>
           <Route path="/catalog/:slug" element={<ProductPage/>}/>
         </Routes>

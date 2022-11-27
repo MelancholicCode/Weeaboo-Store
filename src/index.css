@@ -58,3 +58,24 @@ button {
   width: 35px;
   height: 35px;
 }
+
+.emptyPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .emptyPage {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .emptyPage {
+    font-size: 16px;
+  }
+}

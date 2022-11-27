@@ -48,7 +48,7 @@ export const {
 } = actions;
 
 export const fetchProducts = (page, limit, query) => (dispatch) => {
-  let searchTerm;
+  let searchTerm = '';
   if (query) {
     searchTerm = `&q=${query}`
   }

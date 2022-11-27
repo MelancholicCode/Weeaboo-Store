@@ -67,7 +67,7 @@ const Menu = ({header, items, menuActive, setMenuActive}) => {
                   <div onClick={() => checkPrivateLink(item.path)} className={cl.menuNavLink} to={item.path}>
                     <div className={cl.menuIcon}>
                       {item.icon}
-                      {item.path === '/cart' ? <p className={`${cl.count} ${cl.cartCount}`}>{goodsLength}</p> : null}
+                      {item.path === '/cart' && goodsLength ? <p className={`${cl.count} ${cl.cartCount}`}>{goodsLength}</p> : null}
                     </div>
                     <p className={cl.menuLinkText}>{item.title}</p>
                   </div>

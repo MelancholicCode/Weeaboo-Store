@@ -39,6 +39,12 @@ const CatalogPage = () => {
     }
   }, [page, catalogPages]);
 
+  if (!products.length) {
+    <div className={`container ${cl.CatalogPage}`}>
+      <p className="emptyPage">Товаров нет в наличии</p>
+    </div>
+  }
+
   return (
     <div className={`container ${cl.CatalogPage}`}>
       <Catalog
