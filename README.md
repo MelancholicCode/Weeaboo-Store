@@ -1,5 +1,5 @@
 # Weeaboo Store
----
+
 Weeaboo Store - интернет-магазин манги, написанный на __React + Redux__.
 
 В качестве бэкенда использует __[json-server](https://www.npmjs.com/package/json-server)__ с __[json-server-auth](https://www.npmjs.com/package/json-server-auth)__. Для запросов на сервер - библиотеку __[axios](https://www.npmjs.com/package/axios)__.
