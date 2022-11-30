@@ -7,7 +7,7 @@ import Search from '../Search/Search';
 
 import CartIcon from '../../assets/img/svg/CartIcon';
 import BookmarkIcon from '../../assets/img/svg/BookmarkIcon';
-import Logo from '../../assets/img/svg/Logo';
+import Logo from '../../assets/img/Logo/Logo';
 import LogOutIcon from '../../assets/img/svg/LogOutIcon';
 import ProfileIcon from '../../assets/img/svg/ProfileIcon';
 

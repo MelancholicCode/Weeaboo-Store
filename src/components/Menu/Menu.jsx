@@ -1,17 +1,38 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import BookmarkIcon from '../../assets/img/svg/BookmarkIcon';
+import CartIcon from '../../assets/img/svg/CartIcon';
 import Close from '../../assets/img/svg/Close';
 import LogOutIcon from '../../assets/img/svg/LogOutIcon';
+import ProfileIcon from '../../assets/img/svg/ProfileIcon';
 import { clearCart } from '../../pages/Cart/cartSlice';
 import { clearFavourites } from '../../pages/FavouritesPage/favouritesSlice';
 import { closeAccess, setModal } from '../Form/authSlice';
 import cl from './Menu.module.css';
 
-const Menu = ({header, items, menuActive, setMenuActive}) => {
+const Menu = ({header, menuActive, setMenuActive}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {signedIn} = useSelector(state => state.auth);
   const goodsLength = useSelector(state => state.cart.goods.length)
+
+  const items = [
+    {
+      title: 'Профиль',
+      path: '/account/profile',
+      icon: <ProfileIcon/>
+    },
+    {
+      title: 'Корзина',
+      path: '/cart',
+      icon: <CartIcon/>
+    },
+    {
+      title: 'Избранное',
+      path: '/favourites',
+      icon: <BookmarkIcon/>
+    }
+  ]
 
   const onCloseMenu = () => {
     setMenuActive(false);

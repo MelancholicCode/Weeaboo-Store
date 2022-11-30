@@ -1,4 +1,4 @@
-import logo from '../../../assets/img/weeaboo-store-logo.png';
+import logo from './weeaboo-store-logo.png';
 
 const Logo = () => {
   return (
