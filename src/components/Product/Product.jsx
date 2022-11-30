@@ -89,12 +89,14 @@ const Product = ({product, pageTitle}) => {
   return (
     <li className={cl.productItem}>
       <Link
-        className={cl.productContent}
-        to={`/catalog/${product.slug}`}>
-        <div className={cl.productPoster}>
-          <img height='100%' src={product.poster} alt=""/>
-        </div>
-        <p className={cl.productName}>{stringTrim(product.title, 30)}</p>
+        to={`/catalog/${product.slug}`}
+        className={cl.productPoster}>
+        <img height='100%' width='100%' src={product.poster} alt=""/>
+      </Link>
+      <Link
+        to={`/catalog/${product.slug}`}
+        className={cl.productName}>
+          {stringTrim(product.title, 30)}
       </Link>
       <p className={cl.price}>{product.price} ₽</p>
       <div className={cl.btns}>

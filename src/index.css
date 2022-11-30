@@ -68,6 +68,14 @@ button {
   padding-bottom: 20px;
 }
 
+.alertMessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  font-size: 1.4em;
+}
+
 @media (max-width: 768px) {
   .emptyPage {
     font-size: 20px;

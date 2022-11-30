@@ -22,7 +22,6 @@ const authSlice = createSlice({
     },
     getUserError: state => {
       state.authLoadingStatus = 'error';
-      state.signedIn = false;
     },
     closeAccess: state => {
       state.signedIn = false;
@@ -56,7 +55,7 @@ export const authUser = (user, route) => (dispatch) => {
       localStorage.setItem('user', JSON.stringify(res.data.user))
       dispatch(getUserData(res.data.user))
     })
-    .catch(() => dispatch(getUserError()))
+    .catch(() => dispatch(getUserError()));
 }
 
 export const getAccess = (userId, accessToken) => (dispatch) => {
@@ -76,5 +75,47 @@ export const getAccess = (userId, accessToken) => (dispatch) => {
       localStorage.removeItem('user')
       localStorage.removeItem('accessToken')
       dispatch(setModal(true))
+    });
+}
+
+export const checkPassword = (userData, setStage, setErrorMessage) => (dispatch) => {
+  dispatch(() => getUserLoading())
+  axios.post(`http://localhost:3001/login`, userData)
+    .then(res => {
+      localStorage.setItem('accessToken', res.data.accessToken)
+      localStorage.setItem('user', JSON.stringify(res.data.user))
+      dispatch(getUserData(res.data.user))
+      setStage(2);
+      setErrorMessage('')
+    })
+    .catch(() => setErrorMessage('Неправильный пароль'));
+}
+
+export const changePassword = (userId, newPassword, accessToken, setStage, setErrorMessage) => (dispatch) => {
+  dispatch(() => getUserLoading())
+  axios.patch(`http://localhost:3001/users/${userId}`, {password: newPassword}, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`
+    }
+  })
+    .then(res => {
+      localStorage.setItem('user', JSON.stringify(res.data));
+      dispatch(getUserData(res.data));
+      setStage(3);
+      setErrorMessage('');
+    })
+    .catch((err) => {
+      switch(err) {
+        case 400:
+          setErrorMessage('Пароль слишком мал')
+          break;
+        case 401:
+          dispatch(closeAccess());
+          break;
+        default:
+          break;
+      }
+      setErrorMessage('Пароль слишком мал')
     });
 }

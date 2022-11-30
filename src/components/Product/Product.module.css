@@ -1,7 +1,9 @@
 .productItem {
+  position: relative;
   padding: 20px 40px;
+  width: 100%;
   max-width: 160px;
-  max-height: 300px;
+  height: 300px;
   font-size: 14px;
   justify-self: center;
 }
@@ -12,33 +14,38 @@
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.14);
 }
 
-.productContent {
-  cursor: pointer;
-  margin-bottom: 5px;
-}
-
 .productPoster {
+  display: block;
+  cursor: pointer;
+  grid-area: img;
   text-align: center;
-  width: 100%;
-  height: 50%;
+  width: 60%;
+  margin: 0 auto;
+  height: 150px;
   margin-bottom: 10px;
 }
 
 .productName {
-  margin-bottom: 5px;
+  grid-area: title;
   word-wrap: break-word;
 }
 
 .price {
+  grid-area: price;
   font-weight: 600;
+  margin-top: 10px;
   margin-bottom: 20px;
   font-size: 18px;
 }
 
 .btns {
+  grid-area: btns;
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  max-width: 160px;
   height: max-content;
   margin: 0 auto;
-  margin-top: auto;
   display: flex;
   align-items: center;
   font-size: 0.9em;
@@ -46,10 +53,8 @@
 
 .buyBtn {
   cursor: pointer;
-  min-width: max-content;
-  width: 50%;
-  margin: 0 auto;
-  margin-top: auto;
+  width: 100%;
+  max-width: 80px;
   padding: 15px;
   color: #fff;
   background-color: #ff3636;
@@ -64,17 +69,13 @@
 }
 
 .favourite {
+  margin-left: 20px;
   width: 35px;
   height: 35px;
   cursor: pointer;
-  height: 30px;
 }
 
 @media (max-width: 768px) {
-  .buyBtn {
-    width: 40%;
-  }
-
   .price {
     margin-bottom: 15px;
     font-size: 16px;
@@ -87,32 +88,70 @@
     font-size: 14px;
     justify-self: center;
   }
+
+  .btns {
+    right: 15px;
+    left: 20px;
+    bottom: 15px;
+  }
 }
 
 @media (max-width: 480px) {
-  .buyBtn {
-    padding: 10px;
-  }
-
   .price {
     margin-bottom: 10px;
-    font-size: 14px;
+    font-size: 2em;
   }
 
   .productItem {
-    padding: 8px 16px;
-    max-width: 100px;
-    height: 220px;
+    position: relative;
+    display: grid;
+    grid-template-areas: 'img title'
+                          'img price'
+                          'img btns'
+                          'img btns'
+                          'img btns';
+    padding: 8px 0;
+    width: 100%;
+    max-width: none;
+    height: 200px;
     font-size: 10px;
     justify-self: center;
   }
-
-  .productPoster {
-    height: 45%;
+  
+  .productItem:not(:last-child) {
+    border-bottom: 1px solid #ddd;
   }
 
-  .favourite {
-    width: 20px;
-    height: 20px;
+  .productItem:hover {
+    background-color: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  
+  .btns {
+    position: static;
+  }
+
+  .productPoster {
+    margin: auto 0;
+    margin-right: 10px;
+    height: 150px;
+    width: 100px;
+  }
+
+  .productName {
+    margin-top: 30px;
+    font-size: 1.4em;
+  }
+
+  .price {
+    margin: 0 auto;
+    height: max-content;
+  }
+
+  .buyBtn {
+    max-width: 80px;
+    padding: 10px;
+    font-size: 1.5em;
   }
 }

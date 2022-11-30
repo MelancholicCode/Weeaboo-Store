@@ -28,7 +28,11 @@ const ProductPage = () => {
   if (loadingStatus === 'loading') {
     return <Spinner/>;
   } else if (loadingStatus === 'error') {
-    return <p>Не удалось получить информацию о товаре</p>;
+    return (
+    <div className={`container ${cl.ProductPage}`}>
+      <p>Не удалось получить информацию о товаре</p>
+    </div>
+    )
   }
 
   return (

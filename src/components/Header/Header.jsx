@@ -79,7 +79,7 @@ const Header = ({menuActive, setMenuActive}) => {
                   : null}
               </div>
               <div
-                onClick={() => checkPrivateLink('/profile')}
+                onClick={() => checkPrivateLink('/account/profile')}
                 className={cl.profileBtn}>
                 <ProfileIcon/>
               </div>

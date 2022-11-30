@@ -1,4 +1,5 @@
 .Header {
+  z-index: 1;
   position: fixed;
   width: 100%;
   height: 90px;
@@ -88,7 +89,7 @@
 .burgerBtn {
   cursor: pointer;
   display: none;
-  width: 30px;
+  min-width: 30px;
   height: 20px;
   position: relative;
 }
@@ -121,23 +122,9 @@
 
 @media (max-width: 768px) {
   .logo {
+    min-width: 90px;
     width: 90px;
     height: 70px;
-  }
-  
-  .headerLinkBtns {
-    display: none;
-  }
-  
-  .burgerBtn {
-    display: block;
-  }
-}
-
-@media (max-width: 480px) {
-  .logo {
-    width: 100px;
-    height: 50px;
   }
   
   .headerLinkBtns {
@@ -154,7 +141,16 @@
     height: 65px;
   }
 
+  .logo {
+    display: none;
+  }
+  
+  .headerLinkBtns {
+    display: none;
+  }
+  
   .burgerBtn {
+    display: block;
     width: 25px;
     height: 18px;
   }

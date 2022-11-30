@@ -1,0 +1,41 @@
+.AccountPage {
+  padding-top: 90px;
+  padding-bottom: 20px;
+}
+
+.accountWrapper {
+  overflow: hidden;
+  border-radius: 10px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 80vh;
+  border: 1px solid #000;
+}
+
+.optionsList {
+  width: 100%;
+}
+
+.optionsListItem {
+  font-size: 1.3em;
+  border-bottom: 1px solid #ddd;
+}
+
+.optionsLink {
+  display: block;
+  background-color: #222;
+  color: #fff;
+  padding: 1em;
+}
+
+.rightBlock {
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .AccountPage {
+    padding-top: 65px;
+  }
+}

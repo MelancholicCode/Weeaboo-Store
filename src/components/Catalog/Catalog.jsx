@@ -5,11 +5,11 @@ import cl from './Catalog.module.css'
 
 const Catalog = ({setPage, catalogIsOver, products, productsLoadingStatus, page, pageTitle}) => {
 
-  const renderItems = (arr) => {
-    if (arr.length === 0) {
-      return <p>Товаров нет</p>
-    }
+  if (products.length === 0) {
+    return <p className='emptyPage'>Товары не найдены</p>
+  }
 
+  const renderItems = (arr) => {
     return arr.map(item => (
       <Product
         key={item.id}
@@ -22,7 +22,7 @@ const Catalog = ({setPage, catalogIsOver, products, productsLoadingStatus, page,
   if (!products.length && productsLoadingStatus === 'loading') {
     return <Spinner/>
   } else if (productsLoadingStatus === 'error') {
-    return <p>Что-то пошло не так</p>
+    return <p className="emptyPage">Что-то пошло не так</p>
   }
 
   return (

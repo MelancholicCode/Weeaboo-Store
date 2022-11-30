@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Spinner from '../../assets/img/spinner/Spinner';
 import { authUser, setAuthIdleStatus } from './authSlice';
 
 import cl from './Form.module.css';
@@ -27,7 +28,9 @@ const Form = () => {
     setPassword('');
   }
 
-  if (authLoadingStatus === 'error') {
+  if (authLoadingStatus === 'loading') {
+    return <Spinner/>
+  } else if (authLoadingStatus === 'error') {
     setTimeout(() => dispatch(setAuthIdleStatus()), 3000);
   }
 
@@ -36,10 +39,14 @@ const Form = () => {
       <div className={cl.authBtns}>
         <div
           onClick={() => setIsSignUp(false)}
-          className={`${cl.signInBtn} ${isSignUp ? null : cl.active}`}>Вход</div>
+          className={`${cl.signInBtn} ${isSignUp ? null : cl.active}`}>
+          Вход
+        </div>
         <div
           onClick={() => setIsSignUp(true)}
-          className={`${cl.signUpBtn} ${isSignUp ? cl.active : null}`}>Регистрация</div>
+          className={`${cl.signUpBtn} ${isSignUp ? cl.active : null}`}>
+          Регистрация
+        </div>
       </div>
       <form
         onSubmit={onSubmitForm}

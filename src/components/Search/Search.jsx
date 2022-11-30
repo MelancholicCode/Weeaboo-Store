@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { clearCatalog, setSearchQuery } from '../../pages/CatalogPage/catalogSlice';
 import cl from './Search.module.css';
 
 const Search = () => {
   const [query, setQuery] = useState('');
   const [timer, setTimer] = useState(null);
-  const {productsLoadingStatus, searchQuery} = useSelector(state => state.catalog)
+  const {searchQuery} = useSelector(state => state.catalog)
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,17 +23,17 @@ const Search = () => {
     setTimer(setTimeout(() => {
       dispatch(clearCatalog());
       dispatch(setSearchQuery(e.target.value))
+      navigate('/');
     }, 1000));
   }
 
   return (
-    <Link to='/' className={cl.search}>
+    <div className={cl.search}>
       <input
         value={query}
         onChange={search}
-        disabled={productsLoadingStatus === 'loading' ? true : false}
         className={cl.searchInput} placeholder='Поиск' type="text" />
-    </Link>
+    </div>
   );
 };
 

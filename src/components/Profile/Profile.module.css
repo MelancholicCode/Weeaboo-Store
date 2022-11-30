@@ -1,0 +1,46 @@
+.Profile {
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+}
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.profileName {
+  font-size: 1.5em;
+}
+
+.profileIcon {
+  width: 200px;
+  height: 200px;
+}
+
+.profileOptions {
+  margin-top: 30px;
+}
+
+.emailOption {
+  font-size: 1.3em;
+  margin-bottom: 20px;
+}
+
+.changePassword {
+  font-size: 1.3em;
+  color: #fff;
+  background-color: #222;
+  border-radius: 10px;
+  padding: 0.6em;
+  display: inline;
+  cursor: pointer;
+}
+
+.profileOption:not(:last-child) {
+  margin-bottom: 10px;
+}

@@ -1,5 +1,5 @@
 import Header from "./components/Header/Header";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Cart from "./pages/Cart/Cart";
 import CartIcon from "./assets/img/svg/CartIcon";
@@ -16,16 +16,19 @@ import FavouritesPage from "./pages/FavouritesPage/FavouritesPage";
 import Menu from "./components/Menu/Menu";
 import ProfileIcon from "./assets/img/svg/ProfileIcon";
 import BookmarkIcon from "./assets/img/svg/BookmarkIcon";
-import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import AccountPage from "./pages/AccountPage/AccountPage";
+import Profile from "./components/Profile/Profile";
+import Orders from "./components/Orders/Orders";
+import Form from "./components/Form/Form";
 
 function App() {
   const [menuActive, setMenuActive] = useState(false);
   const dispatch = useDispatch();
-  const {signedIn} = useSelector(state => state.auth);
+  const {signedIn, modal} = useSelector(state => state.auth);
   const menuItems = [
     {
       title: 'Профиль',
-      path: '/profile',
+      path: '/account/profile',
       icon: <ProfileIcon/>
     },
     {
@@ -60,6 +63,10 @@ function App() {
     }
     // eslint-disable-next-line
   }, [dispatch, signedIn])
+
+  const onOpenModal = (value) => {
+    dispatch(setModal(value));
+  }
   
   return (
     <BrowserRouter>
@@ -69,24 +76,27 @@ function App() {
           setMenuActive={setMenuActive}
           header="Меню"
           items={menuItems}/>
-        <Modal/>
+        <Modal
+          setModal={onOpenModal}
+          modal={modal}>
+          <Form/>
+        </Modal>
         <Header
           menuActive={menuActive}
           setMenuActive={setMenuActive}/>
         <Routes>
-          <Route path="/" element={
-            <CatalogPage/>
-          }/>
-            <Route path="/favourites" element={
-            <FavouritesPage/>
-          }/>
-          <Route path="/cart" element={
-            <Cart/>
-          }/>
-          <Route path="/profile" element={
-            <ProfilePage/>
-          }/>
+          <Route path="/" element={<CatalogPage/>}/>
+          <Route path="/favourites" element={<FavouritesPage/>}/>
+          <Route path="/cart" element={<Cart/>}/>
+          <Route path="/account" element={<AccountPage/>}>
+            <Route path="profile" element={<Profile/>}/>
+            <Route path="orders" element={<Orders/>}/>
+          </Route>
           <Route path="/catalog/:slug" element={<ProductPage/>}/>
+          <Route
+            path="*"
+            element={<Navigate to="/404" replace />}
+          />
         </Routes>
       </div>
     </BrowserRouter>

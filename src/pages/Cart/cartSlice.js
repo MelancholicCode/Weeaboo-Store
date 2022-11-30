@@ -72,7 +72,7 @@ export const fetchGoods = (userId, accessToken) => (dispatch) => {
     .catch((err) => {
       switch (err.request.status) {
         case 403:
-          dispatch(setCartIdleStatus(true))
+          dispatch(setCartIdleStatus())
           break;
         default:
           console.log('Что-то пошло не так')

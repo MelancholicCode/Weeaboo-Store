@@ -1,18 +1,5 @@
 {
-  "users": [
-    {
-      "email": "email@example.com",
-      "password": "$2a$10$P008rVmX3UPx1MSK9lFDU.7XQ9/X1EJLK9cbyPuzx2zgEaIVxlvn2",
-      "name": "Сергей",
-      "id": 1
-    },
-    {
-      "email": "email2@example.com",
-      "password": "$2a$10$LKLn4cDdr7NCUroK00obDu0WejzSaaEhrkZyWtUXoLwT4mOxYy616",
-      "name": "Андрей",
-      "id": 2
-    }
-  ],
+  "users": [],
   "favourites": [],
   "cart": [],
   "orders": [],
@@ -24,7 +11,6 @@
       "poster": "https://img-gorod.ru/28/333/2833354_detail.jpg",
       "author": "Масаси Кисимото",
       "price": 926,
-      "category": "manga",
       "slug": "naruto-naruto-kniga-1-naruto-udzumaki"
     },
     {
@@ -34,7 +20,6 @@
       "poster": "https://img-gorod.ru/27/980/2798064_detail.jpg",
       "author": "Ююко Такэмия",
       "price": 415,
-      "category": "manga",
       "slug": "toradora-tigr-i-drakon-tom-9"
     },
     {
@@ -44,7 +29,6 @@
       "poster": "https://img-gorod.ru/29/448/2944827_detail.jpg",
       "author": "Тацуки Фудзимото",
       "price": 589,
-      "category": "manga",
       "slug": "chelovek-benzopila-kniga-6-vpered-chelovek-benzopila"
     },
     {
@@ -54,7 +38,6 @@
       "poster": "https://img-gorod.ru/26/696/2669630_detail.jpg",
       "author": "Джульетта Судзуки",
       "price": 518,
-      "category": "manga",
       "slug": "ochien-priiatno-bogh-tom-1"
     },
     {
@@ -64,7 +47,6 @@
       "poster": "https://img-gorod.ru/29/425/2942549_detail.jpg",
       "author": "Итагаки П.",
       "price": 761,
-      "category": "manga",
       "slug": "beastars-vydayushchiesya-zveri-tom-8"
     },
     {
@@ -74,7 +56,6 @@
       "poster": "https://img-gorod.ru/28/971/2897149_detail.jpg",
       "author": "Исида С.",
       "price": 827,
-      "category": "manga",
       "slug": "tokiyskiy-gul-re-8-kniga-15-16-manga"
     },
     {
@@ -84,7 +65,6 @@
       "poster": "https://img-gorod.ru/26/199/2619918_detail.jpg",
       "author": "Цугуми Ооба, Такэси Обата",
       "price": 1041,
-      "category": "manga",
       "slug": "death-note-black-edition-kniga-2-manga"
     },
     {
@@ -94,7 +74,6 @@
       "poster": "https://img-gorod.ru/29/223/2922372_detail.jpg",
       "author": "Хейкала",
       "price": 1280,
-      "category": "manga",
       "slug": "heikala-risuem-v-stile-anime-i-manga"
     },
     {
@@ -104,7 +83,6 @@
       "poster": "https://img-gorod.ru/29/426/2942674_detail.jpg",
       "author": "Оно К.",
       "price": 599,
-      "category": "manga",
       "slug": "put-domohozyaina-tom-1"
     },
     {
@@ -114,7 +92,6 @@
       "poster": "https://img-gorod.ru/29/577/2957762_detail.jpg",
       "author": "Кагю К.",
       "price": 792,
-      "category": "manga",
       "slug": "ubiitsa-ghoblinov-tom-3-mangha"
     },
     {
@@ -124,7 +101,6 @@
       "poster": "https://img-gorod.ru/29/183/2918341_detail.jpg",
       "author": "Кондо М.",
       "price": 525,
-      "category": "manga",
       "slug": "manga-magicheskaya-uborka-yaponskoe-iskusstvo-navedeniya-poryadka-doma-na-rabote-i-v-lichnoy-zhizni"
     },
     {
@@ -134,7 +110,6 @@
       "poster": "https://img-gorod.ru/25/064/2506497_detail.jpg",
       "author": "Кю Айя, Юсаги Анэко",
       "price": 621,
-      "category": "manga",
       "slug": "mangha-voskhozhdieniie-ghieroia-shchita-tom-1"
     },
     {
@@ -144,7 +119,6 @@
       "poster": "https://img-gorod.ru/27/623/2762379_detail.jpg",
       "author": "Фудзитаки Кадзухиро, Такаяма Яма",
       "price": 1049,
-      "category": "manga",
       "slug": "avtomatichieskoie-upravlieniie-mangha"
     },
     {
@@ -154,7 +128,6 @@
       "poster": "https://img-gorod.ru/25/208/2520868_detail.jpg",
       "author": "Масахару Такэмура",
       "price": 1049,
-      "category": "manga",
       "slug": "zanimatiel-naia-biokhimiia-mangha"
     },
     {
@@ -164,7 +137,6 @@
       "poster": "https://img-gorod.ru/28/465/2846596_detail.jpg",
       "author": "Х. Игараси",
       "price": 979,
-      "category": "manga",
       "slug": "eliektrooborudovaniie-zanimatiel-naia-mangha"
     },
     {
@@ -174,7 +146,6 @@
       "poster": "https://img-gorod.ru/28/308/2830813_detail.jpg",
       "author": "Синдзи Кадзио, Кэндзи Цурута",
       "price": 824,
-      "category": "manga",
       "slug": "vospominaniia-emanon-mangha"
     },
     {
@@ -184,7 +155,6 @@
       "poster": "https://img-gorod.ru/29/577/2957759_detail.jpg",
       "author": "Айда Иро",
       "price": 792,
-      "category": "manga",
       "slug": "tualietnyi-mal-chik-khanako-tom-3"
     },
     {
@@ -194,7 +164,6 @@
       "poster": "https://img-gorod.ru/29/577/2957755_detail.jpg",
       "author": "Кавахара Р.",
       "price": 944,
-      "category": "manga",
       "slug": "sword-art-online-tom-25-unital-ring-iv"
     },
     {
@@ -204,7 +173,6 @@
       "poster": "https://img-gorod.ru/29/577/2957751_detail.jpg",
       "author": "Таппэй Нагацуки",
       "price": 1000,
-      "category": "manga",
       "slug": "re-zero-zhizn-s-nulia-v-al-tiernativnom-mirie-tom-12"
     },
     {
@@ -214,7 +182,6 @@
       "poster": "https://img-gorod.ru/29/559/2955937_detail.jpg",
       "author": "Хироюки Такэи",
       "price": 820,
-      "category": "manga",
       "slug": "korol-shamanov-tom-5"
     },
     {
@@ -224,7 +191,6 @@
       "poster": "https://img-gorod.ru/29/559/2955938_detail.jpg",
       "author": "Гамон Сакураи",
       "price": 652,
-      "category": "manga",
       "slug": "nieliud-tom-12"
     },
     {
@@ -234,7 +200,6 @@
       "poster": "https://img-gorod.ru/29/121/2912150_detail.jpg",
       "author": "Фудзимото Т.",
       "price": 926,
-      "category": "manga",
       "slug": "chieloviek-bienzopila-knigha-4-vo-snie-nastoiashchaia-zhiest-mangha"
     }
   ]
