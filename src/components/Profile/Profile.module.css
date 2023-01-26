@@ -1,7 +1,7 @@
 .Profile {
   padding: 20px;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 59px);
 }
 
 .avatar {
@@ -14,7 +14,7 @@
 }
 
 .profileName {
-  font-size: 1.5em;
+  font-size: 24px;
 }
 
 .profileIcon {
@@ -24,23 +24,21 @@
 
 .profileOptions {
   margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .emailOption {
-  font-size: 1.3em;
-  margin-bottom: 20px;
+  font-size: 20px;
 }
 
 .changePassword {
-  font-size: 1.3em;
+  width: fit-content;
+  cursor: pointer;
+  font-size: 20px;
   color: #fff;
   background-color: #222;
   border-radius: 10px;
-  padding: 0.6em;
-  display: inline;
-  cursor: pointer;
-}
-
-.profileOption:not(:last-child) {
-  margin-bottom: 10px;
+  padding: 15px;
 }

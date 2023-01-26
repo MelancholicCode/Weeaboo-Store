@@ -8,30 +8,17 @@
   }
 }
 
+.productContent {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .productTitle {
   color: #999;
 }
 
 .productDescr {
   line-height: 1.8em;
-}
-
-@media (max-width: 768px) {
-  .productTitle {
-    font-size: 18px;
-  }
-
-  .productDescr {
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 768px) {
-  .productTitle {
-    font-size: 16px;
-  }
-
-  .productDescr {
-    font-size: 12px;
-  }
 }

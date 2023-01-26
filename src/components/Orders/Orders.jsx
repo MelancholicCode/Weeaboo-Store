@@ -25,8 +25,6 @@ const Orders = () => {
     }
   }, [dispatch, signedIn])
 
-  console.log(orders)
-
   if (ordersLoadingStatus === 'loading') {
     return <Spinner/>
   } else if (ordersLoadingStatus === 'error') {
@@ -53,7 +51,7 @@ const Orders = () => {
 
   return (
     <div className={cl.Orders}>
-      <ul>
+      <ul className={cl.ordersList}>
         {renderItems(orders)}
       </ul>
     </div>

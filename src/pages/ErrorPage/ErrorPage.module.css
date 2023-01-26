@@ -1,5 +1,5 @@
 .ErrorPage {
-  padding-top: 90px;
+  padding-top: var(--header-height);
   display: flex;
   justify-content: center;
 }
@@ -32,10 +32,6 @@
 }
 
 @media (max-width: 480px) {
-  .ErrorPage {
-    padding-top: 65px;
-  }
-
   .errorBlock {
     font-size: 1.4em;
     margin-top: 10px;

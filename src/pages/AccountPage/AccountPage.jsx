@@ -1,8 +1,19 @@
 import { useSelector } from 'react-redux';
-import { Link, Outlet } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
+import { Link, Outlet, useMatch } from 'react-router-dom';
 import cl from './AccountPage.module.css';
 
 const AccountPage = () => {
+  const isMenuActive = useMatch('/account');
+  const isMobileOrTablet = useMediaQuery({maxWidth: '768px'});
+  let optionsListClasses = cl.optionsList;
+
+  if (isMobileOrTablet) {
+    if (!isMenuActive) {
+      optionsListClasses = 'hide';
+    }
+  }
+
   const {signedIn} = useSelector(state => state.auth);
   const links = [
     {
@@ -26,7 +37,7 @@ const AccountPage = () => {
   return (
     <div className={`container ${cl.AccountPage}`}>
       <div className={cl.accountWrapper}>
-        <ul className={cl.optionsList}>
+        <ul className={optionsListClasses}>
           {links.map(link => (
             <li key={link.path} className={cl.optionsListItem}>
               <Link
@@ -37,7 +48,8 @@ const AccountPage = () => {
             </li>
           ))}
         </ul>
-        <div className={cl.rightBlock}>
+        <div className={isMenuActive ? 'hide' : cl.rightBlock}>
+          <Link to='/account' className={isMobileOrTablet ? cl.returnBtn : 'hide'}>В меню</Link>
           <Outlet/>
         </div>
       </div>

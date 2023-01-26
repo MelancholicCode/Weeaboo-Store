@@ -39,8 +39,10 @@ const ProductPage = () => {
     <div className={`container ${cl.ProductPage}`}>
       <ProductCard
         product={product}/>
-      <h2 className={cl.productTitle}>Аннотация</h2>
-      <p className={cl.productDescr}>{product.description}</p>
+      <div className={cl.productContent}>
+        <h2 className={cl.productTitle}>Аннотация</h2>
+        <p className={cl.productDescr}>{product.description}</p>
+      </div>
     </div>
   );
 };

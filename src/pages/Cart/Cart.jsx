@@ -85,17 +85,17 @@ const Cart = () => {
       <div className={`container ${cl.Cart}`}>
         <ul className={cl.cartList}>
           {renderItems(goods)}
-          {signedIn && goods.length
-            ? <li className={cl.purchaseBlock}>
+        </ul>
+        {signedIn && goods.length
+            ? <div className={cl.purchaseBlock}>
                 <p className={cl.resultText}>
                   {generalCount} {declOfCount} на сумму {generalPrice} ₽
                 </p>
                 <div onClick={onOrder} className={cl.buyBtn}>
                   Оформить заказ
                 </div>
-              </li>
+              </div>
             : null}
-        </ul>
       </div>
     </>
   );

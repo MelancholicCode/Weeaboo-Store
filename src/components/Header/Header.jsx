@@ -65,13 +65,13 @@ const Header = ({menuActive, setMenuActive}) => {
           {signedIn
             ? <>
               <div
-                className={cl.favourite}
+                className={cl.headerBtn}
                 onClick={() => checkPrivateLink('/favourites')}>
                 <BookmarkIcon
                   color='inherit'/>
               </div>
               <div
-                className={cl.cartBtn}
+                className={`${cl.headerBtn} ${cl.cartBtn}`}
                 onClick={() => checkPrivateLink('/cart')}>
                 <CartIcon/>
                 {signedIn && goodsLength
@@ -79,11 +79,11 @@ const Header = ({menuActive, setMenuActive}) => {
                   : null}
               </div>
               <div
-                onClick={() => checkPrivateLink('/account/profile')}
-                className={cl.profileBtn}>
+                onClick={() => checkPrivateLink('/account')}
+                className={cl.headerBtn}>
                 <ProfileIcon/>
               </div>
-              <Link className={cl.logoutBtn} to='/' onClick={signOut}>
+              <Link className={cl.headerBtn} to='/' onClick={signOut}>
                 <LogOutIcon/>
               </Link>
               </>

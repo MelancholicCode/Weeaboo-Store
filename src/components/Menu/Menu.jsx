@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import BookmarkIcon from '../../assets/img/svg/BookmarkIcon';
 import CartIcon from '../../assets/img/svg/CartIcon';
+import CatalogIcon from '../../assets/img/svg/CatalogIcon';
 import Close from '../../assets/img/svg/Close';
 import LogOutIcon from '../../assets/img/svg/LogOutIcon';
 import ProfileIcon from '../../assets/img/svg/ProfileIcon';
@@ -18,9 +19,14 @@ const Menu = ({header, menuActive, setMenuActive}) => {
 
   const items = [
     {
-      title: 'Профиль',
-      path: '/account/profile',
+      title: 'Аккаунт',
+      path: '/account',
       icon: <ProfileIcon/>
+    },
+    {
+      title: 'Каталог',
+      path: '/',
+      icon: <CatalogIcon/>
     },
     {
       title: 'Корзина',
@@ -48,7 +54,6 @@ const Menu = ({header, menuActive, setMenuActive}) => {
     if (signedIn) {
       setMenuActive(false);
       document.body.style.overflow = '';
-      console.log(route)
       navigate(route)
     } else {
       setMenuActive(false);

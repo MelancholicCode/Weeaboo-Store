@@ -1,7 +1,5 @@
 .Cart {
-  padding-top: 90px;
-  display: flex;
-  justify-content: center;
+  padding-top: var(--header-height);
   padding: inherit 20px;
 }
 
@@ -9,7 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  gap: 30px;
   height: 200px;
   padding: 20px 0;
   width: 100%;
@@ -17,15 +15,13 @@
 
 .resultText {
   font-weight: 600;
-  font-size: 22px;
+  font-size: clamp(1rem, 0.887rem + 0.57vw, 1.375rem);
 }
 
 .buyBtn {
   cursor: pointer;
-  max-width: 400px;
-  margin-top: 20px;
-  font-size: 20px;
-  padding: 1.5em;
+  font-size: clamp(1rem, 0.887rem + 0.57vw, 1.375rem);
+  padding: 20px;
   color: #fff;
   background-color: #ff3636;
   border-radius: 5px;
@@ -35,39 +31,8 @@
 .cartList {
   width: 100%;
 }
-
-@media (max-width: 768px) {
-  .Cart {
-    padding: inherit 15px;
-  }
-  
+@media (max-width: 640px) {
   .purchaseBlock {
-    height: 150px;
-  }
-
-  .resultText {
-    font-size: 18px;
-  }
-  
-  .buyBtn {
-    font-size: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .Cart {
-    padding-top: 65px;
-  }
-
-  .purchaseBlock {
-    height: 100px;
-  }
-
-  .resultText {
-    font-size: 14px;
-  }
-  
-  .buyBtn {
-    font-size: 12px;
+    flex-direction: column;
   }
 }

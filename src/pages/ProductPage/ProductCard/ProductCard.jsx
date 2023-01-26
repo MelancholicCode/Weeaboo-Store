@@ -73,32 +73,34 @@ const ProductCard = ({product}) => {
       <div className={cl.productCardImage}>
         <img height="100%" width="100%" src={product.poster} alt="" />
       </div>
-      <div className={cl.productCardDescr}>
-        <h1 className={cl.productName}>{product.title}</h1>
-        <p className={cl.productAuthor}>{product.author}</p>
-      </div>
-      <div className={cl.purchaseBlock}>
-        <p className={cl.productPrice}>{product.price} ₽</p>
-        {isGood
-          ? <Link to='/cart' className={`${cl.productBtn} ${cl.activeBtn}`}>
-              В корзину
-            </Link>
-          : <div
-              onClick={() => onAddProduct('cart')}
-              className={cl.productBtn}
-              >Купить
-            </div>}
-        {isFavourite
-          ? <div
-              onClick={() => onAddProduct('favourites')}
-              className={`${cl.productBtn} ${cl.activeBtn}`}>
-              В закладках
-            </div>
-          : <div
-              onClick={() => onAddProduct('favourites')}
-              className={cl.productBtn}>
-              Закладки
-            </div>}
+      <div className={cl.productRightBlock}>
+        <div className={cl.productCardDescr}>
+          <h1 className={cl.productName}>{product.title}</h1>
+          <p className={cl.productAuthor}>{product.author}</p>
+        </div>
+        <div className={cl.purchaseBlock}>
+          <p className={cl.productPrice}>{product.price} ₽</p>
+          {isGood
+            ? <Link to='/cart' className={`${cl.productBtn} ${cl.activeBtn}`}>
+                В корзину
+              </Link>
+            : <div
+                onClick={() => onAddProduct('cart')}
+                className={cl.productBtn}
+                >Купить
+              </div>}
+          {isFavourite
+            ? <div
+                onClick={() => onAddProduct('favourites')}
+                className={`${cl.productBtn} ${cl.activeBtn}`}>
+                В закладках
+              </div>
+            : <div
+                onClick={() => onAddProduct('favourites')}
+                className={cl.productBtn}>
+                Закладки
+              </div>}
+        </div>
       </div>
     </div>
   );

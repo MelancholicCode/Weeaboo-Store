@@ -79,7 +79,7 @@ const CartItem = ({good}) => {
         </Link>
         <p className={cl.goodAuthor}>{good.author}</p>
       </div>
-      <div className={cl.productButtons}>
+      <div className={cl.buyBlock}>
         <p className={cl.price}>
           {good.price} ₽
         </p>
@@ -98,24 +98,24 @@ const CartItem = ({good}) => {
             +
           </div>
         </div>
-        <div className={cl.rightButtons}>
-          <div
-            onClick={onChangeFavourite}
-            className={cl.productBtn}>
-            <div className={cl.btnIcon}>
-              <Bookmark
-                color={isFavourite ? '#ff4c4c' : '#ddd'}/>
-            </div>
-            <p>Закладки</p>
+      </div>
+      <div className={cl.productButtons}>
+        <div
+          onClick={onChangeFavourite}
+          className={cl.productBtn}>
+          <div className={cl.btnIcon}>
+            <Bookmark
+              color={isFavourite ? '#ff4c4c' : '#ddd'}/>
           </div>
-          <div
-            onClick={onDeleteGood}
-            className={cl.productBtn}>
-            <div className={cl.btnIcon}>
-              <Trash/>
-            </div>
-            <p>Удалить</p>
+          <p>Закладки</p>
+        </div>
+        <div
+          onClick={onDeleteGood}
+          className={cl.productBtn}>
+          <div className={cl.btnIcon}>
+            <Trash/>
           </div>
+          <p>Удалить</p>
         </div>
       </div>
     </li>

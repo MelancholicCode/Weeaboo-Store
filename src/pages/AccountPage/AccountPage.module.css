@@ -1,25 +1,25 @@
 .AccountPage {
-  padding-top: 90px;
+  padding-top: calc(var(--header-height) + 20px);
+  height: 100vh;
   padding-bottom: 20px;
 }
 
 .accountWrapper {
   overflow: hidden;
   border-radius: 10px;
-  margin-top: 20px;
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  min-height: 80vh;
+  height: 100%;
   border: 1px solid #000;
 }
 
 .optionsList {
+  overflow-y: auto;
   width: 100%;
+  background-color: #222;
 }
 
 .optionsListItem {
-  font-size: 1.3em;
+  font-size: clamp(0.938rem, 0.843rem + 0.47vw, 1.25rem);
   border-bottom: 1px solid #ddd;
 }
 
@@ -27,15 +27,19 @@
   display: block;
   background-color: #222;
   color: #fff;
-  padding: 1em;
+  padding: 40px 20px;
 }
 
 .rightBlock {
   width: 100%;
+  overflow: auto;
 }
 
-@media (max-width: 480px) {
-  .AccountPage {
-    padding-top: 65px;
-  }
+.returnBtn {
+  display: block;
+  cursor: pointer;
+  background-color: #222;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
 }

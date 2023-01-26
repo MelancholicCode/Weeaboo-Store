@@ -1,8 +1,8 @@
 .OrdersItem {
-  padding: 1em;
+  padding: 20px;
   background-color: #eee;
 }
 
-.OrdersItem:not(:last-child) {
+.OrdersItem {
   border-bottom: 1px solid #000;
 }

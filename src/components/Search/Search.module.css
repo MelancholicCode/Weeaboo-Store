@@ -24,10 +24,3 @@
     font-size: 16px;
   }
 }
-
-@media (max-width: 480px) {
-  .searchInput {
-    font-size: 14px;
-    padding: 6px;
-  }
-}

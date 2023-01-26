@@ -2,7 +2,7 @@
   z-index: 1;
   position: fixed;
   width: 100%;
-  height: 90px;
+  height: var(--header-height);
   background-color: #fff;
   box-shadow: 0 0 5px #000;
 }
@@ -23,9 +23,15 @@
 
 .headerLinkBtns {
   display: flex;
-  justify-content: space-between;
+  gap: 20px;
   height: 50px;
   align-items: center;
+}
+
+.headerBtn {
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
 }
 
 .count {
@@ -35,14 +41,16 @@
   text-align: center;
   font-weight: 600;
   font-size: 14;
+  top: 45%;
+  left: 25%;
   width: 18px;
   height: 18px;
   background-color: #fff;
   border-radius: 15px;
 }
 
-.cartCount {
-  transform: translate(0.7em, -1.6em);
+.cartBtn {
+  position: relative;
 }
 
 .loginBtn {
@@ -57,33 +65,6 @@
   background-color: #fff;
   color: #000;
   border: 1px solid #000;
-}
-
-.favourite {
-  cursor: pointer;
-  width: 35px;
-  height: 35px;
-}
-
-.cartBtn {
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
-  margin-left: 20px;
-}
-
-.profileBtn {
-  margin-left: 15px;
-  cursor: pointer;
-  width: 35px;
-  height: 35px;
-}
-
-.logoutBtn {
-  margin-left: 10px;
-  cursor: pointer;
-  width: 35px;
-  height: 35px;
 }
 
 .burgerBtn {
@@ -137,31 +118,11 @@
 }
 
 @media (max-width: 480px) {
-  .Header {
-    height: 65px;
-  }
-
   .logo {
     display: none;
   }
   
   .headerLinkBtns {
     display: none;
-  }
-  
-  .burgerBtn {
-    display: block;
-    width: 25px;
-    height: 18px;
-  }
-
-  .burgerBtn::before,
-  .burgerBtn::after,
-  .burgerBtn span {
-    width: 25px;
-  }
-
-  .burgerBtn::before {
-    top: 8px;
   }
 }

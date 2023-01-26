@@ -1,11 +1,11 @@
 .productItem {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
   padding: 20px 40px;
-  width: 100%;
-  max-width: 160px;
-  height: 300px;
+  width: calc(25% - 20px * 3 / 4);
   font-size: 14px;
-  justify-self: center;
 }
 
 .productItem:hover {
@@ -17,44 +17,35 @@
 .productPoster {
   display: block;
   cursor: pointer;
-  grid-area: img;
-  text-align: center;
   width: 60%;
-  margin: 0 auto;
-  height: 150px;
-  margin-bottom: 10px;
+  aspect-ratio: 3/4;
 }
 
 .productName {
-  grid-area: title;
+  align-self: flex-start;
   word-wrap: break-word;
 }
 
 .price {
-  grid-area: price;
+  align-self: flex-start;
   font-weight: 600;
-  margin-top: 10px;
-  margin-bottom: 20px;
   font-size: 18px;
 }
 
 .btns {
-  grid-area: btns;
-  position: absolute;
-  bottom: 20px;
-  width: 100%;
-  max-width: 160px;
-  height: max-content;
   margin: 0 auto;
+  margin-top: auto;
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 20px;
   font-size: 0.9em;
 }
 
 .buyBtn {
+  width: 60%;
   cursor: pointer;
-  width: 100%;
-  max-width: 80px;
   padding: 15px;
   color: #fff;
   background-color: #ff3636;
@@ -69,89 +60,31 @@
 }
 
 .favourite {
-  margin-left: 20px;
   width: 35px;
   height: 35px;
   cursor: pointer;
 }
 
-@media (max-width: 768px) {
-  .price {
-    margin-bottom: 15px;
-    font-size: 16px;
-  }
-
+@media (max-width: 1200px) {
   .productItem {
-    padding: 15px 20px;
-    max-width: 170px;
-    height: 280px;
-    font-size: 14px;
-    justify-self: center;
+    padding: 20px 20px;
   }
+}
 
-  .btns {
-    right: 15px;
-    left: 20px;
-    bottom: 15px;
+@media (max-width: 960px) {
+  .productItem {
+    width: calc(33.33% - 20px * 2 / 3);
+  }
+}
+
+@media (max-width: 768px) {
+  .productItem {
+    width: calc(50% - 20px / 2);
   }
 }
 
 @media (max-width: 480px) {
-  .price {
-    margin-bottom: 10px;
-    font-size: 2em;
-  }
-
   .productItem {
-    position: relative;
-    display: grid;
-    grid-template-areas: 'img title'
-                          'img price'
-                          'img btns'
-                          'img btns'
-                          'img btns';
-    padding: 8px 0;
     width: 100%;
-    max-width: none;
-    height: 200px;
-    font-size: 10px;
-    justify-self: center;
-  }
-  
-  .productItem:not(:last-child) {
-    border-bottom: 1px solid #ddd;
-  }
-
-  .productItem:hover {
-    background-color: none;
-    border-radius: 0;
-    box-shadow: none;
-  }
-  
-  .btns {
-    position: static;
-  }
-
-  .productPoster {
-    margin: auto 0;
-    margin-right: 10px;
-    height: 150px;
-    width: 100px;
-  }
-
-  .productName {
-    margin-top: 30px;
-    font-size: 1.4em;
-  }
-
-  .price {
-    margin: 0 auto;
-    height: max-content;
-  }
-
-  .buyBtn {
-    max-width: 80px;
-    padding: 10px;
-    font-size: 1.5em;
   }
 }
