@@ -1,5 +1,3 @@
-import Close from '../../assets/img/svg/Close';
-
 import cl from './Modal.module.css';
 
 const Modal = ({modal, setModal, children}) => {
@@ -11,11 +9,6 @@ const Modal = ({modal, setModal, children}) => {
       <div
         onClick={e => e.stopPropagation()}
         className={cl.modalContent}>
-        <div
-          onClick={() => setModal(false)}
-          className={cl.closeBtn}>
-          <Close/>
-        </div>
         {children}
       </div>
     </div>

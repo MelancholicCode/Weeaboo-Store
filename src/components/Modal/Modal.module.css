@@ -37,23 +37,3 @@
   width: 20px;
   height: 20px;
 }
-
-@media (max-width: 1024px) {
-  .modalContent {
-    width: 500px;
-    padding: 20px;
-  }
-}
-
-@media (max-width: 768px) {
-  .modalContent {
-    width: 400px;
-    padding: 15px;
-  }
-
-  .closeBtn {
-    padding: 10px;
-    width: 15px;
-    height: 15px;
-  }
-}

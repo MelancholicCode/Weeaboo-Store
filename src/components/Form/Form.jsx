@@ -1,21 +1,30 @@
+import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Spinner from '../../assets/img/spinner/Spinner';
 import { authUser, setAuthIdleStatus } from './authSlice';
 
 import cl from './Form.module.css';
+import { useEffect } from 'react';
 
 const Form = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const {
+    register,
+    formState: {
+      errors
+    },
+    handleSubmit,
+    reset
+  } = useForm({mode: 'onBlur'});
   const [isSignUp, setIsSignUp] = useState(false);
-
   const {authLoadingStatus} = useSelector(state => state.auth);
   const dispatch = useDispatch();
 
-  const onSubmitForm = (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    reset();
+  }, [isSignUp]);
+
+  const onSubmit = ({name, email, password}) => {
     if (isSignUp) {
       const user = {name, email, password};
       dispatch(authUser(user, 'signup'));
@@ -23,9 +32,7 @@ const Form = () => {
       const  user = {email, password};
       dispatch(authUser(user, 'signin'));
     }
-    setName('');
-    setEmail('');
-    setPassword('');
+    reset();
   }
 
   if (authLoadingStatus === 'loading') {
@@ -35,7 +42,7 @@ const Form = () => {
   }
 
   return (
-    <div>
+    <>
       <div className={cl.authBtns}>
         <div
           onClick={() => setIsSignUp(false)}
@@ -49,34 +56,78 @@ const Form = () => {
         </div>
       </div>
       <form
-        onSubmit={onSubmitForm}
+        onSubmit={handleSubmit(onSubmit)}
         className={cl.authForm}>
         {authLoadingStatus === 'error' &&
           <p className={cl.errorMessage}>Ошибка авторизации</p>}
-        {isSignUp &&
-          <>
-            <label className={cl.authLabel} htmlFor='name'>Имя</label>
-            <input
-              required
-              value={name}
-              onChange={e => setName(e.target.value)}
-              className={cl.authInput} id='name' name='name' type='text' />
-          </>}
-        <label className={cl.authLabel} htmlFor='email'>Почта</label>
-        <input
-          required
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          className={cl.authInput} id='email' name='email' type='email' />
-        <label className={cl.authLabel} htmlFor='password'>Пароль</label>
-        <input
-          required
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          className={cl.authInput} id='password' name='password' type='password' />
-        <button className={cl.submitBtn} type='submit'>Войти</button>
+        {isSignUp ?
+        <>
+          {errors?.name && <p className={cl.authError}>{errors?.name?.message}</p>}
+          <input
+            {...register('name', {
+              required: 'Обязательное поле'
+            })}
+            className={cl.authInput}
+            type='text'
+            placeholder='Имя'/>
+          {errors?.email && <p className={cl.authError}>{errors?.email?.message}</p>}
+          <input
+            {...register('email', {
+              required: 'Обязательное поле',
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: 'Неверный почтовый адрес'
+              }
+            })}
+            className={cl.authInput}
+            type='email'
+            placeholder='Почта'/>
+          {errors?.password && <p className={cl.authError}>{errors?.password?.message}</p>}
+          <input
+            {...register('password', {
+              required: 'Обязательное поле',
+              minLength: {
+                value: 4,
+                message: 'Слишком короткий пароль'
+              }
+            })}
+            className={cl.authInput}
+            type='password'
+            placeholder='Пароль'/>
+        </>
+        :
+        <>
+          {errors?.email && <p className={cl.authError}>{errors?.email?.message}</p>}
+          <input
+            {...register('email', {
+              required: 'Обязательное поле',
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: 'Неверный почтовый адрес'
+              }
+            })}
+            className={cl.authInput}
+            type='email'
+            placeholder='Почта'/>
+          {errors?.password && <p className={cl.authError}>{errors?.password?.message}</p>}
+          <input
+            {...register('password', {
+              required: 'Обязательное поле',
+              minLength: {
+                value: 4,
+                message: 'Слишком короткий пароль'
+              }
+            })}
+            className={cl.authInput}
+            type='password'
+            placeholder='Пароль'/>
+        </>
+        }
+        <button
+          className={cl.submitBtn}
+          type='submit'>Войти</button>
       </form>
-    </div>
+    </>
   );
 };
 

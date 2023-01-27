@@ -7,12 +7,10 @@
 
 .signInBtn, .signUpBtn {
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.3em;
-  height: 4em;
-  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+  flex-grow: 1;
+  font-size: clamp(1rem, 0.925rem + 0.38vw, 1.25rem);
 }
 
 .signInBtn.active, .signUpBtn.active {
@@ -25,15 +23,19 @@
   flex-direction: column;
 }
 
-.authLabel {
-  margin-bottom: 10px;
+.authError {
+  color: #ff4c4c;
+  margin-bottom: 5px;
 }
 
 .authInput {
   font-size: 20px;
   border: 1px solid #ddd;
-  margin-bottom: 10px;
   padding: 10px;
+  width: 100%;
+}
+.authInput:not(:last-child) {
+  margin-bottom: 10px;
 }
 
 .errorMessage {
@@ -50,39 +52,4 @@
   border: none;
   background-color: #ff4c4c;
   color: #fff;
-}
-
-@media (max-width: 1024px) {
-  .signInBtn, .signUpBtn {
-    font-size: 1.2em;
-    height: 3.5em;
-  }
-
-  .authLabel {
-    font-size: 14px;
-  }
-
-  .authInput {
-    padding: 8px;
-  }
-}
-
-@media (max-width: 1024px) {
-  .submitBtn {
-    font-size: 18px;
-  }
-}
-@media (max-width: 768px) {
-  .signInBtn, .signUpBtn {
-    font-size: 0.8em;
-    height: 3em;
-  }
-
-  .submitBtn {
-    font-size: 16px;
-  }
-
-  .authInput {
-    padding: 6px;
-  }
 }

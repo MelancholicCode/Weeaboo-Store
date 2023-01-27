@@ -41,7 +41,8 @@ const Profile = () => {
               stage={stage}
               setStage={setStage}
               errorMessage={errorMessage}
-              setErrorMessage={setErrorMessage}/>}
+              setErrorMessage={setErrorMessage}
+              modal={modal}/>}
       </Modal>
       <div className={cl.avatar}>
         <div className={cl.profileIcon}>
