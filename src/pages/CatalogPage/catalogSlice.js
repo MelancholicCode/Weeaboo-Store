@@ -24,7 +24,6 @@ const catalog = createSlice({
       state.productsLoadingStatus = 'error';
     },
     clearCatalog: state => {
-      console.log(state.products)
       state.products = [];
     },
     setCatalogPages: (state, action) => {
@@ -55,7 +54,6 @@ export const fetchProducts = (page, limit, query) => (dispatch) => {
   dispatch(catalogFetching());
   axios.get(`http://localhost:3001/444/products?_page=${page}&_limit=${limit}${searchTerm}`)
     .then(res => {
-      console.log(res, calcPages(res, limit))
       dispatch(setCatalogPages(calcPages(res, limit)));
       dispatch(catalogFetched(res.data));
     })
