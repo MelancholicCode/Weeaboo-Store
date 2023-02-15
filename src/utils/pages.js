@@ -1,3 +1,3 @@
-export const calcPages = (res, limit) => {
-  return Math.ceil(res.headers['x-total-count'] / limit);
+export const calcPages = (count, limit) => {
+  return Math.ceil(count / limit);
 }
