@@ -26,11 +26,9 @@ const Form = () => {
 
   const onSubmit = ({name, email, password}) => {
     if (isSignUp) {
-      const user = {name, email, password};
-      dispatch(authUser(user, 'signup'));
+      dispatch(authUser(isSignUp, email, password, name));
     } else {
-      const  user = {email, password};
-      dispatch(authUser(user, 'signin'));
+      dispatch(authUser(isSignUp, email, password));
     }
     reset();
   }

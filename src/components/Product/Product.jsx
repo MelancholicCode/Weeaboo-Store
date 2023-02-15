@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 
 import BookmarkIcon from "../../assets/img/svg/BookmarkIcon";
 import { addGood } from "../../pages/Cart/cartSlice";
-import { addFavourite, deleteFavourite } from "../../pages/FavouritesPage/favouritesSlice";
-import { getAccessToken, getUser } from "../../utils/auth";
+import { addFavorite, deleteFavorite } from "../../pages/FavoritesPage/favoritesSlice";
 import { stringTrim } from "../../utils/string";
 import { setModal } from "../Form/authSlice";
 
@@ -14,71 +13,44 @@ import cl from './Product.module.css'
 const Product = ({product, pageTitle}) => {
   const dispatch = useDispatch();
   const [isGood, setIsGood] = useState(false);
-  const [currentFavourite, setCurrentFavourite] = useState(false);
-  const [isFavourite, setIsFavourite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
   const {signedIn} = useSelector(state => state.auth);
   const {goods} = useSelector(state => state.cart);
-  const {favourites} = useSelector(state => state.favourites);
+  const {favorites} = useSelector(state => state.favorites);
+
+  const productId = pageTitle === 'catalog' ? product.id : product.productId;
 
   useEffect(() => {
-    setIsFavourite(false);
-    if (pageTitle === 'catalog') {
-      goods.forEach(item => {
-        if (item.productId === product.id) {
-          setIsGood(true);
-        }
-      })
-      favourites.forEach(item => {
-        if (item.productId === product.id) {
-          setIsFavourite(true);
-          setCurrentFavourite(item);
-        }
-      })
-    } else if (pageTitle === 'favourites') {
-      goods.forEach(item => {
-        if (item.productId === product.productId) {
-          setIsGood(true);
-        }
-      })
-      favourites.forEach(item => {
-        if (item.id === product.id) {
-          setIsFavourite(true);
-          setCurrentFavourite(item);
-        }
-      })
-    }
+    setIsFavorite(false);
+    goods.forEach(item => {
+      if (item.productId === productId) {
+        setIsGood(true);
+      }
+    })
+    favorites.forEach(item => {
+      if (item.productId === productId) {
+        setIsFavorite(true);
+      }
+    });
     // eslint-disable-next-line
-  }, [goods, favourites]);
+  }, [goods, favorites]);
 
   useEffect(() => {
     if (!signedIn) {
       setIsGood(false);
-      setIsFavourite(false);
+      setIsFavorite(false);
     }
   }, [signedIn])
 
   const onAddProduct = (place) => {
     if (signedIn) {
-      const accessToken = getAccessToken();
-      const userId = getUser().id;
-
-      const item = {
-        productId: product.id,
-        title: product.title,
-        poster: product.poster,
-        price: product.price,
-        slug: product.slug,
-      }
-
       if (place === 'cart') {
-        item.author = product.author;
-        item.count = 1;
-        dispatch(addGood(item, userId, accessToken));
-      } else if (place === 'favourites') {
-        if (isFavourite) {
-          dispatch(deleteFavourite(currentFavourite.id, accessToken));
+        dispatch(addGood(productId));
+      } else if (place === 'favorites') {
+        if (isFavorite) {
+          dispatch(deleteFavorite(productId));
         } else {
-          dispatch(addFavourite(item, userId, accessToken));
+          dispatch(addFavorite(productId));
         }
       }
       return
@@ -91,12 +63,12 @@ const Product = ({product, pageTitle}) => {
       <Link
         to={`/catalog/${product.slug}`}
         className={cl.productPoster}>
-        <img height='100%' width='100%' src={product.poster} alt=""/>
+        <img height='100%' width='100%' src={process.env.REACT_APP_API_URL + product.img} alt=""/>
       </Link>
       <Link
         to={`/catalog/${product.slug}`}
         className={cl.productName}>
-          {stringTrim(product.title, 30)}
+          {stringTrim(product.name, 30)}
       </Link>
       <p className={cl.price}>{product.price} ₽</p>
       <div className={cl.btns}>
@@ -110,11 +82,11 @@ const Product = ({product, pageTitle}) => {
               >Купить
             </div>}
         <div
-          onClick={() => onAddProduct('favourites')}
-          className={cl.favourite}
+          onClick={() => onAddProduct('favorites')}
+          className={cl.favorite}
           >
           <BookmarkIcon
-            color={isFavourite ? '#ff4c4c' : '#ddd'}/>
+            color={isFavorite ? '#ff4c4c' : '#ddd'}/>
         </div>
       </div>
     </li>

@@ -12,7 +12,7 @@ import LogOutIcon from '../../assets/img/svg/LogOutIcon';
 import ProfileIcon from '../../assets/img/svg/ProfileIcon';
 
 import cl from './Header.module.css';
-import { clearFavourites } from '../../pages/FavouritesPage/favouritesSlice';
+import { clearFavorites } from '../../pages/FavoritesPage/favoritesSlice';
 import { useEffect } from 'react';
 
 const Header = ({menuActive, setMenuActive}) => {
@@ -30,11 +30,10 @@ const Header = ({menuActive, setMenuActive}) => {
   }, [modal])
 
   const signOut = () => {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     dispatch(closeAccess());
     dispatch(clearCart());
-    dispatch(clearFavourites());
+    dispatch(clearFavorites());
   }
 
   const onOpenModal = (value) => {
@@ -66,7 +65,7 @@ const Header = ({menuActive, setMenuActive}) => {
             ? <>
               <div
                 className={cl.headerBtn}
-                onClick={() => checkPrivateLink('/favourites')}>
+                onClick={() => checkPrivateLink('/favorites')}>
                 <BookmarkIcon
                   color='inherit'/>
               </div>

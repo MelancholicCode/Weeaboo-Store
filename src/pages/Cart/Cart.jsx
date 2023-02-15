@@ -1,6 +1,5 @@
 import CartItem from '../../components/CartItem/CartItem';
 
-import cl from './Cart.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import Spinner from "../../assets/img/spinner/Spinner";
 import Modal from "../../components/Modal/Modal";
@@ -9,6 +8,8 @@ import { sumOfCount, sumOfPrice } from '../../utils/numbers';
 import { getAccessToken, getUser } from '../../utils/auth';
 import { addOrder } from '../AccountPage/ordersSlice';
 import { useState } from 'react';
+
+import cl from './Cart.module.css';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -37,7 +38,6 @@ const Cart = () => {
         goodsIds,
         generalPrice: sumOfPrice(goods),
         generalCount: sumOfCount(goods),
-        date: new Date(),
       }
 
       dispatch(addOrder(order, userId, accessToken, productIds, onThanksModal));
@@ -65,7 +65,7 @@ const Cart = () => {
 
     return arr.map(item => (
       <CartItem
-        key={item.productId}
+        key={item.id}
         good={item}
       />
     ));

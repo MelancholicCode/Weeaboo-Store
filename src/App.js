@@ -3,7 +3,7 @@ import Cart from "./pages/Cart/Cart";
 import ProductPage from "./pages/ProductPage/ProductPage";
 import Modal from "./components/Modal/Modal";
 import CatalogPage from "./pages/CatalogPage/CatalogPage";
-import FavouritesPage from "./pages/FavouritesPage/FavouritesPage";
+import FavoritesPage from "./pages/FavoritesPage/FavoritesPage";
 import Menu from "./components/Menu/Menu";
 import AccountPage from "./pages/AccountPage/AccountPage";
 import Profile from "./components/Profile/Profile";
@@ -16,30 +16,22 @@ import { useEffect, useState } from "react";
 import { getAccess, setModal } from "./components/Form/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGoods } from "./pages/Cart/cartSlice";
-import { getAccessToken, getUser } from "./utils/auth";
-import { fetchFavourites } from "./pages/FavouritesPage/favouritesSlice";
+import { fetchFavorites } from "./pages/FavoritesPage/favoritesSlice";
 
 function App() {
   const [menuActive, setMenuActive] = useState(false);
   const dispatch = useDispatch();
   const {signedIn, modal} = useSelector(state => state.auth);
 
-  const user = getUser();
-  const accessToken = getAccessToken();
-
   useEffect(() => {
-    if (user && accessToken) {
-      dispatch(getAccess(user.id, accessToken));
-    } else {
-      dispatch(setModal(true));
-    }
+    dispatch(getAccess());
     // eslint-disable-next-line
   }, [dispatch]);
 
   useEffect(() => {
     if (signedIn) {
-      dispatch(fetchFavourites(user.id, accessToken));
-      dispatch(fetchGoods(user.id, accessToken));
+      dispatch(fetchFavorites());
+      dispatch(fetchGoods());
       dispatch(setModal(false));
     }
     // eslint-disable-next-line
@@ -66,7 +58,7 @@ function App() {
           setMenuActive={setMenuActive}/>
         <Routes>
           <Route path="/" element={<CatalogPage/>}/>
-          <Route path="/favourites" element={<FavouritesPage/>}/>
+          <Route path="/favorites" element={<FavoritesPage/>}/>
           <Route path="/cart" element={<Cart/>}/>
           <Route path="/account" element={<AccountPage/>}>
             <Route path="profile" element={<Profile/>}/>

@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { closeAccess } from "../../components/Form/authSlice";
+import { changeGoodCount, createGood, getGoods, removeGood } from "../../http/cartAPI";
 
 const initialState = {
   goods: [],
@@ -59,86 +58,42 @@ export const {
   setCartIdleStatus,
 } = actions;
 
-export const fetchGoods = (userId, accessToken) => (dispatch) => {
+export const fetchGoods = () => (dispatch) => {
   dispatch(cartFetching());
-  axios.get(`http://localhost:3001/600/cart?userId=${userId}`, {
-    headers: {
-      "Authorization": `Bearer ${accessToken}`
-    }
-  })
-    .then(({data}) => {
-      dispatch(cartFetched(data))
+  getGoods()
+    .then((goods) => {
+      dispatch(cartFetched(goods))
     })
     .catch((err) => {
-      switch (err.request.status) {
-        case 403:
-          dispatch(setCartIdleStatus())
-          break;
-        default:
-          console.log('Что-то пошло не так')
-      }
+      console.log(err)
     });
 }
 
-export const addGood = (product, userId, accessToken) => (dispatch) => {
-  axios.post('http://localhost:3001/600/cart', {...product, userId}, {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
-    }
-  })
-    .then(({data}) => dispatch(addGoodInState(data)))
+export const addGood = (productId) => (dispatch) => {
+  createGood(productId)
+    .then(product => {
+      console.log(product)
+      dispatch(addGoodInState(product))})
     .catch((err) => {
-      switch (err.request.status) {
-        case 500:
-          console.log('Товар уже добавлен')
-          break
-        case 401:
-          dispatch(closeAccess());
-          break
-        default:
-          console.log('Что-то пошло не так')
-      }
+      console.log(err)
     });
 }
 
-export const deleteGood = (goodId, accessToken) => (dispatch) => {
-  axios.delete(`http://localhost:3001/600/cart/${goodId}`, {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
-    }
-  })
+export const deleteGood = (goodId) => (dispatch) => {
+  removeGood(goodId)
     .then(() => dispatch(deleteGoodInState(goodId)))
     .catch((err) => {
-      switch (err.request.status) {
-        case 404:
-          console.log('Товар не найден: корзина')
-          break
-        case 401:
-          dispatch(closeAccess());
-          break
-        default:
-          console.log('Что-то пошло не так: корзина')
-      }
+      console.log(err)
     });
 }
 
-export const changeCount = (goodId, count, accessToken) => (dispatch) => {
-  axios.patch(`http://localhost:3001/600/cart/${goodId}`, {count}, {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
-    }
-  })
-    .then(() => dispatch(changeCountInState({goodId, count})))
+export const changeCount = (goodId, count) => (dispatch) => {
+  changeGoodCount(goodId, count)
+    .then(() => {
+      console.log(goodId)
+      dispatch(changeCountInState({goodId, count}))
+    })
     .catch((err) => {
-      switch (err.request.status) {
-        case 401:
-          dispatch(closeAccess());
-          break
-        default:
-          console.log('Что-то пошло не так')
-      }
+      console.log(err);
     });
 }

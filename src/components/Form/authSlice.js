@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { check, login, registration } from "../../http/userAPI";
 
 const initialState = {
   user: {},
@@ -47,33 +48,30 @@ export const {
   setAuthIdleStatus
 } = actions;
 
-export const authUser = (user, route) => (dispatch) => {
+export const authUser = (isSignUp, email, password, name) => (dispatch) => {
+  let comingUser;
+
   dispatch(() => getUserLoading())
-  axios.post(`http://localhost:3001/${route}`, user)
-    .then(res => {
-      localStorage.setItem('accessToken', res.data.accessToken)
-      localStorage.setItem('user', JSON.stringify(res.data.user))
-      dispatch(getUserData(res.data.user))
+  if (isSignUp) {
+    comingUser = registration(name, email, password);
+  } else {
+    comingUser = login(email, password);
+  }
+  comingUser
+    .then(user => {
+      dispatch(getUserData(user))
     })
     .catch(() => dispatch(getUserError()));
 }
 
-export const getAccess = (userId, accessToken) => (dispatch) => {
+export const getAccess = () => (dispatch) => {
   dispatch(() => getUserLoading())
-  axios.get(`http://localhost:3001/600/users/${userId}`, {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
-    }
-  })
-    .then(res => {
-      localStorage.setItem('user', JSON.stringify(res.data))
-      dispatch(getUserData(res.data))
+  check()
+    .then((user) => {
+      dispatch(getUserData(user))
     })
     .catch((err) => {
-      console.error(err, 'Ошибка доступа')
-      localStorage.removeItem('user')
-      localStorage.removeItem('accessToken')
+      console.log(err)
       dispatch(setModal(true))
     });
 }

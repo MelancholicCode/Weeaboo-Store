@@ -7,7 +7,7 @@ import Close from '../../assets/img/svg/Close';
 import LogOutIcon from '../../assets/img/svg/LogOutIcon';
 import ProfileIcon from '../../assets/img/svg/ProfileIcon';
 import { clearCart } from '../../pages/Cart/cartSlice';
-import { clearFavourites } from '../../pages/FavouritesPage/favouritesSlice';
+import { clearFavorites } from '../../pages/FavoritesPage/favoritesSlice';
 import { closeAccess, setModal } from '../Form/authSlice';
 import cl from './Menu.module.css';
 
@@ -19,23 +19,23 @@ const Menu = ({header, menuActive, setMenuActive}) => {
 
   const items = [
     {
-      title: 'Аккаунт',
+      name: 'Аккаунт',
       path: '/account',
       icon: <ProfileIcon/>
     },
     {
-      title: 'Каталог',
+      name: 'Каталог',
       path: '/',
       icon: <CatalogIcon/>
     },
     {
-      title: 'Корзина',
+      name: 'Корзина',
       path: '/cart',
       icon: <CartIcon/>
     },
     {
-      title: 'Избранное',
-      path: '/favourites',
+      name: 'Избранное',
+      path: '/favorites',
       icon: <BookmarkIcon/>
     }
   ]
@@ -67,7 +67,7 @@ const Menu = ({header, menuActive, setMenuActive}) => {
     localStorage.removeItem('user');
     dispatch(closeAccess());
     dispatch(clearCart());
-    dispatch(clearFavourites());
+    dispatch(clearFavorites());
     onCloseMenu();
   }
 
@@ -89,13 +89,13 @@ const Menu = ({header, menuActive, setMenuActive}) => {
           {signedIn
             ? <>
               {items.map(item => (
-                <li key={item.title} className={cl.menuNavItem}>
+                <li key={item.name} className={cl.menuNavItem}>
                   <div onClick={() => checkPrivateLink(item.path)} className={cl.menuNavLink} to={item.path}>
                     <div className={cl.menuIcon}>
                       {item.icon}
                       {item.path === '/cart' && goodsLength ? <p className={`${cl.count} ${cl.cartCount}`}>{goodsLength}</p> : null}
                     </div>
-                    <p className={cl.menuLinkText}>{item.title}</p>
+                    <p className={cl.menuLinkText}>{item.name}</p>
                   </div>
                 </li>
               ))}

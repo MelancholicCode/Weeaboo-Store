@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { getProducts } from "../../http/productAPI";
 import { calcPages } from "../../utils/pages";
 
 const initialState = {
@@ -47,15 +47,12 @@ export const {
 } = actions;
 
 export const fetchProducts = (page, limit, query) => (dispatch) => {
-  let searchTerm = '';
-  if (query) {
-    searchTerm = `&q=${query}`
-  }
   dispatch(catalogFetching());
-  axios.get(`http://localhost:3001/444/products?_page=${page}&_limit=${limit}${searchTerm}`)
-    .then(res => {
-      dispatch(setCatalogPages(calcPages(res, limit)));
-      dispatch(catalogFetched(res.data));
+  getProducts(page, limit, query)
+    .then(({rows, count}) => {
+      dispatch(setCatalogPages(calcPages(count, limit)));
+      dispatch(catalogFetched(rows));
     })
-    .catch(() => dispatch(catalogFetchingError()));
+    .catch(() => {
+      dispatch(catalogFetchingError())});
 }

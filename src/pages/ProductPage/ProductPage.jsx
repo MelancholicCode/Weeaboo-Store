@@ -1,7 +1,7 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Spinner from "../../assets/img/spinner/Spinner";
+import { getProduct } from "../../http/productAPI";
 import ProductCard from "./ProductCard/ProductCard";
 
 import cl from './ProductPage.module.css'
@@ -13,10 +13,10 @@ const ProductPage = () => {
 
   useEffect(() => {
     setLoadingStatus('loading');
-    axios.get(`http://localhost:3001/444/products?slug=${slug}`)
-      .then(({data}) => {
+    getProduct(slug)
+      .then(product => {
         setLoadingStatus('idle');
-        setProduct(data[0]);
+        setProduct(product);
       })
       .catch(setLoadingStatus('error'));
   }, [slug])

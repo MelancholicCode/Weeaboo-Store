@@ -5,61 +5,42 @@ import { Link } from 'react-router-dom';
 import Bookmark from '../../assets/img/svg/BookmarkIcon';
 import Trash from '../../assets/img/svg/Trash';
 import { changeCount, deleteGood } from '../../pages/Cart/cartSlice';
-import { addFavourite, deleteFavourite } from '../../pages/FavouritesPage/favouritesSlice';
-import { getAccessToken, getUser } from '../../utils/auth';
+import { addFavorite, deleteFavorite } from '../../pages/FavoritesPage/favoritesSlice';
 
 import cl from './CartItem.module.css';
 
 const CartItem = ({good}) => {
   const dispatch = useDispatch();
-  const {favourites} = useSelector(state => state.favourites);
+  const {favorites} = useSelector(state => state.favorites);
   const {signedIn} = useSelector(state => state.auth);
-  const [isFavourite, setIsFavourite] = useState(false);
-  const [currentFavourite, setCurrentFavourite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
-    setIsFavourite(false);
-    favourites.forEach(item => {
+    setIsFavorite(false);
+    favorites.forEach(item => {
       if (item.productId === good.productId) {
-        setIsFavourite(true);
-        setCurrentFavourite(item);
+        setIsFavorite(true);
       }
     })
     // eslint-disable-next-line
-  }, [favourites])
+  }, [favorites])
 
   const onDeleteGood = () => {
-    const accessToken = getAccessToken();
-
-    if (accessToken) {
-      dispatch(deleteGood(good.id, accessToken));
-    }
+    dispatch(deleteGood(good.id));
   }
 
   const onChangeCount = (count) => {
-    const accessToken = getAccessToken();
-
-    if (accessToken && count >= 1 && count <= 30) {
-      dispatch(changeCount(good.id, count, accessToken));
+    if (count >= 1 && count <= 30) {
+      dispatch(changeCount(good.id, count));
     }
   }
 
-  const onChangeFavourite = () => {
+  const onChangeFavorite = () => {
     if (signedIn) {
-      const accessToken = getAccessToken();
-      const userId = getUser().id;
-
-      const item = {
-        productId: good.productId,
-        title: good.title,
-        poster: good.poster,
-        price: good.price,
-        slug: good.slug,
-      }
-      if (isFavourite) {
-        dispatch(deleteFavourite(currentFavourite.id, accessToken));
+      if (isFavorite) {
+        dispatch(deleteFavorite(good.productId));
       } else {
-        dispatch(addFavourite(item, userId, accessToken));
+        dispatch(addFavorite(good.productId));
       }
     }
   }
@@ -69,19 +50,19 @@ const CartItem = ({good}) => {
       <Link
         className={cl.productCardImage}
         to={`/catalog/${good.slug}`}>
-        <img height="100%" width="100%" src={good.poster} alt="" />
+        <img height="100%" width="100%" src={process.env.REACT_APP_API_URL + good.img} alt="" />
       </Link>
       <div className={cl.productCardDescr}>
         <Link
           className="product-content"
           to={`/catalog/${good.slug}`}>
-          <p className={cl.goodName}>{good.title}</p>
+          <p className={cl.goodName}>{good.name}</p>
         </Link>
         <p className={cl.goodAuthor}>{good.author}</p>
       </div>
       <div className={cl.buyBlock}>
         <p className={cl.price}>
-          {good.price} ₽
+          {good.count * good.price} ₽
         </p>
         <div className={cl.leftButtons}>
           <div
@@ -101,11 +82,11 @@ const CartItem = ({good}) => {
       </div>
       <div className={cl.productButtons}>
         <div
-          onClick={onChangeFavourite}
+          onClick={onChangeFavorite}
           className={cl.productBtn}>
           <div className={cl.btnIcon}>
             <Bookmark
-              color={isFavourite ? '#ff4c4c' : '#ddd'}/>
+              color={isFavorite ? '#ff4c4c' : '#ddd'}/>
           </div>
           <p>Закладки</p>
         </div>
