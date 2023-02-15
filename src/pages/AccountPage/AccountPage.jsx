@@ -17,11 +17,11 @@ const AccountPage = () => {
   const {signedIn} = useSelector(state => state.auth);
   const links = [
     {
-      title: 'Мой профиль',
+      name: 'Мой профиль',
       path: '/profile'
     },
     {
-      title: 'История заказов',
+      name: 'История заказов',
       path: '/orders'
     }
   ]
@@ -43,7 +43,7 @@ const AccountPage = () => {
               <Link
                 className={cl.optionsLink}
                 to={`/account${link.path}`}>
-                {link.title}
+                {link.name}
               </Link>
             </li>
           ))}
