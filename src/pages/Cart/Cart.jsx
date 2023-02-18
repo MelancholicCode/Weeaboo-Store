@@ -5,42 +5,42 @@ import Spinner from "../../assets/img/spinner/Spinner";
 import Modal from "../../components/Modal/Modal";
 import { declOfNum } from '../../utils/string';
 import { sumOfCount, sumOfPrice } from '../../utils/numbers';
-import { getAccessToken, getUser } from '../../utils/auth';
 import { addOrder } from '../AccountPage/ordersSlice';
 import { useState } from 'react';
 
 import cl from './Cart.module.css';
+import { useForm } from 'react-hook-form';
 
 const Cart = () => {
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const {goods, goodsLoadingStatus} = useSelector(state => state.cart);
   const {signedIn} = useSelector(state => state.auth);
+  const [address, setAddress] = useState('');
+  const [showMessage, setShowMessage] = useState(false);
+  const {
+    register,
+    formState: {
+      errors
+    },
+    handleSubmit,
+    reset
+  } = useForm({mode: 'onBlur'});
 
-  const onThanksModal = (value) => {
-    let timeout;
-    if (value) {
-      setModal(true);
-      setTimeout(() => setModal(false), 3000);
-      return;
+  const onOrder = (e) => {
+    e.preventDefault();
+    if (signedIn) {
+      dispatch(addOrder(address, onModal, setShowMessage));
     }
-    clearTimeout(timeout);
   }
 
-  const onOrder = () => {
-    if (signedIn) {
-      const accessToken = getAccessToken();
-      const userId = getUser().id;
-      const goodsIds = goods.map(good => good.productId);
-      const productIds = goods.map(good => good.id);
-      
-      const order = {
-        goodsIds,
-        generalPrice: sumOfPrice(goods),
-        generalCount: sumOfCount(goods),
-      }
-
-      dispatch(addOrder(order, userId, accessToken, productIds, onThanksModal));
+  const onModal = (bool) => {
+    if (bool) {
+      setModal(true);
+    } else {
+      reset();
+      setShowMessage(false);
+      setModal(false);
     }
   }
 
@@ -52,9 +52,9 @@ const Cart = () => {
 
   if (!signedIn) {
     return (
-    <div className={`container ${cl.Cart}`}>
-      <p className="emptyPage">Чтобы просмотреть свою корзину - нужно войти в аккаунт</p>
-    </div>
+      <div className={`container ${cl.Cart}`}>
+        <p className="emptyPage">Чтобы просмотреть свою корзину - нужно войти в аккаунт</p>
+      </div>
     )
   }
 
@@ -79,8 +79,25 @@ const Cart = () => {
     <>
       <Modal
         modal={modal}
-        setModal={setModal}>
-        <p className="alertMessage">Спасибо за покупку!</p>
+        setModal={onModal}
+      >
+        {showMessage
+          ? <p className="alertMessage">Спасибо за покупку!</p>
+          : <form onSubmit={handleSubmit(onOrder)}>
+              {errors?.address && <p className={cl.formError}>{errors?.address?.message}</p>}
+              <input
+                {...register('address', {
+                  required: 'Заполните адрес для заказа'
+                })}
+                id='address'
+                value={address}
+                className={cl.addressInput}
+                onChange={e => setAddress(e.target.value)}
+                placeholder='Введите адрес'
+                type="text"
+              />
+              <button className={cl.orderBtn}>Сделать заказ</button>
+            </form>}
       </Modal>
       <div className={`container ${cl.Cart}`}>
         <ul className={cl.cartList}>
@@ -91,7 +108,7 @@ const Cart = () => {
                 <p className={cl.resultText}>
                   {generalCount} {declOfCount} на сумму {generalPrice} ₽
                 </p>
-                <div onClick={onOrder} className={cl.buyBtn}>
+                <div onClick={() => onModal(true)} className={cl.buyBtn}>
                   Оформить заказ
                 </div>
               </div>

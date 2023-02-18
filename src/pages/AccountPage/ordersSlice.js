@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { closeAccess } from "../../components/Form/authSlice";
-import { clearCart, deleteGood } from "../Cart/cartSlice";
+import { createOrder, getOrders } from "../../http/orderAPI";
+import { clearCart } from "../Cart/cartSlice";
 
 const initialState = {
   orders: [],
@@ -46,50 +45,25 @@ export const {
   clearOrders
 } = actions;
 
-export const fetchOrders = (userId, accessToken) => (dispatch) => {
-  dispatch(ordersFetching());
-  axios.get(`http://localhost:3001/600/orders?userId=${userId}`, {
-    headers: {
-      "Authorization": `Bearer ${accessToken}`
-    }
-  })
-    .then(({data}) => {
-      dispatch(ordersFetched(data))
+export const fetchOrders = () => (dispatch) => {
+  getOrders()
+    .then((orders) => {
+      dispatch(ordersFetched(orders));
     })
     .catch((err) => {
-      switch (err.request.status) {
-        case 403:
-          dispatch(setOrdersIdleStatus())
-          break;
-        case 401:
-          dispatch(closeAccess());
-          break;
-        default:
-          console.log('Что-то пошло не так')
-      }
+      console.error(err);
     });
 }
 
-export const addOrder = (order, userId, accessToken, goodsIds, onThanksModal) => (dispatch) => {
-  axios.post('http://localhost:3001/600/orders', {...order, userId}, {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
-    }
-  })
-    .then(({data}) => {
-      dispatch(addOrderInState(data));
+export const addOrder = (address, onModal, setShowMessage) => (dispatch) => {
+  createOrder(address)
+    .then((order) => {
+      dispatch(addOrderInState(order));
       dispatch(clearCart());
-      goodsIds.forEach(id => dispatch(deleteGood(id, accessToken)));
-      onThanksModal(true);
+      setShowMessage(true);
+      setTimeout(() => onModal(false), 3000);
     })
     .catch((err) => {
-      switch (err.request.status) {
-        case 401:
-          dispatch(closeAccess());
-          break
-        default:
-          console.log('Что-то пошло не так')
-      }
+      console.error(err);
     });
 }
