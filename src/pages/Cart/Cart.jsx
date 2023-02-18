@@ -27,8 +27,7 @@ const Cart = () => {
     reset
   } = useForm({mode: 'onBlur'});
 
-  const onOrder = (e) => {
-    e.preventDefault();
+  const onOrder = () => {
     if (signedIn) {
       dispatch(addOrder(address, onModal, setShowMessage));
     }
