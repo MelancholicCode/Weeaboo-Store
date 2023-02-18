@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ProfileIcon from '../../assets/img/svg/ProfileIcon';
-import { getUser } from '../../utils/auth';
 import ChangePassword from '../ChangePassword/ChangePassword';
 import Modal from '../Modal/Modal';
 import cl from './Profile.module.css';
@@ -10,12 +9,7 @@ const Profile = () => {
   const [modal, setModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [stage, setStage] = useState(1);
-  const {signedIn} = useSelector(state => state.auth);
-
-  let user = {name: '', email: ''};
-  if (signedIn) {
-    user = getUser();
-  }
+  const {user} = useSelector(state => state.auth);
 
   useEffect(() => {
     let timer;
@@ -48,10 +42,10 @@ const Profile = () => {
         <div className={cl.profileIcon}>
           <ProfileIcon/>
         </div>
-        <p className={cl.profileName}>{user.name}</p>
+        <p className={cl.profileName}>{user?.name}</p>
       </div>
       <div className={cl.profileOptions}>
-        <p className={cl.emailOption}>Почта: {user.email}</p>
+        <p className={cl.emailOption}>Почта: {user?.email}</p>
         <div onClick={() => onSetModal(true)} className={cl.changePassword}>Изменить пароль</div>
       </div>
     </div>
