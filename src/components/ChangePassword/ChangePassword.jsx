@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAccessToken, getUser } from '../../utils/auth';
 import { changePassword, checkPassword } from '../Form/authSlice';
 
 import cl from './ChangePassword.module.css';
@@ -15,7 +14,7 @@ const ChangePassword = ({stage, setStage, errorMessage, setErrorMessage, modal})
     handleSubmit,
     reset
   } = useForm({mode: 'onBlur'});
-  const {signedIn} = useSelector(state => state.auth);
+  const {signedIn, user} = useSelector(state => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,13 +25,11 @@ const ChangePassword = ({stage, setStage, errorMessage, setErrorMessage, modal})
 
   const onSubmit = ({firstPassword, newPassword, secondPassword}) => {
     if (signedIn) {
-      const user = getUser();
-      const accessToken = getAccessToken();
       if (stage === 1) {
-        dispatch(checkPassword({email: user.email, password: firstPassword}, setStage, setErrorMessage));
+        dispatch(checkPassword(user.email, firstPassword, setStage, setErrorMessage));
       } else if (stage === 2) {
         if (newPassword === secondPassword) {
-          dispatch(changePassword(user.id, newPassword, accessToken, setStage, setErrorMessage))
+          dispatch(changePassword(newPassword, setStage, setErrorMessage))
           return
         }
         setErrorMessage('Пароли не совпадают');

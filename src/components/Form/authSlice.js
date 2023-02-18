@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { check, login, registration } from "../../http/userAPI";
+import { check, login, newPasswordChange, registration } from "../../http/userAPI";
 
 const initialState = {
   user: {},
   authLoadingStatus: 'idle',
+  errorMessage: '',
   signedIn: false,
   modal: false
 }
@@ -21,8 +21,9 @@ const authSlice = createSlice({
       state.signedIn = true;
       state.authLoadingStatus = 'idle';
     },
-    getUserError: state => {
+    getUserError: (state, action) => {
       state.authLoadingStatus = 'error';
+      state.errorMessage = action.payload;
     },
     closeAccess: state => {
       state.signedIn = false;
@@ -61,7 +62,7 @@ export const authUser = (isSignUp, email, password, name) => (dispatch) => {
     .then(user => {
       dispatch(getUserData(user))
     })
-    .catch(() => dispatch(getUserError()));
+    .catch(({message}) => dispatch(getUserError(message)));
 }
 
 export const getAccess = () => (dispatch) => {
@@ -71,49 +72,31 @@ export const getAccess = () => (dispatch) => {
       dispatch(getUserData(user))
     })
     .catch((err) => {
-      console.log(err)
+      console.error(err)
+      
       dispatch(setModal(true))
     });
 }
 
-export const checkPassword = (userData, setStage, setErrorMessage) => (dispatch) => {
+export const checkPassword = (email, password, setStage, setErrorMessage) => (dispatch) => {
   dispatch(() => getUserLoading())
-  axios.post(`http://localhost:3001/login`, userData)
-    .then(res => {
-      localStorage.setItem('accessToken', res.data.accessToken)
-      localStorage.setItem('user', JSON.stringify(res.data.user))
-      dispatch(getUserData(res.data.user))
+  login(email, password)
+    .then(() => {
       setStage(2);
       setErrorMessage('')
     })
-    .catch(() => setErrorMessage('Неправильный пароль'));
+    .catch(({message}) => setErrorMessage(message));
 }
 
-export const changePassword = (userId, newPassword, accessToken, setStage, setErrorMessage) => (dispatch) => {
+export const changePassword = (password, setStage, setErrorMessage) => (dispatch) => {
   dispatch(() => getUserLoading())
-  axios.patch(`http://localhost:3001/users/${userId}`, {password: newPassword}, {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
-    }
-  })
-    .then(res => {
-      localStorage.setItem('user', JSON.stringify(res.data));
-      dispatch(getUserData(res.data));
+  newPasswordChange(password)
+    .then(user => {
+      dispatch(getUserData(user));
       setStage(3);
       setErrorMessage('');
     })
-    .catch((err) => {
-      switch(err) {
-        case 400:
-          setErrorMessage('Пароль слишком мал')
-          break;
-        case 401:
-          dispatch(closeAccess());
-          break;
-        default:
-          break;
-      }
-      setErrorMessage('Пароль слишком мал')
+    .catch(({message}) => {
+      setErrorMessage(message)
     });
 }

@@ -17,7 +17,7 @@ const Form = () => {
     reset
   } = useForm({mode: 'onBlur'});
   const [isSignUp, setIsSignUp] = useState(false);
-  const {authLoadingStatus} = useSelector(state => state.auth);
+  const {authLoadingStatus, errorMessage} = useSelector(state => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -57,7 +57,7 @@ const Form = () => {
         onSubmit={handleSubmit(onSubmit)}
         className={cl.authForm}>
         {authLoadingStatus === 'error' &&
-          <p className={cl.errorMessage}>Ошибка авторизации</p>}
+          <p className={cl.errorMessage}>{errorMessage}</p>}
         {isSignUp ?
         <>
           {errors?.name && <p className={cl.authError}>{errors?.name?.message}</p>}
