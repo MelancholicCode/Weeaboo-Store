@@ -6,6 +6,7 @@ import CatalogIcon from '../../assets/img/svg/CatalogIcon';
 import Close from '../../assets/img/svg/Close';
 import LogOutIcon from '../../assets/img/svg/LogOutIcon';
 import ProfileIcon from '../../assets/img/svg/ProfileIcon';
+import { clearOrders } from '../../pages/AccountPage/ordersSlice';
 import { clearCart } from '../../pages/Cart/cartSlice';
 import { clearFavorites } from '../../pages/FavoritesPage/favoritesSlice';
 import { closeAccess, setModal } from '../Form/authSlice';
@@ -63,10 +64,10 @@ const Menu = ({header, menuActive, setMenuActive}) => {
   }
 
   const signOut = () => {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('user');
+    localStorage.removeItem('token');
     dispatch(closeAccess());
     dispatch(clearCart());
+    dispatch(clearOrders());
     dispatch(clearFavorites());
     onCloseMenu();
   }

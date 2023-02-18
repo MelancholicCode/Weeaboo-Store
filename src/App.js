@@ -17,6 +17,7 @@ import { getAccess, setModal } from "./components/Form/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchGoods } from "./pages/Cart/cartSlice";
 import { fetchFavorites } from "./pages/FavoritesPage/favoritesSlice";
+import { fetchOrders } from "./pages/AccountPage/ordersSlice";
 
 function App() {
   const [menuActive, setMenuActive] = useState(false);
@@ -32,6 +33,7 @@ function App() {
     if (signedIn) {
       dispatch(fetchFavorites());
       dispatch(fetchGoods());
+      dispatch(fetchOrders());
       dispatch(setModal(false));
     }
     // eslint-disable-next-line

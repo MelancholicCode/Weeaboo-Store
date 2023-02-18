@@ -1,13 +1,13 @@
 import cl from './OrdersItem.module.css';
 
-const OrdersItem = ({orderId, goodsIds, generalPrice, generalCount, date}) => {
+const OrdersItem = ({order, orderItems}) => {
   return (
     <li className={cl.OrdersItem}>
-      <p>id заказа: {orderId}</p>
-      <p>id товаров: {goodsIds.join(', ')}</p>
-      <p>Цена: {generalPrice} ₽</p>
-      <p>Общее количество: {generalCount}</p>
-      <p>Дата покупки: {new Date(date).toLocaleString()}</p>
+      <p>id заказа: {order.id}</p>
+      <p>id товаров: {orderItems.map(item => item.id).join(', ')}</p>
+      <p>Цена: {order.generalPrice} ₽</p>
+      <p>Общее количество: {orderItems.reduce((acc, cur) => acc + cur.count, 0)}</p>
+      <p>Дата покупки: {new Date(order.createdAt).toLocaleString()}</p>
     </li>
   );
 };
