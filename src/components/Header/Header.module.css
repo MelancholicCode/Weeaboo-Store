@@ -118,9 +118,9 @@
 }
 
 @media (max-width: 480px) {
-  .logo {
+  /* .logo {
     display: none;
-  }
+  } */
   
   .headerLinkBtns {
     display: none;

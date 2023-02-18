@@ -59,7 +59,7 @@ const Header = ({menuActive, setMenuActive}) => {
         <Link className={cl.logo} to="/">
           <Logo/>
         </Link>
-        <Search/>
+        {/* <Search/> */}
         <div className={cl.headerLinkBtns}>
           {signedIn
             ? <>
