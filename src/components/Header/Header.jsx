@@ -14,6 +14,7 @@ import ProfileIcon from '../../assets/img/svg/ProfileIcon';
 import cl from './Header.module.css';
 import { clearFavorites } from '../../pages/FavoritesPage/favoritesSlice';
 import { useEffect } from 'react';
+import { clearOrders } from '../../pages/AccountPage/ordersSlice';
 
 const Header = ({menuActive, setMenuActive}) => {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const Header = ({menuActive, setMenuActive}) => {
     localStorage.removeItem('token');
     dispatch(closeAccess());
     dispatch(clearCart());
+    dispatch(clearOrders());
     dispatch(clearFavorites());
   }
 
