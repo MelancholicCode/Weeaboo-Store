@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Logo } from '@/components/icons/Logo/Logo';
+import { Logo } from '@/assets/icons/Logo/Logo';
 
 export const Header = () => {
   const navLinks = [
