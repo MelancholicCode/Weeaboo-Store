@@ -9,11 +9,10 @@
     "React": "readonly"
   },
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "prettier"],
+  "plugins": ["@typescript-eslint"],
   "rules": {
-    "@typescript-eslint/no-unused-vars": ["error"],
+    "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/no-var-requires": "off",
-    "prettier/prettier": "error"
+    "@typescript-eslint/no-var-requires": "off"
   }
 }
