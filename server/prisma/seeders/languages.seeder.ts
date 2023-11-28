@@ -9,9 +9,9 @@ const createLanguage = async (
 ): Promise<Language> => {
   return await prisma.language.create({
     data: {
-      name: name,
-      code: code,
-      countryId: countryId,
+      name,
+      code,
+      countryId,
     },
   });
 };
