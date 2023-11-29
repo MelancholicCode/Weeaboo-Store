@@ -23,11 +23,11 @@ const createCategory = async (
       CategoryTitle: {
         create: [
           {
-            text: en,
+            text: ru,
             languageId: languages.russian.id,
           },
           {
-            text: ru,
+            text: en,
             languageId: languages.english.id,
           },
           {
