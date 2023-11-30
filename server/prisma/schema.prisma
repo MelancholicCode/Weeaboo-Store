@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -8,85 +9,62 @@ datasource db {
 }
 
 model User {
-  id            Int             @id @default(autoincrement())
-  avatar        String
-  name          String
-  surname       String
-  email         String          @unique
-  password      String
-  address       String
-  country       Country         @relation(fields: [countryId], references: [id])
-  countryId     Int
-  language      Language        @relation(fields: [languageId], references: [id])
-  languageId    Int
-  Cart          Cart?
-  Review        Review[]
-  RolesOnUsers  RolesOnUsers[]
-  Favorite      Favorite[]
-  PurchasedItem PurchasedItem[]
+  id           Int            @id @default(autoincrement())
+  avatar       String
+  name         String
+  surname      String
+  email        String         @unique
+  password     String
+  address      String
+  Cart         Cart?
+  Review       Review[]
+  RolesOnUsers RolesOnUsers[]
+  Favorite     Favorite[]
+  Order        Order[]
 }
 
 model Cart {
-  id     Int     @id @unique @default(autoincrement())
-  user   User    @relation(fields: [userId], references: [id])
-  userId Int     @unique
-  Order  Order[]
+  id       Int        @id @unique @default(autoincrement())
+  user     User       @relation(fields: [userId], references: [id])
+  userId   Int        @unique
+  CartItem CartItem[]
 }
 
 model Category {
-  id            Int             @id @unique @default(autoincrement())
-  Product       Product[]
-  CategoryTitle CategoryTitle[]
-}
-
-model CategoryTitle {
-  id         Int      @id @unique @default(autoincrement())
-  text       String
-  category   Category @relation(fields: [categoryId], references: [id])
-  categoryId Int
-  language   Language @relation(fields: [languageId], references: [id])
-  languageId Int
+  id      Int       @id @unique @default(autoincrement())
+  name    String
+  slug    String
+  Product Product[]
 }
 
 model Product {
-  id            Int            @id @unique @default(autoincrement())
-  img           String
-  rating        Int
-  category      Category       @relation(fields: [categoryId], references: [id])
-  categoryId    Int
-  Order         Order?
-  Favorite      Favorite?
-  Price         Price[]
-  ProductInfo   ProductInfo?
-  PurchasedItem PurchasedItem?
-  Review        Review?
-}
-
-model ProductInfo {
-  id          Int      @id @unique @default(autoincrement())
+  id          Int        @id @unique @default(autoincrement())
   title       String
   description String
-  product     Product  @relation(fields: [productId], references: [id])
-  productId   Int      @unique
-  language    Language @relation(fields: [languageId], references: [id])
-  languageId  Int
+  price       Int
+  img         String
+  category    Category   @relation(fields: [categoryId], references: [id])
+  categoryId  Int
+  CartItem    CartItem?
+  Favorite    Favorite?
+  OrderItem   OrderItem?
+  Review      Review[]
 }
 
-model Price {
-  id         Int      @id @unique @default(autoincrement())
-  value      Int
-  product    Product  @relation(fields: [productId], references: [id])
-  productId  Int
-  currency   Currency @relation(fields: [currencyId], references: [id])
-  currencyId Int
+model Order {
+  id        Int         @id @unique @default(autoincrement())
+  user      User        @relation(fields: [userId], references: [id])
+  userId    Int
+  OrderItem OrderItem[]
 }
 
-model PurchasedItem {
+model OrderItem {
   id        Int     @id @unique @default(autoincrement())
   product   Product @relation(fields: [productId], references: [id])
   productId Int     @unique
-  user      User    @relation(fields: [userId], references: [id])
-  userId    Int
+  order     Order   @relation(fields: [orderId], references: [id])
+  orderId   Int
+  Review    Review?
 }
 
 model Favorite {
@@ -98,16 +76,18 @@ model Favorite {
 }
 
 model Review {
-  id              Int     @id @unique @default(autoincrement())
-  rate            Int
-  comment         String
-  user            User    @relation(fields: [userId], references: [id])
-  userId          Int
-  purchasedItem   Product @relation(fields: [purchasedItemId], references: [id])
-  purchasedItemId Int     @unique
+  id          Int       @id @unique @default(autoincrement())
+  rate        Int
+  comment     String
+  user        User      @relation(fields: [userId], references: [id])
+  userId      Int
+  orderItem   OrderItem @relation(fields: [orderItemId], references: [id])
+  orderItemId Int       @unique
+  product     Product   @relation(fields: [productId], references: [id])
+  productId   Int
 }
 
-model Order {
+model CartItem {
   id        Int     @id @unique @default(autoincrement())
   quantity  Int     @default(1)
   cart      Cart    @relation(fields: [cartId], references: [id])
@@ -129,33 +109,4 @@ model RolesOnUsers {
   roleId Int
 
   @@id([userId, roleId])
-}
-
-model Country {
-  id       Int       @id @unique @default(autoincrement())
-  name     String
-  code     String    @unique
-  User     User[]
-  Currency Currency?
-  Language Language?
-}
-
-model Language {
-  id            Int             @id @unique @default(autoincrement())
-  name          String
-  code          String          @unique
-  country       Country         @relation(fields: [countryId], references: [id])
-  countryId     Int             @unique
-  ProductInfo   ProductInfo[]
-  User          User[]
-  CategoryTitle CategoryTitle[]
-}
-
-model Currency {
-  id        Int     @id @unique @default(autoincrement())
-  code      String  @unique
-  symbol    String
-  country   Country @relation(fields: [countryId], references: [id])
-  countryId Int     @unique
-  Price     Price[]
 }
