@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { Product } from '@prisma/client';
-import { FileService } from '../file/file.service';
+import { FileDirectory, FileService } from '../file/file.service';
 
 @Injectable()
 export class ProductService {
@@ -52,7 +52,11 @@ export class ProductService {
   }
 
   async create(dto: CreateProductDto, image: string): Promise<Product> {
-    const imagePath = this.fileService.createFile(image);
+    const imagePath = this.fileService.createFile(
+      FileDirectory.PRODUCT_IMAGE,
+      image,
+    );
+
     return await this.prisma.product.create({
       data: {
         title: dto.title,
@@ -64,13 +68,16 @@ export class ProductService {
     });
   }
 
-  async delete(id: string): Promise<number> {
-    const product = await this.prisma.product.delete({
-      where: {
-        id: +id,
-      },
-    });
-    this.fileService.removeFile(product.img);
-    return product.id;
+  async delete(id: string) {
+    try {
+      const product = await this.prisma.product.delete({
+        where: {
+          id: +id,
+        },
+      });
+      this.fileService.removeFile(product.img);
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.NOT_FOUND);
+    }
   }
 }

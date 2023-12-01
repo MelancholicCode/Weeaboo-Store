@@ -1,6 +1,6 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { RoleService } from './role.service';
-import { RoleDto } from './role.dto';
+import { CreateRoleDto } from './create-role.dto.ts/create-role.dto';
 
 @Controller('role')
 export class RoleController {
@@ -10,13 +10,18 @@ export class RoleController {
     return this.roleService.getAll();
   }
 
-  @Get(':name')
-  getByName(@Param('name') name: string) {
-    return this.roleService.getByName(name);
+  @Get(':id')
+  getByName(@Param('id') id: string) {
+    return this.roleService.getByName(id);
   }
 
   @Post()
-  create(@Body() dto: RoleDto) {
+  create(@Body() dto: CreateRoleDto) {
     return this.roleService.create(dto);
+  }
+
+  @Delete(':id')
+  delete(@Param('id') id: string) {
+    return this.roleService.delete(id);
   }
 }

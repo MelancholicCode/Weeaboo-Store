@@ -1,6 +1,11 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
-import { RoleDto } from './role.dto';
+import { CreateRoleDto } from './create-role.dto.ts/create-role.dto';
 
 @Injectable()
 export class RoleService {
@@ -23,9 +28,21 @@ export class RoleService {
     return role;
   }
 
-  async create(dto: RoleDto) {
+  async create(dto: CreateRoleDto) {
     return await this.prisma.role.create({
       data: dto,
     });
+  }
+
+  async delete(id: string) {
+    try {
+      await this.prisma.role.delete({
+        where: {
+          id: +id,
+        },
+      });
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.NOT_FOUND);
+    }
   }
 }
