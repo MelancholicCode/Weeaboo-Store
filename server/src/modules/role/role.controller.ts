@@ -5,6 +5,7 @@ import { CreateRoleDto } from './dto/createRole.dto';
 @Controller('role')
 export class RoleController {
   constructor(private readonly roleService: RoleService) {}
+
   @Get()
   getAll() {
     return this.roleService.getAll();

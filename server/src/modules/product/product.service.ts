@@ -10,6 +10,7 @@ export class ProductService {
     private readonly prisma: PrismaService,
     private readonly fileService: FileService,
   ) {}
+
   async getAll(
     count: string = '20',
     offset: string = '0',

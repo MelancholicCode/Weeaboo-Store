@@ -10,6 +10,7 @@ import { CreateRoleDto } from './dto/createRole.dto';
 @Injectable()
 export class RoleService {
   constructor(private readonly prisma: PrismaService) {}
+
   async getAll() {
     return await this.prisma.role.findMany();
   }

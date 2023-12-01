@@ -13,6 +13,7 @@ export class UserService {
     private readonly cartService: CartService,
     private readonly fileService: FileService,
   ) {}
+
   async getAll() {
     return this.prisma.user.findMany();
   }
