@@ -5,6 +5,8 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { resolve } from 'path';
 import { ProductModule } from './modules/product/product.module';
 import { FileModule } from './modules/file/file.module';
+import { UserModule } from './modules/user/user.module';
+import { RoleModule } from './modules/role/role.module';
 
 @Module({
   imports: [
@@ -16,6 +18,8 @@ import { FileModule } from './modules/file/file.module';
     }),
     CategoryModule,
     ProductModule,
+    UserModule,
+    RoleModule,
     FileModule,
   ],
   controllers: [],
