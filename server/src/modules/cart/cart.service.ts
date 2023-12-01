@@ -14,6 +14,14 @@ export class CartService {
     });
   }
 
+  async getAllItems(cartId: string) {
+    return await this.prisma.cartItem.findMany({
+      where: {
+        cartId: +cartId,
+      },
+    });
+  }
+
   async createItem(cartId: string, dto: CreateCartItemDto) {
     return await this.prisma.cartItem.create({
       data: {

@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Delete,
+  Get,
   HttpException,
   HttpStatus,
   Param,
@@ -13,6 +14,11 @@ import { CreateCartItemDto } from './dto/createCartItem.dto';
 @Controller('cart')
 export class CartController {
   constructor(private readonly cartService: CartService) {}
+
+  @Get(':cartId')
+  getAllItems(@Param('cartId') cartId: string) {
+    return this.cartService.getAllItems(cartId);
+  }
 
   @Post(':cartId')
   createItem(@Param('cartId') cartId: string, @Body() dto: CreateCartItemDto) {
