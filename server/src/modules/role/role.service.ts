@@ -5,7 +5,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
-import { CreateRoleDto } from './create-role.dto.ts/create-role.dto';
+import { CreateRoleDto } from './dto/createRole.dto';
 
 @Injectable()
 export class RoleService {

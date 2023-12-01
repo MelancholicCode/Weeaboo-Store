@@ -1,14 +1,16 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto } from './dto/createUser.dto';
 import { RoleService } from '../role/role.service';
 import { FileDirectory, FileService } from '../file/file.service';
+import { CartService } from '../cart/cart.service';
 
 @Injectable()
 export class UserService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly roleService: RoleService,
+    private readonly cartService: CartService,
     private readonly fileService: FileService,
   ) {}
   async getAll() {
@@ -28,6 +30,7 @@ export class UserService {
         avatar: imagePath,
       },
     });
+    await this.cartService.create(user.id);
     const userWithRole = await this.prisma.rolesOnUsers
       .create({
         data: {

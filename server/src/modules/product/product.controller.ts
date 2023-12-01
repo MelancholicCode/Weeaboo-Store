@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { CreateProductDto } from './dto/create-product.dto';
+import { CreateProductDto } from './dto/createProduct.dto';
 
 @Controller('product')
 export class ProductController {

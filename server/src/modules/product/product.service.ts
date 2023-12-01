@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
-import { CreateProductDto } from './dto/create-product.dto';
+import { CreateProductDto } from './dto/createProduct.dto';
 import { Product } from '@prisma/client';
 import { FileDirectory, FileService } from '../file/file.service';
 
