@@ -7,6 +7,8 @@ import {
   Post,
   UploadedFile,
   UseInterceptors,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/createUser.dto';
@@ -22,6 +24,7 @@ export class UserController {
   }
 
   @Post()
+  @UsePipes(new ValidationPipe())
   @UseInterceptors(FileInterceptor('avatar'))
   create(@UploadedFile() image, @Body() dto: CreateUserDto) {
     return this.userService.create(image, dto);

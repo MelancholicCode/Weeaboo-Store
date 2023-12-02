@@ -18,6 +18,15 @@ export class UserService {
     return this.prisma.user.findMany();
   }
 
+  async getOne(email: string) {
+    return await this.prisma.user.findUnique({
+      where: {
+        email: email,
+      },
+      include: { roles: true },
+    });
+  }
+
   async create(image, dto: CreateUserDto) {
     const imagePath = this.fileService.createFile(
       FileDirectory.USER_AVATAR,
@@ -32,16 +41,14 @@ export class UserService {
       },
     });
     await this.cartService.create(user.id);
-    const userWithRole = await this.prisma.rolesOnUsers
+    return await this.prisma.rolesOnUsers
       .create({
         data: {
           roleId: role.id,
           userId: user.id,
         },
       })
-      .user();
-
-    return userWithRole;
+      .user({ include: { roles: true } });
   }
 
   async delete(id: string) {

@@ -10,5 +10,6 @@ import { CartModule } from '../cart/cart.module';
   imports: [RoleModule, CartModule],
   controllers: [UserController],
   providers: [UserService, FileService, PrismaService],
+  exports: [UserService],
 })
 export class UserModule {}

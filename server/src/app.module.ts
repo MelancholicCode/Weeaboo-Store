@@ -9,6 +9,7 @@ import { UserModule } from './modules/user/user.module';
 import { RoleModule } from './modules/role/role.module';
 import { CartModule } from './modules/cart/cart.module';
 import { FavoriteModule } from './modules/favorite/favorite.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { FavoriteModule } from './modules/favorite/favorite.module';
     CartModule,
     FavoriteModule,
     FileModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
