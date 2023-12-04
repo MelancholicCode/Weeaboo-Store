@@ -8,7 +8,7 @@ import { CreateUserDto } from '../user/dto/createUser.dto';
 import { UserService } from '../user/user.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { RolesOnUsers, User } from '@prisma/client';
+import { Role, User } from '@prisma/client';
 
 @Injectable()
 export class AuthService {
@@ -41,7 +41,7 @@ export class AuthService {
     return this.generateToken(user);
   }
 
-  private generateToken(user: { roles: RolesOnUsers[] } & User) {
+  private generateToken(user: User & { roles: Role[] }) {
     const payload = { id: user.id, email: user.email, roles: user.roles };
     return {
       token: this.jwtService.sign(payload),
