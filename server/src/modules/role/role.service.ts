@@ -35,11 +35,11 @@ export class RoleService {
     });
   }
 
-  async delete(id: string) {
+  async delete(name: string) {
     try {
       await this.prisma.role.delete({
         where: {
-          id: +id,
+          name,
         },
       });
     } catch (error) {

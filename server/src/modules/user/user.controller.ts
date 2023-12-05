@@ -37,6 +37,9 @@ export class UserController {
     return this.userService.create(image, dto);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Roles('ADMIN')
+  @UseGuards(RolesGuard)
   @Delete(':id')
   delete(@Param('id') id: string) {
     return this.userService.delete(id);

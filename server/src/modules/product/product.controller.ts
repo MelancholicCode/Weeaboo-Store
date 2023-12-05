@@ -7,11 +7,15 @@ import {
   Post,
   Query,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CreateProductDto } from './dto/createProduct.dto';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { RolesGuard } from '../auth/roles.guard';
+import { Roles } from '../auth/roles.decorator';
 
 @Controller('product')
 export class ProductController {
@@ -31,12 +35,18 @@ export class ProductController {
     return this.productService.getOne(id);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Roles('ADMIN')
+  @UseGuards(RolesGuard)
   @Post()
   @UseInterceptors(FileInterceptor('picture'))
   create(@UploadedFile() image, @Body() dto: CreateProductDto) {
     return this.productService.create(dto, image);
   }
 
+  @UseGuards(JwtAuthGuard)
+  @Roles('ADMIN')
+  @UseGuards(RolesGuard)
   @Delete(':id')
   delete(@Param('id') id: string) {
     return this.productService.delete(id);
