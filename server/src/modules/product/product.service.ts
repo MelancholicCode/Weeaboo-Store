@@ -1,7 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { CreateProductDto } from './dto/createProduct.dto';
-import { Product } from '@prisma/client';
 import { FileDirectory, FileService } from '../file/file.service';
 
 @Injectable()
@@ -11,11 +10,7 @@ export class ProductService {
     private readonly fileService: FileService,
   ) {}
 
-  async getAll(
-    count: string = '20',
-    offset: string = '0',
-    query: string,
-  ): Promise<Product[]> {
+  async getAll(count: string = '20', offset: string = '0', query: string) {
     return await this.prisma.product.findMany({
       take: +count,
       skip: +offset,
@@ -34,10 +29,10 @@ export class ProductService {
     });
   }
 
-  async getOne(id: string): Promise<Product> {
+  async getOne(slug: string) {
     return await this.prisma.product.findFirst({
       where: {
-        id: +id,
+        slug,
       },
     });
   }
@@ -52,7 +47,7 @@ export class ProductService {
     });
   }
 
-  async create(dto: CreateProductDto, image: string): Promise<Product> {
+  async create(dto: CreateProductDto, image: string) {
     const imagePath = this.fileService.createFile(
       FileDirectory.PRODUCT_IMAGE,
       image,
@@ -60,11 +55,10 @@ export class ProductService {
 
     return await this.prisma.product.create({
       data: {
-        title: dto.title,
-        description: dto.description,
+        ...dto,
         price: +dto.price,
-        img: imagePath,
         categoryId: +dto.categoryId,
+        img: imagePath,
       },
     });
   }

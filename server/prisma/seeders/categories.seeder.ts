@@ -35,7 +35,7 @@ export const seedCategories = async (): Promise<Category[]> => {
     const householdGoods = await prisma.category.create({
       data: {
         name: 'Household Goods',
-        slug: 'hoursehold-goods',
+        slug: 'household-goods',
       },
     });
 

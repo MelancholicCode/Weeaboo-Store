@@ -30,9 +30,9 @@ export class ProductController {
     return this.productService.getAll(count, offset, query);
   }
 
-  @Get(':id')
-  getOne(@Param('id') id: string) {
-    return this.productService.getOne(id);
+  @Get(':slug')
+  getOne(@Param('slug') slug: string) {
+    return this.productService.getOne(slug);
   }
 
   @UseGuards(JwtAuthGuard)
@@ -47,8 +47,8 @@ export class ProductController {
   @UseGuards(JwtAuthGuard)
   @Roles('ADMIN')
   @UseGuards(RolesGuard)
-  @Delete(':id')
-  delete(@Param('id') id: string) {
-    return this.productService.delete(id);
+  @Delete(':slug')
+  delete(@Param('slug') slug: string) {
+    return this.productService.delete(slug);
   }
 }

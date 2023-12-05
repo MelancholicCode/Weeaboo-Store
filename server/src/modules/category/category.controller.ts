@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/createCategory.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
@@ -12,6 +12,11 @@ export class CategoryController {
   @Get()
   getAll() {
     return this.categoryService.getAll();
+  }
+
+  @Get(':slug')
+  getOne(@Param('slug') slug: string) {
+    return this.categoryService.getOne(slug);
   }
 
   @UseGuards(JwtAuthGuard)
