@@ -14,6 +14,14 @@ export class CartService {
     });
   }
 
+  async getCart(userId: string) {
+    return await this.prisma.cart.findUnique({
+      where: {
+        userId: +userId,
+      },
+    });
+  }
+
   async getAllItems(cartId: string) {
     return await this.prisma.cartItem.findMany({
       where: {

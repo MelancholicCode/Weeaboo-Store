@@ -10,6 +10,7 @@ import { RoleModule } from './modules/role/role.module';
 import { CartModule } from './modules/cart/cart.module';
 import { FavoriteModule } from './modules/favorite/favorite.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { OrderModule } from './modules/order/order.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { AuthModule } from './modules/auth/auth.module';
     UserModule,
     RoleModule,
     CartModule,
+    OrderModule,
     FavoriteModule,
     FileModule,
     AuthModule,
