@@ -3,8 +3,7 @@ import {
   Controller,
   Delete,
   Get,
-  HttpException,
-  HttpStatus,
+  NotFoundException,
   Param,
   Post,
   UseGuards,
@@ -35,7 +34,7 @@ export class CartController {
     try {
       return this.cartService.deleteItem(id);
     } catch (error) {
-      throw new HttpException(error.message, HttpStatus.NOT_FOUND);
+      throw new NotFoundException('Cart item not found');
     }
   }
 }

@@ -2,8 +2,7 @@ import {
   Controller,
   Delete,
   Get,
-  HttpException,
-  HttpStatus,
+  NotFoundException,
   Param,
   Post,
   UseGuards,
@@ -33,7 +32,7 @@ export class OrderController {
     try {
       return this.orderService.delete(id);
     } catch (error) {
-      throw new HttpException(error.message, HttpStatus.NOT_FOUND);
+      throw new NotFoundException(error.message);
     }
   }
 }

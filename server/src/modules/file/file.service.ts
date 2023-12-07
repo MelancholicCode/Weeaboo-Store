@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as uuid from 'uuid';
@@ -27,7 +27,7 @@ export class FileService {
       fs.writeFileSync(path.resolve(filePath, fileName), file.buffer);
       return fileDirectory + '/' + fileName;
     } catch (error) {
-      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new InternalServerErrorException(error.message);
     }
   }
 
@@ -37,7 +37,7 @@ export class FileService {
         path.resolve(__dirname, '..', '..', 'static', ...fileName.split('/')),
       );
     } catch (error) {
-      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new InternalServerErrorException(error.message);
     }
   }
 }

@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { CartService } from '../cart/cart.service';
 
@@ -35,7 +35,7 @@ export class OrderService {
       });
     }
 
-    throw new HttpException('Cart items is not found', HttpStatus.NOT_FOUND);
+    throw new NotFoundException('Cart items is not found');
   }
 
   async delete(id: string) {
