@@ -1,24 +1,20 @@
 import Link from 'next/link';
-import { Logo } from '@/assets/icons/Logo/Logo';
-import {
-  ACCOUNT_PAGE,
-  CART_PAGE,
-  CATALOG_PAGE,
-  GALLERY_PAGE,
-  HOME_PAGE,
-} from '../../constants/routes';
+import { LogoIcon } from '@/assets/icons/LogoIcon/LogoIcon';
+import { router } from '../../constants/routes';
 import { getCategories } from '@/utils/api/category';
+import { CartIcon } from '@/assets/icons/CartIcon/CartIcon';
+import { AuthIcon } from '@/assets/icons/AuthIcon/AuthIcon';
 
 export const Header = async () => {
-  const navLinks = [HOME_PAGE, CATALOG_PAGE, GALLERY_PAGE];
+  const navLinks = [router.HOME_PAGE, router.CATALOG_PAGE, router.GALLERY_PAGE];
   const categories = await getCategories();
 
   return (
     <header className="shadow-md">
       <div className="container m-auto flex flex-col items-center px-4">
         <div className="flex w-full items-center justify-between pb-2 pt-3">
-          <Link href={HOME_PAGE.href} className="flex items-center">
-            <Logo />
+          <Link href={router.HOME_PAGE.href} className="flex items-center">
+            <LogoIcon />
             <span className="text-xl font-bold">Weeaboo Store</span>
           </Link>
           <nav>
@@ -30,9 +26,19 @@ export const Header = async () => {
               ))}
             </ul>
           </nav>
-          <div className="flex gap-4">
-            <Link href={CART_PAGE.href}>{CART_PAGE.text}</Link>
-            <Link href={ACCOUNT_PAGE.href}>{ACCOUNT_PAGE.text}</Link>
+          <div className="flex items-center gap-4">
+            <Link href={router.CART_PAGE.href}>
+              <CartIcon className="h-6 w-6" />
+            </Link>
+            <button>
+              <AuthIcon className="h-6 w-6" />
+            </button>
+            <Link
+              className="block h-fit w-fit p-2"
+              href={router.ACCOUNT_PAGE.href}
+            >
+              <AuthIcon />
+            </Link>
           </div>
         </div>
         <div className="w-full border-t pb-3 pt-2">

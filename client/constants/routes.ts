@@ -1,24 +1,32 @@
-export const HOME_PAGE = {
+const HOME_PAGE = {
   href: '/',
   text: 'Home',
 };
 
-export const CATALOG_PAGE = {
+const CATALOG_PAGE = {
   href: '/catalog',
   text: 'Catalog',
 };
 
-export const GALLERY_PAGE = {
+const GALLERY_PAGE = {
   href: '/gallery',
   text: 'Gallery',
 };
 
-export const CART_PAGE = {
+const CART_PAGE = {
   href: '/cart',
   text: 'Cart',
 };
 
-export const ACCOUNT_PAGE = {
+const ACCOUNT_PAGE = {
   href: '/account',
   text: 'Account',
+};
+
+export const router = {
+  HOME_PAGE,
+  CATALOG_PAGE,
+  GALLERY_PAGE,
+  CART_PAGE,
+  ACCOUNT_PAGE,
 };
