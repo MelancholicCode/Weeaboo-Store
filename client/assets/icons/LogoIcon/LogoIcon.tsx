@@ -1,11 +1,12 @@
-export const Logo = () => {
+import { FC } from 'react';
+
+interface LogoIconProps {
+  className?: string;
+}
+
+export const LogoIcon: FC<LogoIconProps> = ({ className }) => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 48 48"
-      width="48px"
-      height="48px"
-    >
+    <svg className={className} viewBox="0 0 48 48" width="48px" height="48px">
       <circle cx="11" cy="30" r="4" fill="#fa91ad" />
       <circle cx="37" cy="30" r="4" fill="#fa91ad" />
       <polyline
