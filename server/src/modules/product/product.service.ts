@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
-import { CreateProductDto } from './dto/createProduct.dto';
+import { ProductDto } from './dto/product.dto';
 import { FileDirectory, FileService } from '../file/file.service';
 
 @Injectable()
@@ -47,7 +47,7 @@ export class ProductService {
     });
   }
 
-  async create(dto: CreateProductDto, image: string) {
+  async create(dto: ProductDto, image: string) {
     const imagePath = this.fileService.createFile(
       FileDirectory.PRODUCT_IMAGE,
       image,

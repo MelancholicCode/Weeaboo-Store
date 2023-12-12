@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
-import { CreateUserDto } from './dto/createUser.dto';
+import { UserDto } from './dto/user.dto';
 import { RoleService } from '../role/role.service';
 import { FileDirectory, FileService } from '../file/file.service';
 import { CartService } from '../cart/cart.service';
@@ -18,31 +18,15 @@ export class UserService {
     return this.prisma.user.findMany();
   }
 
-  async getOne(email: string) {
-    const user = await this.prisma.user.findUnique({
-      where: {
-        email: email,
-      },
-      include: {
-        roles: true,
-      },
-    });
-
-    const roles = await this.prisma.role.findMany({
-      where: {
-        id: {
-          in: user.roles.map((item) => item.roleId),
-        },
-      },
-    });
-
-    return {
-      ...user,
-      roles,
-    };
+  async getOneById(id: number) {
+    return await this.findByIdentifier('id', id);
   }
 
-  async create(image, dto: CreateUserDto) {
+  async getOneByEmail(email: string) {
+    return await this.findByIdentifier('email', email);
+  }
+
+  async create(image, dto: UserDto) {
     const imagePath = this.fileService.createFile(
       FileDirectory.USER_AVATAR,
       image,
@@ -84,5 +68,34 @@ export class UserService {
     } catch (error) {
       throw new NotFoundException(error.message);
     }
+  }
+
+  private async findByIdentifier(
+    identifier: 'email' | 'id',
+    value: string | number,
+  ) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        [identifier]: value,
+      } as any,
+      include: {
+        roles: true,
+      },
+    });
+
+    if (!user) return null;
+
+    const roles = await this.prisma.role.findMany({
+      where: {
+        id: {
+          in: user.roles.map((item) => item.roleId),
+        },
+      },
+    });
+
+    return {
+      ...user,
+      roles,
+    };
   }
 }

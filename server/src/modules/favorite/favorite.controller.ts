@@ -1,15 +1,15 @@
-import { Body, Controller, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Param, Post } from '@nestjs/common';
 import { FavoriteService } from './favorite.service';
-import { CreateFavoriteDto } from './dto/createFavorite.dto';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { FavoriteDto } from './dto/favorite.dto';
+import { Auth } from '../auth/decorators/auth.decorator';
 
 @Controller('favorite')
 export class FavoriteController {
   constructor(private readonly favoriteService: FavoriteService) {}
 
-  @UseGuards(JwtAuthGuard)
+  @Auth()
   @Post(':userId')
-  create(@Param('userId') userId: string, @Body() dto: CreateFavoriteDto) {
+  create(@Param('userId') userId: string, @Body() dto: FavoriteDto) {
     return this.favoriteService.create(userId, dto);
   }
 }

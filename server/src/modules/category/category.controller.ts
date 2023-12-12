@@ -1,9 +1,9 @@
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { CategoryService } from './category.service';
-import { CreateCategoryDto } from './dto/createCategory.dto';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
-import { Roles } from '../auth/roles.decorator';
+import { CategoryDto } from './dto/category.dto';
+import { Roles } from '../auth/decorators/roles.decorator';
 import { RolesGuard } from '../auth/roles.guard';
+import { Auth } from '../auth/decorators/auth.decorator';
 
 @Controller('category')
 export class CategoryController {
@@ -19,11 +19,11 @@ export class CategoryController {
     return this.categoryService.getOne(slug);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @Auth()
   @Roles('ADMIN')
   @UseGuards(RolesGuard)
   @Post()
-  create(@Body() dto: CreateCategoryDto) {
+  create(@Body() dto: CategoryDto) {
     return this.categoryService.create(dto);
   }
 }

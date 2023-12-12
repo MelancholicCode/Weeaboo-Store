@@ -8,16 +8,16 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { RoleService } from './role.service';
-import { CreateRoleDto } from './dto/createRole.dto';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { RoleDto } from './dto/role-dto';
 import { RolesGuard } from '../auth/roles.guard';
-import { Roles } from '../auth/roles.decorator';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { Auth } from '../auth/decorators/auth.decorator';
 
 @Controller('role')
 export class RoleController {
   constructor(private readonly roleService: RoleService) {}
 
-  @UseGuards(JwtAuthGuard)
+  @Auth()
   @Roles('ADMIN')
   @UseGuards(RolesGuard)
   @Get()
@@ -30,15 +30,15 @@ export class RoleController {
     return this.roleService.getByName(id);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @Auth()
   @Roles('ADMIN')
   @UseGuards(RolesGuard)
   @Post()
-  create(@Body() dto: CreateRoleDto) {
+  create(@Body() dto: RoleDto) {
     return this.roleService.create(dto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @Auth()
   @Roles('ADMIN')
   @UseGuards(RolesGuard)
   @Delete(':name')

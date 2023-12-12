@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
-import { CreateRoleDto } from './dto/createRole.dto';
+import { RoleDto } from './dto/role-dto';
 
 @Injectable()
 export class RoleService {
@@ -24,7 +24,7 @@ export class RoleService {
     return role;
   }
 
-  async create(dto: CreateRoleDto) {
+  async create(dto: RoleDto) {
     return await this.prisma.role.create({
       data: dto,
     });

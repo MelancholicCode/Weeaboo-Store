@@ -6,29 +6,28 @@ import {
   NotFoundException,
   Param,
   Post,
-  UseGuards,
 } from '@nestjs/common';
 import { CartService } from './cart.service';
-import { CreateCartItemDto } from './dto/createCartItem.dto';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { CartItemDto } from './dto/cart-item.dto';
+import { Auth } from '../auth/decorators/auth.decorator';
 
 @Controller('cart')
 export class CartController {
   constructor(private readonly cartService: CartService) {}
 
-  @UseGuards(JwtAuthGuard)
+  @Auth()
   @Get(':cartId')
   getAllItems(@Param('cartId') cartId: string) {
     return this.cartService.getAllItems(cartId);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @Auth()
   @Post(':cartId')
-  createItem(@Param('cartId') cartId: string, @Body() dto: CreateCartItemDto) {
+  createItem(@Param('cartId') cartId: string, @Body() dto: CartItemDto) {
     return this.cartService.createItem(cartId, dto);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @Auth()
   @Delete(':id')
   deleteItem(@Param('id') id: string) {
     try {

@@ -5,28 +5,28 @@ import {
   NotFoundException,
   Param,
   Post,
-  UseGuards,
 } from '@nestjs/common';
 import { OrderService } from './order.service';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+
+import { Auth } from '../auth/decorators/auth.decorator';
 
 @Controller('order')
 export class OrderController {
   constructor(private readonly orderService: OrderService) {}
 
-  @UseGuards(JwtAuthGuard)
+  @Auth()
   @Get(':orderId')
   getAllItems(@Param('orderId') orderId: string) {
     return this.orderService.getAllItems(orderId);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @Auth()
   @Post(':userId')
   create(@Param('userId') userId: string) {
     return this.orderService.create(userId);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @Auth()
   @Delete(':id')
   delete(@Param('id') id: string) {
     try {

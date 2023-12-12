@@ -17,9 +17,7 @@ import { OrderModule } from './modules/order/order.module';
     ServeStaticModule.forRoot({
       rootPath: resolve(__dirname, 'static'),
     }),
-    ConfigModule.forRoot({
-      envFilePath: '.env',
-    }),
+    ConfigModule.forRoot(),
     CategoryModule,
     ProductModule,
     UserModule,
