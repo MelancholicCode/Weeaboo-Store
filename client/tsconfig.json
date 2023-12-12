@@ -22,7 +22,10 @@
       "@/components/*": ["./components/*"],
       "@/assets/*": ["./assets/*"],
       "@/shared/*": ["./shared/*"],
-      "@/utils/*": ["./utils/*"]
+      "@/api/*": ["./api/*"],
+      "@/constants/*": ["./constants/*"],
+      "@/services/*": ["./services/*"],
+      "@/store/*": ["./store/*"]
     }
   },
   "include": [

@@ -1,13 +1,11 @@
 import Link from 'next/link';
 import { LogoIcon } from '@/assets/icons/LogoIcon/LogoIcon';
 import { router } from '../../constants/routes';
-import { getCategories } from '@/utils/api/category';
 import { CartIcon } from '@/assets/icons/CartIcon/CartIcon';
 import { AuthIcon } from '@/assets/icons/AuthIcon/AuthIcon';
 
 export const Header = async () => {
   const navLinks = [router.HOME_PAGE, router.CATALOG_PAGE, router.GALLERY_PAGE];
-  const categories = await getCategories();
 
   return (
     <header className="shadow-md">
@@ -43,11 +41,11 @@ export const Header = async () => {
         </div>
         <div className="w-full border-t pb-3 pt-2">
           <ul className="flex w-full items-center divide-x divide-solid">
-            {categories.map((category) => (
+            {/* {categories.map((category) => (
               <li key={category.id} className="flex-1 px-2 text-center">
                 <Link href={category.slug}>{category.name}</Link>
               </li>
-            ))}
+            ))} */}
           </ul>
         </div>
       </div>

@@ -1,3 +1,5 @@
-export default function Home() {
-  return <main className="container m-auto"></main>;
-}
+const Home = () => {
+  return <main className="container mx-auto"></main>;
+};
+
+export default Home;

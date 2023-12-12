@@ -1,10 +1,4 @@
-interface Category {
-  id: number;
-  name: string;
-  slug: string;
-}
-
-interface Product {
+export interface IProduct {
   id: number;
   title: string;
   description: string;
