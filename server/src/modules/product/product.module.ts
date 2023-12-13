@@ -3,10 +3,10 @@ import { ProductController } from './product.controller';
 import { ProductService } from './product.service';
 import { PrismaService } from 'src/prisma.service';
 import { FileService } from '../file/file.service';
-import { JwtModule } from '@nestjs/jwt';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
-  imports: [JwtModule],
+  imports: [AuthModule],
   controllers: [ProductController],
   providers: [ProductService, FileService, PrismaService],
 })

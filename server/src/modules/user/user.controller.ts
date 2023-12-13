@@ -19,8 +19,16 @@ export class UserController {
   @Auth()
   @Roles('ADMIN')
   @UseGuards(RolesGuard)
-  @Delete(':id')
-  delete(@Param('id') id: string) {
-    return this.userService.delete(id);
+  @Get(':email')
+  getOne(@Param('email') email: string) {
+    return this.userService.getOneByEmail(email);
+  }
+
+  @Auth()
+  @Roles('ADMIN')
+  @UseGuards(RolesGuard)
+  @Delete(':email')
+  delete(@Param('email') email: string) {
+    return this.userService.delete(email);
   }
 }

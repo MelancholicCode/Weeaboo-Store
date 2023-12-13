@@ -17,17 +17,18 @@ import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { Auth } from '../auth/decorators/auth.decorator';
 
+@UseGuards(RolesGuard)
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @Get()
-  getAll(
+  getMany(
     @Query('count') count: string,
     @Query('offset') offset: string,
     @Query('query') query: string,
   ) {
-    return this.productService.getAll(count, offset, query);
+    return this.productService.getMany(count, offset, query);
   }
 
   @Get(':slug')

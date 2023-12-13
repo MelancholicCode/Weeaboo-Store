@@ -9,23 +9,36 @@ export class OrderService {
     private readonly cartService: CartService,
   ) {}
 
-  async getAllItems(orderId: string) {
-    return await this.prisma.orderItem.findMany({
+  async getAll(userId: number) {
+    return await this.prisma.order.findMany({
       where: {
-        orderId: +orderId,
+        userId,
+      },
+      include: {
+        OrderItem: true,
       },
     });
   }
 
-  async create(userId: string) {
-    const cart = await this.cartService.getCart(userId);
+  async getOneWithItems(userId: number, id: number) {
+    return await this.prisma.order.findUnique({
+      where: {
+        userId,
+        id,
+      },
+      include: {
+        OrderItem: true,
+      },
+    });
+  }
 
-    const cartItems = await this.cartService.getAllItems(String(cart.id));
+  async create(userId: number) {
+    const { CartItem: cartItems } = await this.cartService.getAllItems(userId);
 
     if (cartItems.length) {
       return await this.prisma.order.create({
         data: {
-          userId: +userId,
+          userId,
           OrderItem: {
             createMany: {
               data: cartItems,
@@ -38,10 +51,10 @@ export class OrderService {
     throw new NotFoundException('Cart items is not found');
   }
 
-  async delete(id: string) {
-    return await this.prisma.order.delete({
+  delete(id: number) {
+    this.prisma.order.delete({
       where: {
-        id: +id,
+        id,
       },
     });
   }

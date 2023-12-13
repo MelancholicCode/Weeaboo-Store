@@ -58,11 +58,11 @@ export class UserService {
     };
   }
 
-  async delete(id: string) {
+  async delete(email: string) {
     try {
       await this.prisma.user.delete({
         where: {
-          id: +id,
+          email,
         },
       });
     } catch (error) {

@@ -10,7 +10,7 @@ export class ProductService {
     private readonly fileService: FileService,
   ) {}
 
-  async getAll(count: string = '20', offset: string = '0', query: string) {
+  async getMany(count: string = '20', offset: string = '0', query: string) {
     return await this.prisma.product.findMany({
       take: +count,
       skip: +offset,
@@ -70,6 +70,7 @@ export class ProductService {
           id: +id,
         },
       });
+
       this.fileService.removeFile(product.img);
     } catch (error) {
       throw new NotFoundException(error.message);

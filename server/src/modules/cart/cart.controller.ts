@@ -1,5 +1,4 @@
 import {
-  Body,
   Controller,
   Delete,
   Get,
@@ -8,30 +7,33 @@ import {
   Post,
 } from '@nestjs/common';
 import { CartService } from './cart.service';
-import { CartItemDto } from './dto/cart-item.dto';
 import { Auth } from '../auth/decorators/auth.decorator';
+import { CurrentUser } from '../auth/decorators/user.decorator';
 
 @Controller('cart')
 export class CartController {
   constructor(private readonly cartService: CartService) {}
 
   @Auth()
-  @Get(':cartId')
-  getAllItems(@Param('cartId') cartId: string) {
-    return this.cartService.getAllItems(cartId);
+  @Get()
+  getAllItems(@CurrentUser('id') userId: number) {
+    return this.cartService.getAllItems(userId);
   }
 
   @Auth()
-  @Post(':cartId')
-  createItem(@Param('cartId') cartId: string, @Body() dto: CartItemDto) {
-    return this.cartService.createItem(cartId, dto);
+  @Post('productId')
+  createItem(
+    @CurrentUser('id') userId: number,
+    @Param(':productId') productId: string,
+  ) {
+    return this.cartService.createItem(userId, +productId);
   }
 
   @Auth()
   @Delete(':id')
-  deleteItem(@Param('id') id: string) {
+  deleteItem(@CurrentUser('id') userId: number, @Param('id') id: string) {
     try {
-      return this.cartService.deleteItem(id);
+      return this.cartService.deleteItem(userId, +id);
     } catch (error) {
       throw new NotFoundException('Cart item not found');
     }
