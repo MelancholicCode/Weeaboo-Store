@@ -42,6 +42,7 @@ model Product {
   title       String
   description String
   price       Int
+  rate        Decimal        @default(0.0)
   img         String
   slug        String     @unique
   category    Category   @relation(fields: [categoryId], references: [id])

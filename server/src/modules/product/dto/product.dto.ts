@@ -9,5 +9,6 @@ export class ProductDto {
   readonly description: string;
   @IsString()
   readonly price: string;
+  @IsString()
   readonly categoryId: string;
 }

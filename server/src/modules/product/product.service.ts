@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { ProductDto } from './dto/product.dto';
 import { FileDirectory, FileService } from '../file/file.service';
+import { Product } from '@prisma/client';
 
 @Injectable()
 export class ProductService {
@@ -60,6 +61,15 @@ export class ProductService {
         categoryId: +dto.categoryId,
         img: imagePath,
       },
+    });
+  }
+
+  async updateOne(id: number, data: Partial<Product>) {
+    return await this.prisma.product.update({
+      where: {
+        id,
+      },
+      data,
     });
   }
 
