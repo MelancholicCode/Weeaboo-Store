@@ -6,12 +6,15 @@ export class CartService {
   constructor(private readonly prisma: PrismaService) {}
 
   async getAllItems(userId: number) {
-    return await this.prisma.cart.findUnique({
+    const { id: cartId } = await this.prisma.cart.findUnique({
       where: {
         userId: +userId,
       },
-      include: {
-        CartItem: true,
+    });
+
+    return await this.prisma.cartItem.findMany({
+      where: {
+        cartId,
       },
     });
   }

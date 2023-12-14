@@ -1,19 +1,23 @@
 import { api } from '@/api/api.instance';
+import { IReview, ReviewInfo } from '@/shared/types/review.interface';
 
 const ReviewService = {
   async getAll(productId: number) {
-    return await api.get(`/review/${productId}`);
+    const response = await api.get<ReviewInfo[]>(`/review/${productId}`);
+    return response.data;
   },
 
   async create(productId: number, rate: number, comment: string) {
-    return await api.post(`/review/${productId}`, {
+    const response = await api.post<IReview>(`/review/${productId}`, {
       rate,
       comment,
     });
+    return response.data;
   },
 
   async delete(reviewId: number) {
-    return await api.delete(`/category/${reviewId}`);
+    const response = await api.delete<void>(`/category/${reviewId}`);
+    return response.data;
   },
 };
 

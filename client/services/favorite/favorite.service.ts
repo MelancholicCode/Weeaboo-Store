@@ -1,16 +1,22 @@
 import { api } from '@/api/api.instance';
+import {
+  FavoriteWithProduct,
+  IFavorite,
+} from '@/shared/types/favorite.interface';
 
 const FavoriteService = {
   async getAll() {
-    return await api.get('/favorite');
+    const response = await api.get<FavoriteWithProduct[]>('/favorite');
+    return response.data;
   },
 
   async createItem(productId: number) {
-    return await api.post(`/favorite/${productId}`);
+    const response = await api.post<IFavorite>(`/favorite/${productId}`);
+    return response.data;
   },
 
   async delete(id: number) {
-    return await api.delete(`/favorite/${id}`);
+    return await api.delete<void>(`/favorite/${id}`);
   },
 };
 

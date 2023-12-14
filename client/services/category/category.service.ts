@@ -1,16 +1,20 @@
 import { api } from '@/api/api.instance';
+import { ICategory } from '@/shared/types/category.interface';
 
 const CategoryService = {
   async getAll() {
-    return await api.get('/category');
+    const response = await api.get<ICategory[]>('/category');
+    return response.data;
   },
 
   async getOne(slug: string) {
-    return await api.get(`/category/${slug}`);
+    const response = await api.get<ICategory>(`/category/${slug}`);
+    return response.data;
   },
 
   async create(name: string, slug: string) {
-    return await api.post('/category', { name, slug });
+    const response = await api.post<ICategory>('/category', { name, slug });
+    return response.data;
   },
 };
 

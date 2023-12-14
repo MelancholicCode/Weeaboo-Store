@@ -33,7 +33,7 @@ export class OrderService {
   }
 
   async create(userId: number) {
-    const { CartItem: cartItems } = await this.cartService.getAllItems(userId);
+    const cartItems = await this.cartService.getAllItems(userId);
 
     if (cartItems.length) {
       return await this.prisma.order.create({

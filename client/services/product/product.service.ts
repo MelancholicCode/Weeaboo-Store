@@ -1,16 +1,19 @@
 import { api } from '@/api/api.instance';
 import { getParamsString } from './product.helper';
 import { IProductBody } from './product.interface';
+import { IProduct } from '@/shared/types/product.interface';
 
 const ProductService = {
   async getMany(count?: number, offset?: number, query?: string) {
-    return await api.get(
+    const response = await api.get<IProduct[]>(
       `/product${getParamsString({ count, offset, query })}`
     );
+    return response.data;
   },
 
   async getOne(slug: string) {
-    return await api.get(`/product/${slug}`);
+    const response = await api.get<IProduct>(`/product/${slug}`);
+    return response.data;
   },
 
   async create(body: IProductBody) {
@@ -20,11 +23,13 @@ const ProductService = {
       formData.append(key, body[key as keyof IProductBody]);
     }
 
-    return await api.post('/product', formData);
+    const response = await api.post<IProduct>('/product', formData);
+    return response.data;
   },
 
   async delete(slug: string) {
-    return await api.delete(`/product/${slug}`);
+    const response = await api.delete<void>(`/product/${slug}`);
+    return response.data;
   },
 };
 

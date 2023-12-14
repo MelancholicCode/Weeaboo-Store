@@ -1,21 +1,26 @@
 import { api } from '@/api/api.instance';
+import { IRole } from '@/shared/types/role.interface';
 
 const RoleService = {
   async getAll() {
-    return await api.get('/role');
+    const response = await api.get<IRole[]>('/role');
+    return response.data;
   },
 
   async getOne(name: string) {
-    return await api.get(`/role/${name}`);
+    const response = await api.get<IRole>(`/role/${name}`);
+    return response.data;
   },
 
   async create(name: string) {
-    return await api.post('/role', { name });
+    const response = await api.post<IRole>('/role', { name });
+    return response.data;
   },
 
   async delete(name: string) {
-    return await api.delete(`/role/${name}`)
-  }
+    const response = await api.delete<void>(`/role/${name}`);
+    return response.data;
+  },
 };
 
 export default RoleService;

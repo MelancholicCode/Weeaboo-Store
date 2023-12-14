@@ -15,18 +15,16 @@ export class ProductService {
     return await this.prisma.product.findMany({
       take: +count,
       skip: +offset,
-      ...(query
-        ? {
-            where: {
-              title: {
-                search: query,
-              },
-              description: {
-                search: query,
-              },
-            },
-          }
-        : {}),
+      ...(query && {
+        where: {
+          title: {
+            search: query,
+          },
+          description: {
+            search: query,
+          },
+        },
+      }),
     });
   }
 
@@ -34,16 +32,6 @@ export class ProductService {
     return await this.prisma.product.findFirst({
       where: {
         slug,
-      },
-    });
-  }
-
-  async search(query: string) {
-    return await this.prisma.product.findMany({
-      where: {
-        title: {
-          search: query,
-        },
       },
     });
   }

@@ -1,16 +1,19 @@
 import { api } from '@/api/api.instance';
+import { ICartItem } from '@/shared/types/cart.interface';
 
 const CartService = {
   async getAll() {
-    return await api.get('/cart');
+    const response = await api.get<ICartItem[]>('/cart');
+    return response.data;
   },
 
   async createItem(productId: number) {
-    return await api.post(`/cart/${productId}`);
+    const response = await api.post<ICartItem>(`/cart/${productId}`);
+    return response.data;
   },
 
   async delete(id: number) {
-    return await api.delete(`/cart/${id}`);
+    return await api.delete<void>(`/cart/${id}`);
   },
 };
 

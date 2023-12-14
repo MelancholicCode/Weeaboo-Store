@@ -6,3 +6,11 @@ export interface IReview {
   orderItemId: number;
   productId: number;
 }
+
+interface IUserInfo {
+  avatar: string;
+  name: string;
+  surname: string;
+}
+
+export type ReviewInfo = IReview & { user: IUserInfo };
