@@ -12,9 +12,6 @@ const nextConfig = {
       'store',
     ],
   },
-  images: {
-    domains: ['image.dokodemo.world'],
-  },
   env: {
     API_URL: process.env.API_URL,
   },
