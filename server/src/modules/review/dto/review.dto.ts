@@ -2,7 +2,7 @@ import { IsNumber, IsString } from 'class-validator';
 
 export class ReviewDto {
   @IsNumber()
-  rate: number;
+  readonly rate: number;
   @IsString()
-  comment: string;
+  readonly comment: string;
 }

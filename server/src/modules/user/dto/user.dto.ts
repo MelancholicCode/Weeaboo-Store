@@ -2,16 +2,16 @@ import { IsEmail, IsString, MinLength } from 'class-validator';
 
 export class UserDto {
   @IsString()
-  name: string;
+  readonly name: string;
   @IsString()
-  surname: string;
+  readonly surname: string;
   @IsEmail()
-  email: string;
+  readonly email: string;
   @IsString()
   @MinLength(8, {
     message: 'Password length must be 8 or more symbols',
   })
-  password: string;
+  readonly password: string;
   @IsString()
-  address: string;
+  readonly address: string;
 }

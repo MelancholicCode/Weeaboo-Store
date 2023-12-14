@@ -37,10 +37,9 @@ export class ProductService {
   }
 
   async create(dto: ProductDto, image: string) {
-    const imagePath = this.fileService.createFile(
-      FileDirectory.PRODUCT_IMAGE,
-      image,
-    );
+    const imagePath =
+      dto.imageSource ||
+      this.fileService.createFile(FileDirectory.PRODUCT_IMAGE, image);
 
     return await this.prisma.product.create({
       data: {
