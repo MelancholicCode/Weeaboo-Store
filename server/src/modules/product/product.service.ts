@@ -1,14 +1,16 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { ProductDto } from './dto/product.dto';
-import { FileDirectory, FileService } from '../file/file.service';
+import { FileType, FileService } from '../file/file.service';
 import { Product } from '@prisma/client';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class ProductService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly fileService: FileService,
+    private readonly configService: ConfigService,
   ) {}
 
   async getMany(count: string = '20', offset: string = '0', query: string) {
@@ -36,10 +38,14 @@ export class ProductService {
     });
   }
 
-  async create(dto: ProductDto, image: string) {
-    const imagePath =
-      dto.imageSource ||
-      this.fileService.createFile(FileDirectory.PRODUCT_IMAGE, image);
+  async create(dto: ProductDto, image) {
+    const imagePath = await this.fileService.createFile(
+      FileType.PRODUCT_IMAGE,
+      image,
+      this.configService.getOrThrow('YA_CLOUD_BUCKET'),
+    );
+
+    console.log(imagePath);
 
     return await this.prisma.product.create({
       data: {
@@ -61,16 +67,20 @@ export class ProductService {
   }
 
   async delete(id: string) {
-    try {
-      const product = await this.prisma.product.delete({
-        where: {
-          id: +id,
-        },
-      });
+    const product = await this.prisma.product.delete({
+      where: {
+        id: +id,
+      },
+    });
 
-      this.fileService.removeFile(product.img);
-    } catch (error) {
-      throw new NotFoundException(error.message);
-    }
+    const splittedPath = product.img.split('/');
+    const type = splittedPath[splittedPath.length - 2];
+    const fileName = splittedPath[splittedPath.length - 1];
+    const key = `${type}/${fileName}`;
+
+    this.fileService.removeFile(
+      key,
+      this.configService.getOrThrow('YA_CLOUD_BUCKET'),
+    );
   }
 }

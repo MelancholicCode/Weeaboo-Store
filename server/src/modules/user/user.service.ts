@@ -1,9 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { UserDto } from './dto/user.dto';
 import { RoleService } from '../role/role.service';
-import { FileDirectory, FileService } from '../file/file.service';
+import { FileType, FileService } from '../file/file.service';
 import { CartService } from '../cart/cart.service';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class UserService {
@@ -12,6 +13,7 @@ export class UserService {
     private readonly roleService: RoleService,
     private readonly cartService: CartService,
     private readonly fileService: FileService,
+    private readonly configService: ConfigService,
   ) {}
 
   async getAll() {
@@ -26,10 +28,11 @@ export class UserService {
     return await this.findByIdentifier('email', email);
   }
 
-  async create(image, dto: UserDto) {
-    const imagePath = this.fileService.createFile(
-      FileDirectory.USER_AVATAR,
+  async create(dto: UserDto, image) {
+    const imagePath = await this.fileService.createFile(
+      FileType.USER_AVATAR,
       image,
+      this.configService.getOrThrow('YA_CLOUD_BUCKET'),
     );
 
     const role = await this.roleService.getByName('USER');
@@ -58,16 +61,12 @@ export class UserService {
     };
   }
 
-  async delete(email: string) {
-    try {
-      await this.prisma.user.delete({
-        where: {
-          email,
-        },
-      });
-    } catch (error) {
-      throw new NotFoundException(error.message);
-    }
+  delete(email: string) {
+    this.prisma.user.delete({
+      where: {
+        email,
+      },
+    });
   }
 
   private async findByIdentifier(

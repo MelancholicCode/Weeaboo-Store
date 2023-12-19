@@ -30,15 +30,11 @@ export class RoleService {
     });
   }
 
-  async delete(name: string) {
-    try {
-      await this.prisma.role.delete({
-        where: {
-          name,
-        },
-      });
-    } catch (error) {
-      throw new NotFoundException(error.message);
-    }
+  delete(name: string) {
+    this.prisma.role.delete({
+      where: {
+        name,
+      },
+    });
   }
 }

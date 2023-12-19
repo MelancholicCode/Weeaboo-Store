@@ -47,10 +47,13 @@ export class AuthService {
     }
 
     const hashPassword = await hash(dto.password);
-    const user = await this.userService.create(image, {
-      ...dto,
-      password: hashPassword,
-    });
+    const user = await this.userService.create(
+      {
+        ...dto,
+        password: hashPassword,
+      },
+      image,
+    );
 
     return this.getUserWithTokens(user);
   }
