@@ -4,46 +4,41 @@ const prisma = new PrismaClient();
 
 export const seedCategories = async (): Promise<Category[]> => {
   try {
-    const food = await prisma.category.create({
-      data: {
+    const categoriesData = [
+      {
         name: 'Food',
         slug: 'food',
       },
-    });
-
-    const cosmetics = await prisma.category.create({
-      data: {
+      {
         name: 'Cosmetics',
         slug: 'cosmetics',
       },
-    });
-
-    const electronics = await prisma.category.create({
-      data: {
+      {
         name: 'Electronics',
         slug: 'electronics',
       },
-    });
-
-    const manga = await prisma.category.create({
-      data: {
+      {
         name: 'Manga',
         slug: 'manga',
       },
-    });
-
-    const householdGoods = await prisma.category.create({
-      data: {
+      {
         name: 'Household Goods',
         slug: 'household-goods',
       },
-    });
+    ];
 
-    const categories = [food, cosmetics, electronics, manga, householdGoods];
+    const categories: Category[] = [];
+
+    for (let i = 0; i < categoriesData.length; i++) {
+      categories.push(
+        await prisma.category.create({
+          data: categoriesData[i],
+        }),
+      );
+    }
 
     console.log('Categories seeded successfully');
     console.log(categories);
-    return categories;
   } catch (error) {
     console.error('Error seeding categories:', error);
     return [];
