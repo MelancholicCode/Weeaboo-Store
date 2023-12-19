@@ -1,12 +1,17 @@
-import { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren } from 'react';
+import styles from './Button.module.scss';
 
 interface ButtonProps {
   className?: string;
 }
 
-export const Button: FC<PropsWithChildren<ButtonProps>> = ({className, children, ...rest}) => {
+export const Button: FC<PropsWithChildren<ButtonProps>> = ({
+  className,
+  children,
+  ...rest
+}) => {
   return (
-    <button className={`px-2 py-3 bg-red-500 rounded-md text-white ${className}`} {...rest}>
+    <button className={`${styles.button} ${className}`} {...rest}>
       {children}
     </button>
   );

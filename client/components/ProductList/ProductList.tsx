@@ -1,20 +1,23 @@
 import { FC } from 'react';
 import { ProductItem } from '../ProductItem/ProductItem';
+import { IProduct } from '@/shared/types/product.interface';
+import styles from './ProductList.module.scss';
 
 interface ProductListProps {
-  products: Product[];
+  products: IProduct[];
 }
 
 export const ProductList: FC<ProductListProps> = ({ products }) => {
   return (
-    <ul className='flex gap-2 justify-between'>
+    <ul className={styles.list}>
       {products.map((product) => (
-        <ProductItem
-          key={product.id}
-          img={product.img}
-          title={product.title}
-          price={product.price}
-        />
+        <li key={product.id} className={styles.list_item}>
+          <ProductItem
+            img={product.img}
+            title={product.title}
+            price={product.price}
+          />
+        </li>
       ))}
     </ul>
   );

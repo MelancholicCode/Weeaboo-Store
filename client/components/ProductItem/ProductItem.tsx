@@ -2,23 +2,31 @@ import { FC } from 'react';
 import { Button } from '@/shared/components/Button/Button';
 import { Typography } from '@/shared/components/Typography/Typography';
 import Image from 'next/image';
+import styles from './ProductItem.module.scss';
+import clsx from 'clsx';
 
 interface ProductItemProps {
+  className?: string;
   img: string;
   title: string;
   price: number;
 }
 
-export const ProductItem: FC<ProductItemProps> = ({ img, title, price }) => {
+export const ProductItem: FC<ProductItemProps> = ({
+  className,
+  img,
+  title,
+  price,
+}) => {
   return (
-    <div className="flex w-full max-w-xs flex-col justify-between gap-2 rounded-md p-3 shadow-md">
+    <div className={clsx(styles.container, [className])}>
       <Image
         src={img}
         alt=""
         sizes="100vw"
         width={0}
         height={0}
-        style={{ width: '100%', height: 'auto' }}
+        className={styles.image}
       />
       <div>
         <Typography variant="title-2">{title}</Typography>

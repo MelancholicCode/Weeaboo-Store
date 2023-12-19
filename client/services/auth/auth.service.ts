@@ -37,7 +37,7 @@ const AuthService = {
 
     if (response.data.accessToken) saveInStorage(response.data);
 
-    return response;
+    return response.data;
   },
 };
 

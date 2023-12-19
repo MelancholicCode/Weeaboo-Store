@@ -1,5 +1,5 @@
 const Home = () => {
-  return <main className="container mx-auto"></main>;
+  return <main className="container"></main>;
 };
 
 export default Home;

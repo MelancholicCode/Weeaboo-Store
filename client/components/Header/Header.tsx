@@ -1,51 +1,66 @@
+import { FC } from 'react';
 import Link from 'next/link';
 import { LogoIcon } from '@/assets/icons/LogoIcon/LogoIcon';
 import { router } from '../../constants/routes';
 import { CartIcon } from '@/assets/icons/CartIcon/CartIcon';
 import { AuthIcon } from '@/assets/icons/AuthIcon/AuthIcon';
+import CategoryService from '@/services/category/category.service';
+import { IUser } from '@/shared/types/user.interface';
+import { ProfileIcon } from '@/assets/icons/ProfileIcon/ProfileIcon';
+import styles from './Header.module.scss';
 
-export const Header = async () => {
-  const navLinks = [router.HOME_PAGE, router.CATALOG_PAGE, router.GALLERY_PAGE];
+interface HeaderProps {
+  user: IUser | null;
+}
+
+export const Header: FC<HeaderProps> = async ({ user }) => {
+  const navLinks = [
+    { text: 'Home', href: router.HOME_PAGE },
+    { text: 'Catalog', href: router.CATALOG_PAGE },
+    { text: 'Gallery', href: router.GALLERY_PAGE },
+  ];
+
+  const categories = await CategoryService.getAll();
 
   return (
-    <header className="shadow-md">
-      <div className="container m-auto flex flex-col items-center px-4">
-        <div className="flex w-full items-center justify-between pb-2 pt-3">
-          <Link href={router.HOME_PAGE.href} className="flex items-center">
+    <header className={styles.header}>
+      <div className={`container ${styles.container}`}>
+        <div className={styles.header_top}>
+          <Link href={router.HOME_PAGE} className={styles.logo}>
             <LogoIcon />
-            <span className="text-xl font-bold">Weeaboo Store</span>
+            <span className={styles.logo_text}>Weeaboo Store</span>
           </Link>
           <nav>
-            <ul className="flex gap-4">
-              {navLinks.map(({ href, text }) => (
+            <ul className={styles.links_list}>
+              {navLinks.map(({ text, href }) => (
                 <li key={href}>
                   <Link href={href}>{text}</Link>
                 </li>
               ))}
             </ul>
           </nav>
-          <div className="flex items-center gap-4">
-            <Link href={router.CART_PAGE.href}>
-              <CartIcon className="h-6 w-6" />
+          <div className={styles.account_buttons}>
+            <Link href={router.CART_PAGE}>
+              <CartIcon className={styles.icon} />
             </Link>
-            <button>
-              <AuthIcon className="h-6 w-6" />
-            </button>
-            <Link
-              className="block h-fit w-fit p-2"
-              href={router.ACCOUNT_PAGE.href}
-            >
-              <AuthIcon />
-            </Link>
+            {user ? (
+              <Link className={styles.link} href={router.ACCOUNT_PAGE}>
+                <ProfileIcon className={styles.icon} />
+              </Link>
+            ) : (
+              <Link href={router.AUTH_PAGE} className={styles.link}>
+                <AuthIcon className={styles.icon} />
+              </Link>
+            )}
           </div>
         </div>
-        <div className="w-full border-t pb-3 pt-2">
-          <ul className="flex w-full items-center divide-x divide-solid">
-            {/* {categories.map((category) => (
-              <li key={category.id} className="flex-1 px-2 text-center">
+        <div className={styles.header_bottom}>
+          <ul className={styles.category_list}>
+            {categories.map((category) => (
+              <li key={category.id} className={styles.category_item}>
                 <Link href={category.slug}>{category.name}</Link>
               </li>
-            ))} */}
+            ))}
           </ul>
         </div>
       </div>

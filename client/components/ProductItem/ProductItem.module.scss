@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+  border-radius: 15px;
+  padding: 12px;
+  box-shadow: 0 1px 2px 0 rgb(0, 0, 0, 0.05);
+  height: 100%;
+}
+
+.image {
+  height: 256px;
+  width: 100%;
+  object-fit: cover;
+}
