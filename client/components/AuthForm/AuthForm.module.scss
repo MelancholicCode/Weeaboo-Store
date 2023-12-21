@@ -1,0 +1,57 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 500px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.auth_buttons {
+  display: flex;
+}
+
+.auth_button_wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+@keyframes strike {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+.auth_button {
+  position: relative;
+  width: fit-content;
+  font-size: 16px;
+  font-weight: 700;
+
+  &::before {
+    transition: width 0.3s;
+    position: absolute;
+    height: 1px;
+    width: 0;
+  }
+
+  &_active {
+    &::before {
+      content: '';
+      top: 110%;
+      left: 0;
+      animation: strike 1s 1;
+      background-color: var(--black-color);
+      width: 100%;
+    }
+  }
+}
