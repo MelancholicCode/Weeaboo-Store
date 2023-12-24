@@ -4,22 +4,29 @@ import {
   NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
-import { UserDto } from '../user/dto/user.dto';
+import { UserLoginDto } from '../user/dto/user-login.dto';
+import { UserRegistrationDto } from '../user/dto/user-registration.dto';
 import { UserService } from '../user/user.service';
 import { JwtService } from '@nestjs/jwt';
 import { hash, verify } from 'argon2';
 import { Role, User } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
+import { CookieOptions, Response } from 'express';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class AuthService {
+  ACCESS_TOKEN_EXPIRE_MINUTES = 15;
+  REFRESH_TOKEN_EXPIRE_DAYS = 30;
+
   constructor(
     private readonly userService: UserService,
     private readonly prisma: PrismaService,
     private readonly jwtService: JwtService,
+    private readonly configService: ConfigService,
   ) {}
 
-  async login(dto: UserDto) {
+  async login(dto: UserLoginDto) {
     const user = await this.validateUser(dto);
 
     return this.getUserWithTokens(user);
@@ -35,7 +42,7 @@ export class AuthService {
     return this.getUserWithTokens(user);
   }
 
-  async registration(image, dto: UserDto) {
+  async registration(image, dto: UserRegistrationDto) {
     const candidate = await this.prisma.user.findUnique({
       where: {
         email: dto.email,
@@ -58,15 +65,22 @@ export class AuthService {
     return this.getUserWithTokens(user);
   }
 
+  private getUserWithTokens = (user: User & { roles: Role[] }) => ({
+    id: user.id,
+    email: user.email,
+    roles: user.roles,
+    ...this.generateTokens(user),
+  });
+
   private generateTokens(user: User & { roles: Role[] }) {
     const payload = { id: user.id, email: user.email, roles: user.roles };
 
     const accessToken = this.jwtService.sign(payload, {
-      expiresIn: '1h',
+      expiresIn: `${this.ACCESS_TOKEN_EXPIRE_MINUTES}m`,
     });
 
     const refreshToken = this.jwtService.sign(payload, {
-      expiresIn: '7d',
+      expiresIn: `${this.REFRESH_TOKEN_EXPIRE_DAYS}d`,
     });
 
     return {
@@ -75,14 +89,7 @@ export class AuthService {
     };
   }
 
-  private getUserWithTokens = (user: User & { roles: Role[] }) => ({
-    id: user.id,
-    email: user.email,
-    roles: user.roles,
-    ...this.generateTokens(user),
-  });
-
-  private async validateUser(dto: UserDto) {
+  private async validateUser(dto: UserLoginDto) {
     const user = await this.userService.getOneByEmail(dto.email);
 
     if (!user) throw new NotFoundException('User not found');
@@ -93,5 +100,38 @@ export class AuthService {
       throw new UnauthorizedException('Incorrect email or password');
 
     return user;
+  }
+
+  addTokensInResponse(
+    response: Response,
+    refreshToken: string,
+    accessToken: string,
+  ) {
+    const accessTokenExpires = new Date();
+    accessTokenExpires.setMinutes(
+      accessTokenExpires.getMinutes() + this.ACCESS_TOKEN_EXPIRE_MINUTES,
+    );
+
+    const refreshTokenExpires = new Date();
+    refreshTokenExpires.setDate(
+      refreshTokenExpires.getDate() + this.REFRESH_TOKEN_EXPIRE_DAYS,
+    );
+
+    const tokenCookieConfig: CookieOptions = {
+      // secure: this.configService.get('NODE_ENV') === 'production',
+      // domain: 'localhost',
+      // sameSite: 'none',
+    };
+
+    response.cookie('accessToken', accessToken, {
+      expires: accessTokenExpires,
+      ...tokenCookieConfig,
+    });
+
+    response.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      expires: refreshTokenExpires,
+      ...tokenCookieConfig,
+    });
   }
 }

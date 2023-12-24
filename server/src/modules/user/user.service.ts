@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
-import { UserDto } from './dto/user.dto';
+import { UserRegistrationDto } from './dto/user-registration.dto';
 import { RoleService } from '../role/role.service';
 import { FileType, FileService } from '../file/file.service';
 import { CartService } from '../cart/cart.service';
@@ -28,12 +28,14 @@ export class UserService {
     return await this.findByIdentifier('email', email);
   }
 
-  async create(dto: UserDto, image) {
-    const imagePath = await this.fileService.createFile(
-      FileType.USER_AVATAR,
-      image,
-      this.configService.getOrThrow('YA_CLOUD_BUCKET'),
-    );
+  async create(dto: UserRegistrationDto, image?: any) {
+    const imagePath = image
+      ? await this.fileService.createFile(
+          FileType.USER_AVATAR,
+          image,
+          this.configService.getOrThrow('YA_CLOUD_BUCKET'),
+        )
+      : this.configService.getOrThrow('PLACEHOLDER_IMAGE_URL');
 
     const role = await this.roleService.getByName('USER');
     const user = await this.prisma.user.create({
