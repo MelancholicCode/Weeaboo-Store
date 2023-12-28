@@ -1,41 +1,26 @@
-import { getContentType } from '@/api/api.helper';
-import {
-  IAuthResponse,
-  TokensEnum,
-  IEmailPassword,
-} from '@/store/user/user.interface';
-import { saveInStorage } from './auth.helper';
-import Cookies from 'js-cookie';
-import axios from 'axios';
+import { IUser } from '@/shared/types/user.interface';
+import { ILoginData, IRegistrationData } from './auth.types';
 import { api } from '@/api/api.instance';
+import { AuthTypesEnum } from './auth.types';
+import { IRole } from '@/shared/types/role.interface';
 
 const AuthService = {
-  async main(type: 'login' | 'register', data: IEmailPassword) {
-    const response = await api.post<IAuthResponse>(`/auth/${type}`, data, {
-      method: 'POST',
-    });
-
-    if (response.data.accessToken) saveInStorage(response.data);
+  async main(type: AuthTypesEnum, data: ILoginData | IRegistrationData) {
+    const response = await api.post<IUser>(`/auth/${type}`, data);
 
     return response.data;
   },
 
   async getNewTokens() {
-    const refreshToken = Cookies.get(TokensEnum.REFRESH_TOKEN);
-
-    const response = await axios.post<string, { data: IAuthResponse }>(
-      `${process.env.API_URL}/auth/login/access-token`,
-      {
-        refreshToken,
-      },
-      {
-        headers: {
-          ...getContentType(),
-        },
-      }
+    const response = await api.get<string, { data: IUser }>(
+      '/auth/login/tokens'
     );
 
-    if (response.data.accessToken) saveInStorage(response.data);
+    return response.data;
+  },
+
+  async getMe() {
+    const response = await api.get<IUser & { roles: IRole[] }>('/auth/me');
 
     return response.data;
   },

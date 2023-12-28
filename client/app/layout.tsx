@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Header } from '@/components/Header/Header';
-import './globals.css';
+import '@/styles/globals.scss';
+import '@/styles/variables.scss';
+import { AppProvider } from '../providers/AppProvider/AppProvider';
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'] });
 
@@ -14,8 +16,10 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-        {children}
+        <AppProvider>
+          <Header />
+          {children}
+        </AppProvider>
       </body>
     </html>
   );

@@ -4,6 +4,4 @@ export interface IUser {
   id: number;
   email: string;
   roles: IRole[];
-  accessToken: string;
-  refreshToken: string;
 }

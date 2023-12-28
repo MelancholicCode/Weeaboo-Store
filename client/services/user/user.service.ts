@@ -1,4 +1,4 @@
-import { api } from '@/api/api.instance';
+import { api } from '../../api/api.instance';
 import { IRole } from '@/shared/types/role.interface';
 import { IUser } from '@/shared/types/user.interface';
 

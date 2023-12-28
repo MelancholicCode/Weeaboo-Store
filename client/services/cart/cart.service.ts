@@ -12,8 +12,8 @@ const CartService = {
     return response.data;
   },
 
-  async delete(id: number) {
-    return await api.delete<void>(`/cart/${id}`);
+  async delete(itemId: number) {
+    return await api.delete<void>(`/cart/${itemId}`);
   },
 };
 

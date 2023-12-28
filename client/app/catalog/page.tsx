@@ -5,8 +5,6 @@ import styles from './page.module.scss';
 const Catalog = async () => {
   const products = await ProductService.getMany();
 
-  console.log(products);
-
   return (
     <main className={`container ${styles.container}`}>
       <ProductList products={products} />

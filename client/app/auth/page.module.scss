@@ -5,15 +5,6 @@
 }
 
 .form {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: calc(100% - 32px);
-
-  @media (max-height: 620px) {
-    position: static;
-    transform: translate(0, 0);
-    margin: 10% 0;
-  }
+  margin: 10% 0;
+  width: 100%;
 }

@@ -1,32 +1,45 @@
-const HOME_PAGE = {
-  href: '/',
-  text: 'Home',
+const NOT_FOUND = '/404';
+const AUTH = '/auth';
+const HOME = '/';
+const CATALOG = '/catalog';
+const PRODUCT = `${CATALOG}/product`;
+const GALLERY = '/gallery';
+const ACCOUNT = '/account';
+const CART = `${ACCOUNT}/cart`;
+const FAVORITES = `${ACCOUNT}/favorites`;
+const PROFILE = `${ACCOUNT}/profile`;
+const ORDERS = `${ACCOUNT}/orders`;
+const ADMIN = '/admin';
+const ADMIN_USERS = `${ADMIN}/users`;
+const ADMIN_PRODUCTS = `${ADMIN}/products`;
+const ADMIN_ORDERS = `${ADMIN}/orders`;
+
+const publicRoutes = {
+  HOME,
+  CATALOG,
+  GALLERY,
+  PRODUCT,
 };
 
-const CATALOG_PAGE = {
-  href: '/catalog',
-  text: 'Catalog',
+const authUserRoutes = {
+  PROFILE,
+  CART,
+  FAVORITES,
+  ACCOUNT,
+  ORDERS,
 };
 
-const GALLERY_PAGE = {
-  href: '/gallery',
-  text: 'Gallery',
+const adminRoutes = {
+  ADMIN,
+  ADMIN_USERS,
+  ADMIN_PRODUCTS,
+  ADMIN_ORDERS,
 };
 
-const CART_PAGE = {
-  href: '/cart',
-  text: 'Cart',
-};
-
-const ACCOUNT_PAGE = {
-  href: '/account',
-  text: 'Account',
-};
-
-export const router = {
-  HOME_PAGE,
-  CATALOG_PAGE,
-  GALLERY_PAGE,
-  CART_PAGE,
-  ACCOUNT_PAGE,
+export const routes = {
+  publicRoutes,
+  authUserRoutes,
+  adminRoutes,
+  AUTH,
+  NOT_FOUND,
 };

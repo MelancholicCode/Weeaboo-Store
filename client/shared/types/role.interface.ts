@@ -1,4 +1,9 @@
+export enum RolesEnum {
+  'USER',
+  'ADMIN',
+}
+
 export interface IRole {
   id: string;
-  name: string;
+  name: RolesEnum;
 }

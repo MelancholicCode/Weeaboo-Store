@@ -1,9 +1,11 @@
 import { FC, PropsWithChildren } from 'react';
+import styles from './Typography.module.scss';
+import clsx from 'clsx';
 
 interface TypographyProps {
   className?: string;
   type?: 'h1' | 'h2' | 'p';
-  variant: 'title-1' | 'title-2' | 'body-1';
+  variant: 'title-1' | 'title-2' | 'body-1' | 'body-2';
 }
 
 export const Typography: FC<PropsWithChildren<TypographyProps>> = ({
@@ -14,14 +16,15 @@ export const Typography: FC<PropsWithChildren<TypographyProps>> = ({
 }) => {
   const Tag = type;
 
-  const tailwindClassnames = {
-    'title-1': 'text-xl font-bold',
-    'title-2': 'text-lg font-bold',
-    'body-1': 'text-base',
-  };
-
   return (
-    <Tag className={`${tailwindClassnames[variant]} ${className}`}>
+    <Tag
+      className={clsx(className, {
+        [styles['title-1']]: variant === 'title-1',
+        [styles['title-2']]: variant === 'title-2',
+        [styles['body-1']]: variant === 'body-1',
+        [styles['body-2']]: variant === 'body-2',
+      })}
+    >
       {children}
     </Tag>
   );

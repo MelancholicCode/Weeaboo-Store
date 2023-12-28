@@ -1,0 +1,17 @@
+.account_buttons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.link {
+  display: block;
+  height: fit-content;
+  width: fit-content;
+  padding: 8px;
+}
+
+.icon {
+  height: 24px;
+  width: 24px;
+}
