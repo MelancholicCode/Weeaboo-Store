@@ -15,10 +15,22 @@ import { UserRegistrationDto } from '../user/dto/user-registration.dto';
 import { AuthService } from './auth.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Request, Response } from 'express';
+import { Auth } from './decorators/auth.decorator';
+import { CurrentUser } from './decorators/user.decorator';
+import { UserService } from '../user/user.service';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly userService: UserService,
+  ) {}
+
+  @Auth()
+  @Get('me')
+  getMe(@CurrentUser('id') userId: number) {
+    return this.userService.getOneById(userId);
+  }
 
   @Post('login')
   async login(@Res() response: Response, @Body() dto: UserLoginDto) {

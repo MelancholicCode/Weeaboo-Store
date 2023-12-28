@@ -119,7 +119,7 @@ export class AuthService {
 
     const tokenCookieConfig: CookieOptions = {
       // secure: this.configService.get('NODE_ENV') === 'production',
-      // domain: 'localhost',
+      // domain: this.configService.get('CLIENT_DOMAIN') || localhost,
       // sameSite: 'none',
     };
 
