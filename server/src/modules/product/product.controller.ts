@@ -27,8 +27,9 @@ export class ProductController {
     @Query('count') count: string,
     @Query('offset') offset: string,
     @Query('query') query: string,
+    @Query('category') categorySlug: string,
   ) {
-    return this.productService.getMany(count, offset, query);
+    return this.productService.getMany(count, offset, query, categorySlug);
   }
 
   @Get(':slug')

@@ -13,20 +13,30 @@ export class ProductService {
     private readonly configService: ConfigService,
   ) {}
 
-  async getMany(count: string = '20', offset: string = '0', query: string) {
+  async getMany(
+    count: string = '20',
+    offset: string = '0',
+    query: string,
+    categorySlug: string,
+  ) {
     return await this.prisma.product.findMany({
       take: +count,
       skip: +offset,
-      ...(query && {
-        where: {
+      where: {
+        ...(query && {
           title: {
             search: query,
           },
           description: {
             search: query,
           },
-        },
-      }),
+        }),
+        ...(categorySlug && {
+          category: {
+            slug: categorySlug,
+          },
+        }),
+      },
     });
   }
 
