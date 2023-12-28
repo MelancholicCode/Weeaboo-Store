@@ -16,6 +16,7 @@ export const ProductList: FC<ProductListProps> = ({ products }) => {
             img={product.img}
             title={product.title}
             price={product.price}
+            slug={product.slug}
           />
         </li>
       ))}

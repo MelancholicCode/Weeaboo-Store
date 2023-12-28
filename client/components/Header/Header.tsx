@@ -37,7 +37,9 @@ export const Header = async () => {
           <ul className={styles.category_list}>
             {categories.map((category) => (
               <li key={category.id} className={styles.category_item}>
-                <Link href={category.slug}>{category.name}</Link>
+                <Link href={`${routes.publicRoutes.CATEGORY}/${category.slug}`}>
+                  {category.name}
+                </Link>
               </li>
             ))}
           </ul>

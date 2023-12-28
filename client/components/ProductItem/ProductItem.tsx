@@ -12,6 +12,7 @@ interface ProductItemProps {
   img: string;
   title: string;
   price: number;
+  slug: string;
 }
 
 export const ProductItem: FC<ProductItemProps> = ({
@@ -19,10 +20,11 @@ export const ProductItem: FC<ProductItemProps> = ({
   img,
   title,
   price,
+  slug,
 }) => {
   return (
     <div className={clsx(styles.container, [className])}>
-      <Link href={routes.publicRoutes.PRODUCT}>
+      <Link href={`${routes.publicRoutes.PRODUCT}/${slug}`}>
         <Image
           src={img}
           alt=""
@@ -33,7 +35,7 @@ export const ProductItem: FC<ProductItemProps> = ({
         />
       </Link>
       <div className={styles.info_wrapper}>
-        <Link href={routes.publicRoutes.PRODUCT}>
+        <Link href={`${routes.publicRoutes.PRODUCT}/${slug}`}>
           <Typography className={styles.title} variant="body-2">
             {title}
           </Typography>

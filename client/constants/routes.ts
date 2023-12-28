@@ -2,6 +2,7 @@ const NOT_FOUND = '/404';
 const AUTH = '/auth';
 const HOME = '/';
 const CATALOG = '/catalog';
+const CATEGORY = `${CATALOG}/category`;
 const PRODUCT = `${CATALOG}/product`;
 const GALLERY = '/gallery';
 const ACCOUNT = '/account';
@@ -18,6 +19,7 @@ const publicRoutes = {
   HOME,
   CATALOG,
   GALLERY,
+  CATEGORY,
   PRODUCT,
 };
 
