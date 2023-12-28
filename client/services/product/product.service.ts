@@ -4,9 +4,20 @@ import { IProductBody } from './product.interface';
 import { IProduct } from '@/shared/types/product.interface';
 
 const ProductService = {
-  async getMany(count?: number, offset?: number, query?: string) {
+  async getMany(queryParams?: {
+    count?: number;
+    offset?: number;
+    query?: string;
+    categorySlug?: string;
+  }) {
+    const { count, offset, query, categorySlug } = queryParams || {};
     const response = await api.get<IProduct[]>(
-      `/product${getParamsString({ count, offset, query })}`
+      `/product${getParamsString({
+        count,
+        offset,
+        query,
+        category: categorySlug,
+      })}`
     );
     return response.data;
   },
