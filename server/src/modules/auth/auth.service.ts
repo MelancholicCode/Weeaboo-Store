@@ -14,6 +14,11 @@ import { PrismaService } from 'src/prisma.service';
 import { CookieOptions, Response } from 'express';
 import { ConfigService } from '@nestjs/config';
 
+enum TokensEnum {
+  ACCESS_TOKEN = 'accessToken',
+  REFRESH_TOKEN = 'refreshToken',
+}
+
 @Injectable()
 export class AuthService {
   ACCESS_TOKEN_EXPIRE_MINUTES = 15;
@@ -68,7 +73,11 @@ export class AuthService {
   private getUserWithTokens = (user: User & { roles: Role[] }) => ({
     id: user.id,
     email: user.email,
+    name: user.name,
+    surname: user.surname,
     roles: user.roles,
+    address: user.address,
+    avatar: user.avatar,
     ...this.generateTokens(user),
   });
 
@@ -123,15 +132,20 @@ export class AuthService {
       // sameSite: 'none',
     };
 
-    response.cookie('accessToken', accessToken, {
+    response.cookie(TokensEnum.ACCESS_TOKEN, accessToken, {
       expires: accessTokenExpires,
       ...tokenCookieConfig,
     });
 
-    response.cookie('refreshToken', refreshToken, {
+    response.cookie(TokensEnum.REFRESH_TOKEN, refreshToken, {
       httpOnly: true,
       expires: refreshTokenExpires,
       ...tokenCookieConfig,
     });
+  }
+
+  logout(response: Response) {
+    response.cookie(TokensEnum.ACCESS_TOKEN, '', { expires: new Date() });
+    response.cookie(TokensEnum.REFRESH_TOKEN, '', { expires: new Date() });
   }
 }

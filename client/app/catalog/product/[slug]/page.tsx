@@ -8,7 +8,7 @@ const ProductPage = async ({ params }: { params: { slug: string } }) => {
   const product = await ProductService.getOne(params.slug);
 
   return (
-    <div className={`container ${styles.container}`}>
+    <main className={`container ${styles.container}`}>
       <div className={styles.card}>
         <div className={styles.image_wrapper}>
           <Image
@@ -32,7 +32,7 @@ const ProductPage = async ({ params }: { params: { slug: string } }) => {
         </Typography>
         <Typography variant="body-1">{product.description}</Typography>
       </div>
-    </div>
+    </main>
   );
 };
 

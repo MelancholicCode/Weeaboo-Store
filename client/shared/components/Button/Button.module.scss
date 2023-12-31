@@ -1,6 +1,15 @@
 .button {
   padding: 12px 8px;
-  background: var(--accent-color);
   border-radius: 10px;
-  color: var(--white-color);
+  font-weight: 600;
+
+  &_contained {
+    background: var(--accent-color);
+    color: var(--white-color);
+  }
+
+  &_outlined {
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+  }
 }

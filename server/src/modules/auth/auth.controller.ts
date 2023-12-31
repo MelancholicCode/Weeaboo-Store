@@ -28,8 +28,11 @@ export class AuthController {
 
   @Auth()
   @Get('me')
-  getMe(@CurrentUser('id') userId: number) {
-    return this.userService.getOneById(userId);
+  async getMe(@CurrentUser('id') userId: number) {
+    const { id, name, surname, roles, avatar, email, address } =
+      await this.userService.getOneById(userId);
+
+    return { id, name, surname, roles, avatar, email, address };
   }
 
   @Post('login')
@@ -66,5 +69,12 @@ export class AuthController {
     this.authService.addTokensInResponse(response, refreshToken, accessToken);
 
     return response.json(userData);
+  }
+
+  @Get('logout')
+  logout(@Res() response: Response) {
+    this.authService.logout(response);
+
+    return response.send();
   }
 }

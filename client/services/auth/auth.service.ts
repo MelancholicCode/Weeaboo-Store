@@ -24,6 +24,10 @@ const AuthService = {
 
     return response.data;
   },
+
+  logout() {
+    return api.get<void>('/auth/logout');
+  },
 };
 
 export default AuthService;

@@ -9,6 +9,7 @@
 }
 
 .header_top {
+  position: relative;
   display: flex;
   width: 100%;
   align-items: center;
@@ -31,6 +32,10 @@
 }
 
 .links_list {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   gap: 16px;
 }
