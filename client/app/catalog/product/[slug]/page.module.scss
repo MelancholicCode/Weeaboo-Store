@@ -45,3 +45,14 @@
   flex-direction: column;
   gap: 10px;
 }
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.favorite_button {
+  width: 45px;
+  height: 45px;
+}

@@ -1,12 +1,9 @@
 import { api } from '@/api/api.instance';
-import {
-  FavoriteWithProduct,
-  IFavorite,
-} from '@/shared/types/favorite.interface';
+import { IFavorite } from '@/shared/types/favorite.interface';
 
 const FavoriteService = {
   async getAll() {
-    const response = await api.get<FavoriteWithProduct[]>('/favorite');
+    const response = await api.get<IFavorite[]>('/favorite');
     return response.data;
   },
 

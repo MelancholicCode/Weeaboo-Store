@@ -2,7 +2,8 @@ import ProductService from '@/services/product/product.service';
 import styles from './page.module.scss';
 import Image from 'next/image';
 import { Typography } from '@/shared/components/Typography/Typography';
-import BuyButton from '@/components/BuyButton/BuyButton';
+import BuyButton from '@/shared/components/BuyButton/BuyButton';
+import FavoriteButton from '@/shared/components/FavoriteButton/FavoriteButton';
 
 const ProductPage = async ({ params }: { params: { slug: string } }) => {
   const product = await ProductService.getOne(params.slug);
@@ -23,7 +24,13 @@ const ProductPage = async ({ params }: { params: { slug: string } }) => {
         <div className={styles.info}>
           <Typography variant="body-1">{product.title}</Typography>
           <Typography variant="body-2">Price: {product.price}$</Typography>
-          <BuyButton className={styles.button} productId={product.id} />
+          <div className={styles.buttons}>
+            <FavoriteButton
+              className={styles.favorite_button}
+              productId={product.id}
+            />
+            <BuyButton className={styles.button} productId={product.id} />
+          </div>
         </div>
       </div>
       <div className={styles.description}>

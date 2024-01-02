@@ -9,6 +9,7 @@ import { logout } from '@/store/auth/auth.slice';
 import { useRouter } from 'next/navigation';
 import { routes } from '@/constants/routes';
 import { cartReset } from '@/store/cart/cart.slice';
+import { favoriteReset } from '@/store/favorite/favorite.slice';
 
 const AccountMenu = () => {
   const dispatch = useAppDispatch();
@@ -19,6 +20,7 @@ const AccountMenu = () => {
     try {
       await dispatch(logout());
       dispatch(cartReset());
+      dispatch(favoriteReset());
       router.push(routes.publicRoutes.CATALOG);
     } catch (error) {
       console.log(error);
@@ -40,7 +42,12 @@ const AccountMenu = () => {
       <Typography variant="body-1">Email: {user.email}</Typography>
       <Typography variant="body-1">Address: {user.address}</Typography>
       <Button className={styles.button}>Admin panel</Button>
-      <Button className={styles.button}>Check favorites</Button>
+      <Button
+        className={styles.button}
+        onClick={() => router.push(routes.authUserRoutes.FAVORITES)}
+      >
+        Check favorites
+      </Button>
       <Button className={styles.button}>Check orders</Button>
       <Button
         className={styles.button}

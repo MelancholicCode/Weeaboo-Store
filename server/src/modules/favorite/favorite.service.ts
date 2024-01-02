@@ -22,11 +22,14 @@ export class FavoriteService {
         userId,
         productId,
       },
+      include: {
+        product: true,
+      },
     });
   }
 
-  delete(userId: number, id: number) {
-    this.prisma.favorite.delete({
+  async delete(userId: number, id: number) {
+    await this.prisma.favorite.delete({
       where: {
         userId,
         id,

@@ -12,6 +12,7 @@ import { Typography } from '@/shared/components/Typography/Typography';
 import { useAppDispatch } from '@/store/hooks/hooks';
 import { login, registration } from '@/store/auth/auth.slice';
 import { getCartItems } from '@/store/cart/cart.slice';
+import { getFavorites } from '@/store/favorite/favorite.slice';
 
 interface AuthFormProps {
   className?: string;
@@ -49,6 +50,7 @@ const AuthForm: FC<AuthFormProps> = ({ className }) => {
         );
       }
       await dispatch(getCartItems());
+      await dispatch(getFavorites());
     } catch (error: any) {
       setError(error);
     }
