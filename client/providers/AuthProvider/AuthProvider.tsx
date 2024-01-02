@@ -1,19 +1,19 @@
 'use client';
 
-import { getMe } from '@/store/auth/auth.slice';
-import { AppDispatch } from '@/store/store';
 import { FC, PropsWithChildren, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { getMe } from '@/store/auth/auth.slice';
+import { getCartItems } from '@/store/cart/cart.slice';
+import { useAppDispatch } from '@/store/hooks/hooks';
 
 export const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    try {
-      dispatch(getMe());
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(getMe())
+      .then(async () => {
+        await dispatch(getCartItems());
+      })
+      .catch((error: any) => console.log(error));
   }, []);
 
   return <>{children}</>;

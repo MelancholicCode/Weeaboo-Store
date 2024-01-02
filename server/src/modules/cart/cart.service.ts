@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
+import { ChangeCartItemQuantityDto } from './dto/change-cart-item-quantity.dto';
 
 @Injectable()
 export class CartService {
@@ -15,6 +16,9 @@ export class CartService {
     return await this.prisma.cartItem.findMany({
       where: {
         cartId,
+      },
+      include: {
+        product: true,
       },
     });
   }
@@ -39,6 +43,32 @@ export class CartService {
         productId,
         cartId,
       },
+      include: {
+        product: true,
+      },
+    });
+  }
+
+  async changeQuantity(
+    userId: number,
+    id: number,
+    dto: ChangeCartItemQuantityDto,
+  ) {
+    const { id: cartId } = await this.prisma.cart.findUnique({
+      where: {
+        userId,
+      },
+    });
+
+    return await this.prisma.cartItem.update({
+      where: {
+        cartId,
+        id,
+      },
+      data: dto,
+      include: {
+        product: true,
+      },
     });
   }
 
@@ -49,7 +79,7 @@ export class CartService {
       },
     });
 
-    this.prisma.cartItem.delete({
+    await this.prisma.cartItem.delete({
       where: {
         cartId,
         id,

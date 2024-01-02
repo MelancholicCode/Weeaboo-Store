@@ -12,6 +12,13 @@ const CartService = {
     return response.data;
   },
 
+  async changeQuantity(id: number, quantity: number) {
+    const response = await api.patch<ICartItem>(`/cart/${id}`, {
+      quantity,
+    });
+    return response.data;
+  },
+
   async delete(itemId: number) {
     return await api.delete<void>(`/cart/${itemId}`);
   },

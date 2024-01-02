@@ -5,9 +5,10 @@ import { Typography } from '@/shared/components/Typography/Typography';
 import { useAppDispatch, useAppSelector } from '@/store/hooks/hooks';
 import Image from 'next/image';
 import styles from './AccountMenu.module.scss';
-import { authLogout } from '@/store/auth/auth.slice';
+import { logout } from '@/store/auth/auth.slice';
 import { useRouter } from 'next/navigation';
 import { routes } from '@/constants/routes';
+import { cartReset } from '@/store/cart/cart.slice';
 
 const AccountMenu = () => {
   const dispatch = useAppDispatch();
@@ -16,7 +17,8 @@ const AccountMenu = () => {
 
   const handleLogout = async () => {
     try {
-      await dispatch(authLogout());
+      await dispatch(logout());
+      dispatch(cartReset());
       router.push(routes.publicRoutes.CATALOG);
     } catch (error) {
       console.log(error);
@@ -38,6 +40,7 @@ const AccountMenu = () => {
       <Typography variant="body-1">Email: {user.email}</Typography>
       <Typography variant="body-1">Address: {user.address}</Typography>
       <Button className={styles.button}>Admin panel</Button>
+      <Button className={styles.button}>Check favorites</Button>
       <Button className={styles.button}>Check orders</Button>
       <Button
         className={styles.button}

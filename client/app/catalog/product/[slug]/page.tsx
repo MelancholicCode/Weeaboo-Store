@@ -2,7 +2,7 @@ import ProductService from '@/services/product/product.service';
 import styles from './page.module.scss';
 import Image from 'next/image';
 import { Typography } from '@/shared/components/Typography/Typography';
-import { Button } from '@/shared/components/Button/Button';
+import BuyButton from '@/components/BuyButton/BuyButton';
 
 const ProductPage = async ({ params }: { params: { slug: string } }) => {
   const product = await ProductService.getOne(params.slug);
@@ -23,7 +23,7 @@ const ProductPage = async ({ params }: { params: { slug: string } }) => {
         <div className={styles.info}>
           <Typography variant="body-1">{product.title}</Typography>
           <Typography variant="body-2">Price: {product.price}$</Typography>
-          <Button className={styles.button}>Buy</Button>
+          <BuyButton className={styles.button} productId={product.id} />
         </div>
       </div>
       <div className={styles.description}>

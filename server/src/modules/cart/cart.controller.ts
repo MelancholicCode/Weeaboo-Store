@@ -1,14 +1,17 @@
 import {
+  Body,
   Controller,
   Delete,
   Get,
   NotFoundException,
   Param,
+  Patch,
   Post,
 } from '@nestjs/common';
 import { CartService } from './cart.service';
 import { Auth } from '../auth/decorators/auth.decorator';
 import { CurrentUser } from '../auth/decorators/user.decorator';
+import { ChangeCartItemQuantityDto } from './dto/change-cart-item-quantity.dto';
 
 @Controller('cart')
 export class CartController {
@@ -21,12 +24,22 @@ export class CartController {
   }
 
   @Auth()
-  @Post('productId')
+  @Post(':productId')
   createItem(
     @CurrentUser('id') userId: number,
-    @Param(':productId') productId: string,
+    @Param('productId') productId: string,
   ) {
     return this.cartService.createItem(userId, +productId);
+  }
+
+  @Auth()
+  @Patch(':id')
+  changeQuantity(
+    @CurrentUser('id') userId: number,
+    @Param('id') id: string,
+    @Body() dto: ChangeCartItemQuantityDto,
+  ) {
+    return this.cartService.changeQuantity(userId, +id, dto);
   }
 
   @Auth()

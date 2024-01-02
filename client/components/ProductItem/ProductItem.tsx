@@ -1,14 +1,15 @@
 import { FC } from 'react';
-import { Button } from '@/shared/components/Button/Button';
 import { Typography } from '@/shared/components/Typography/Typography';
 import Image from 'next/image';
 import styles from './ProductItem.module.scss';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { routes } from '@/constants/routes';
+import BuyButton from '../BuyButton/BuyButton';
 
 interface ProductItemProps {
   className?: string;
+  id: number;
   img: string;
   title: string;
   price: number;
@@ -17,6 +18,7 @@ interface ProductItemProps {
 
 export const ProductItem: FC<ProductItemProps> = ({
   className,
+  id,
   img,
   title,
   price,
@@ -42,7 +44,7 @@ export const ProductItem: FC<ProductItemProps> = ({
         </Link>
         <Typography variant="body-2">{price}$</Typography>
       </div>
-      <Button>Buy</Button>
+      <BuyButton productId={id} />
     </div>
   );
 };

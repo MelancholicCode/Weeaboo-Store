@@ -10,20 +10,16 @@ import {
   createAsyncThunk,
   createSlice,
 } from '@reduxjs/toolkit';
+import { LoadingStatesEnum } from '../store.types';
 
-export enum AuthStates {
-  IDLE = 'idle',
-  LOADING = 'loading',
-}
-
-export interface AuthSliceState {
-  loading: AuthStates;
+interface AuthSliceState {
+  loading: LoadingStatesEnum;
   user: IUser | null;
   error: SerializedError | null;
 }
 
 const internalInitialState: AuthSliceState = {
-  loading: AuthStates.IDLE,
+  loading: LoadingStatesEnum.IDLE,
   user: null,
   error: null,
 };
@@ -32,50 +28,50 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState: internalInitialState,
   reducers: {
-    reset: () => internalInitialState,
+    userReset: () => internalInitialState,
   },
   extraReducers: (builder) => {
     builder.addCase(getMe.pending, (state) => {
-      state.loading = AuthStates.LOADING;
+      state.loading = LoadingStatesEnum.LOADING;
     });
     builder.addCase(getMe.fulfilled, (state, action) => {
       state.user = action.payload;
-      state.loading = AuthStates.IDLE;
+      state.loading = LoadingStatesEnum.IDLE;
     });
     builder.addCase(getMe.rejected, (state, action) => {
       state = { ...internalInitialState, error: action.error };
       throw new Error(action.error.message);
     });
-    builder.addCase(authLogin.pending, (state) => {
-      state.loading = AuthStates.LOADING;
+    builder.addCase(login.pending, (state) => {
+      state.loading = LoadingStatesEnum.LOADING;
     });
-    builder.addCase(authLogin.fulfilled, (state, action) => {
+    builder.addCase(login.fulfilled, (state, action) => {
       state.user = action.payload;
-      state.loading = AuthStates.IDLE;
+      state.loading = LoadingStatesEnum.IDLE;
     });
-    builder.addCase(authLogin.rejected, (state, action) => {
+    builder.addCase(login.rejected, (state, action) => {
       state = { ...internalInitialState, error: action.error };
       throw new Error(action.error.message);
     });
-    builder.addCase(authRegistration.pending, (state) => {
-      state.loading = AuthStates.LOADING;
+    builder.addCase(registration.pending, (state) => {
+      state.loading = LoadingStatesEnum.LOADING;
     });
-    builder.addCase(authRegistration.fulfilled, (state, action) => {
+    builder.addCase(registration.fulfilled, (state, action) => {
       state.user = action.payload;
-      state.loading = AuthStates.IDLE;
+      state.loading = LoadingStatesEnum.IDLE;
     });
-    builder.addCase(authRegistration.rejected, (state, action) => {
+    builder.addCase(registration.rejected, (state, action) => {
       state = { ...internalInitialState, error: action.error };
       throw new Error(action.error.message);
     });
-    builder.addCase(authLogout.pending, (state) => {
-      state.loading = AuthStates.LOADING;
+    builder.addCase(logout.pending, (state) => {
+      state.loading = LoadingStatesEnum.LOADING;
     });
-    builder.addCase(authLogout.fulfilled, () => internalInitialState);
+    builder.addCase(logout.fulfilled, () => internalInitialState);
   },
 });
 
-export const getMe = createAsyncThunk('auth/me', async (_, thunkAPI) => {
+export const getMe = createAsyncThunk('auth/getMe', async (_, thunkAPI) => {
   try {
     return await AuthService.getMe();
   } catch (error: any) {
@@ -83,7 +79,7 @@ export const getMe = createAsyncThunk('auth/me', async (_, thunkAPI) => {
   }
 });
 
-export const authRegistration = createAsyncThunk(
+export const registration = createAsyncThunk(
   'auth/registration',
   async (
     { authData, push }: { authData: IRegistrationData; push: () => void },
@@ -99,7 +95,7 @@ export const authRegistration = createAsyncThunk(
   }
 );
 
-export const authLogin = createAsyncThunk(
+export const login = createAsyncThunk(
   'auth/login',
   async (
     { authData, push }: { authData: ILoginData; push: () => void },
@@ -115,16 +111,13 @@ export const authLogin = createAsyncThunk(
   }
 );
 
-export const authLogout = createAsyncThunk(
-  'auth/logout',
-  async (_, thunkAPI) => {
-    try {
-      return await AuthService.logout();
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue({ error: error.message });
-    }
+export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+  try {
+    return await AuthService.logout();
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue({ error: error.message });
   }
-);
+});
 
-export const { reset } = authSlice.actions;
+export const { userReset } = authSlice.actions;
 export const authReducer = authSlice.reducer;

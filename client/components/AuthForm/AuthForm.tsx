@@ -10,7 +10,8 @@ import { useRouter } from 'next/navigation';
 import { routes } from '@/constants/routes';
 import { Typography } from '@/shared/components/Typography/Typography';
 import { useAppDispatch } from '@/store/hooks/hooks';
-import { authLogin, authRegistration } from '@/store/auth/auth.slice';
+import { login, registration } from '@/store/auth/auth.slice';
+import { getCartItems } from '@/store/cart/cart.slice';
 
 interface AuthFormProps {
   className?: string;
@@ -33,20 +34,21 @@ const AuthForm: FC<AuthFormProps> = ({ className }) => {
 
     try {
       if (isLogin) {
-        dispatch(
-          authLogin({
+        await dispatch(
+          login({
             authData: { email, password },
             push: () => router.push(routes.publicRoutes.CATALOG),
           })
         );
       } else {
-        dispatch(
-          authRegistration({
+        await dispatch(
+          registration({
             authData: { email, password, name, surname, address },
             push: () => router.push(routes.publicRoutes.CATALOG),
           })
         );
       }
+      await dispatch(getCartItems());
     } catch (error: any) {
       setError(error);
     }

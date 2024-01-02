@@ -13,6 +13,7 @@ export const ProductList: FC<ProductListProps> = ({ products }) => {
       {products.map((product) => (
         <li key={product.id} className={styles.list_item}>
           <ProductItem
+            id={product.id}
             img={product.img}
             title={product.title}
             price={product.price}
