@@ -23,7 +23,7 @@ const favoriteSlice = createSlice({
   name: 'cart',
   initialState: internalInitialState,
   reducers: {
-    favoriteReset: () => internalInitialState,
+    favoritesReset: () => internalInitialState,
   },
   extraReducers: (builder) => {
     builder.addCase(getFavorites.pending, (state) => {
@@ -88,5 +88,5 @@ export const deleteFavorite = createAsyncThunk(
   }
 );
 
-export const { favoriteReset } = favoriteSlice.actions;
+export const { favoritesReset } = favoriteSlice.actions;
 export const favoriteReducer = favoriteSlice.reducer;

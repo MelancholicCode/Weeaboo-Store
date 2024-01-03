@@ -1,10 +1,10 @@
-import CartItems from '@/components/CartItems/CartItems';
+import CartItemList from '@/components/CartItemList/CartItemList';
 import styles from './page.module.scss';
 
 const CartPage = () => {
   return (
     <main className={`container ${styles.container}`}>
-      <CartItems />
+      <CartItemList />
     </main>
   );
 };

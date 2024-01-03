@@ -29,7 +29,7 @@ export class ReviewService {
   }
 
   async create(userId: number, productId: number, dto: ReviewDto) {
-    const orderItem = await this.prisma.orderItem.findUnique({
+    const orderItem = await this.prisma.orderItem.findFirst({
       where: {
         order: {
           userId,

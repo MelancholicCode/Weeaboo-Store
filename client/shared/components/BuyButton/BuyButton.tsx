@@ -16,7 +16,7 @@ const BuyButton: FC<BuyButtonProps> = ({ className, productId }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
-  const { items } = useAppSelector((state) => state.cart);
+  const { cartItems } = useAppSelector((state) => state.cart);
 
   const handleAddInCart = async () => {
     if (user) {
@@ -30,7 +30,7 @@ const BuyButton: FC<BuyButtonProps> = ({ className, productId }) => {
     }
   };
 
-  return items.some((item) => item.productId === productId) ? (
+  return cartItems.some((item) => item.productId === productId) ? (
     <Button
       className={className}
       onClick={() => router.push(routes.authUserRoutes.CART)}

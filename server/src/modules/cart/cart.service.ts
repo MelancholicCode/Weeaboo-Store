@@ -7,15 +7,11 @@ export class CartService {
   constructor(private readonly prisma: PrismaService) {}
 
   async getAllItems(userId: number) {
-    const { id: cartId } = await this.prisma.cart.findUnique({
-      where: {
-        userId: +userId,
-      },
-    });
-
     return await this.prisma.cartItem.findMany({
       where: {
-        cartId,
+        cart: {
+          userId,
+        },
       },
       include: {
         product: true,
@@ -54,15 +50,11 @@ export class CartService {
     id: number,
     dto: ChangeCartItemQuantityDto,
   ) {
-    const { id: cartId } = await this.prisma.cart.findUnique({
-      where: {
-        userId,
-      },
-    });
-
     return await this.prisma.cartItem.update({
       where: {
-        cartId,
+        cart: {
+          userId,
+        },
         id,
       },
       data: dto,
@@ -73,16 +65,22 @@ export class CartService {
   }
 
   async deleteItem(userId: number, id: number) {
-    const { id: cartId } = await this.prisma.cart.findUnique({
-      where: {
-        userId,
-      },
-    });
-
     await this.prisma.cartItem.delete({
       where: {
-        cartId,
+        cart: {
+          userId,
+        },
         id,
+      },
+    });
+  }
+
+  async deleteAll(userId: number) {
+    await this.prisma.cartItem.deleteMany({
+      where: {
+        cart: {
+          userId,
+        },
       },
     });
   }

@@ -35,17 +35,29 @@ export class OrderService {
   async create(userId: number) {
     const cartItems = await this.cartService.getAllItems(userId);
 
+    const orderItems = cartItems.map((item) => ({
+      productId: item.productId,
+      quantity: item.quantity,
+    }));
+
     if (cartItems.length) {
-      return await this.prisma.order.create({
+      const order = await this.prisma.order.create({
         data: {
           userId,
           OrderItem: {
             createMany: {
-              data: cartItems,
+              data: orderItems,
             },
           },
         },
+        include: {
+          OrderItem: true,
+        },
       });
+
+      await this.cartService.deleteAll(userId);
+
+      return order;
     }
 
     throw new NotFoundException('Cart items is not found');

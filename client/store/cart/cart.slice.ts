@@ -9,13 +9,13 @@ import { LoadingStatesEnum } from '../store.types';
 
 interface CartSliceState {
   loading: LoadingStatesEnum;
-  items: ICartItem[];
+  cartItems: ICartItem[];
   error: SerializedError | null;
 }
 
 const internalInitialState: CartSliceState = {
   loading: LoadingStatesEnum.IDLE,
-  items: [],
+  cartItems: [],
   error: null,
 };
 
@@ -30,7 +30,7 @@ const cartSlice = createSlice({
       state.loading = LoadingStatesEnum.LOADING;
     });
     builder.addCase(getCartItems.fulfilled, (state, action) => {
-      state.items = action.payload;
+      state.cartItems = action.payload;
       state.loading = LoadingStatesEnum.IDLE;
     });
     builder.addCase(getCartItems.rejected, (state, action) => {
@@ -41,21 +41,23 @@ const cartSlice = createSlice({
       state.loading = LoadingStatesEnum.LOADING;
     });
     builder.addCase(createCartItem.fulfilled, (state, action) => {
-      state.items = [...state.items, action.payload];
+      state.cartItems = [...state.cartItems, action.payload];
       state.loading = LoadingStatesEnum.IDLE;
     });
     builder.addCase(deleteCartItem.pending, (state) => {
       state.loading = LoadingStatesEnum.LOADING;
     });
     builder.addCase(deleteCartItem.fulfilled, (state, action) => {
-      state.items = state.items.filter((item) => item.id !== action.payload);
+      state.cartItems = state.cartItems.filter(
+        (item) => item.id !== action.payload
+      );
       state.loading = LoadingStatesEnum.IDLE;
     });
     builder.addCase(changeCartItemQuantity.pending, (state) => {
       state.loading = LoadingStatesEnum.LOADING;
     });
     builder.addCase(changeCartItemQuantity.fulfilled, (state, action) => {
-      state.items = state.items.map((item) =>
+      state.cartItems = state.cartItems.map((item) =>
         item.id === action.payload.id ? action.payload : item
       );
       state.loading = LoadingStatesEnum.IDLE;

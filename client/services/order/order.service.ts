@@ -1,25 +1,19 @@
 import { api } from '@/api/api.instance';
-import { IOrder, OrderWithItems } from '@/shared/types/order.interface';
+import { OrderWithItems } from '@/shared/types/order.interface';
 
 const OrderService = {
   async getAll() {
-    const response = await api.get<OrderWithItems>('/order');
-    return {
-      ...response.data,
-      orderItems: response.data.OrderItem,
-    };
+    const response = await api.get<OrderWithItems[]>('/order');
+    return response.data;
   },
 
   async getOne(id: number) {
     const response = await api.get<OrderWithItems>(`/order/${id}`);
-    return {
-      ...response.data,
-      orderItems: response.data.OrderItem,
-    };
+    return response.data;
   },
 
   async create() {
-    const response = await api.post<IOrder>('/order');
+    const response = await api.post<OrderWithItems>('/order');
     return response.data;
   },
 

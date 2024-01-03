@@ -38,18 +38,18 @@ model Category {
 }
 
 model Product {
-  id          Int        @id @unique @default(autoincrement())
+  id          Int         @id @unique @default(autoincrement())
   title       String
   description String
   price       Int
-  rate        Decimal        @default(0.0)
+  rate        Decimal     @default(0.0)
   img         String
-  slug        String     @unique
-  category    Category   @relation(fields: [categoryId], references: [id])
+  slug        String      @unique
+  category    Category    @relation(fields: [categoryId], references: [id])
   categoryId  Int
   CartItem    CartItem?
   Favorite    Favorite?
-  OrderItem   OrderItem?
+  OrderItem   OrderItem[]
   Review      Review[]
 }
 
@@ -64,7 +64,7 @@ model OrderItem {
   id        Int     @id @unique @default(autoincrement())
   quantity  Int
   product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  productId Int     @unique
+  productId Int
   order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
   orderId   Int
   Review    Review?
