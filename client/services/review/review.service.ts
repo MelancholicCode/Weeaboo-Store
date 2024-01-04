@@ -1,9 +1,14 @@
 import { api } from '@/api/api.instance';
-import { IReview, ReviewInfo } from '@/shared/types/review.interface';
+import { IReview } from '@/shared/types/review.interface';
 
 const ReviewService = {
+  async getMy() {
+    const response = await api.get<IReview[]>('/review');
+    return response.data;
+  },
+
   async getAll(productId: number) {
-    const response = await api.get<ReviewInfo[]>(`/review/${productId}`);
+    const response = await api.get<IReview[]>(`/review/${productId}`);
     return response.data;
   },
 

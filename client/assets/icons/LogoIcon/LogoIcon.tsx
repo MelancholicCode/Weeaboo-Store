@@ -1,12 +1,8 @@
-import { FC } from 'react';
+import { FC, SVGProps } from 'react';
 
-interface LogoIconProps {
-  className?: string;
-}
-
-export const LogoIcon: FC<LogoIconProps> = ({ className }) => {
+export const LogoIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
   return (
-    <svg className={className} viewBox="0 0 48 48" width="48px" height="48px">
+    <svg viewBox="0 0 48 48" width="48px" height="48px" {...props}>
       <circle cx="11" cy="30" r="4" fill="#fa91ad" />
       <circle cx="37" cy="30" r="4" fill="#fa91ad" />
       <polyline

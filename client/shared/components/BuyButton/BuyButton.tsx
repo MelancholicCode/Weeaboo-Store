@@ -12,7 +12,7 @@ interface BuyButtonProps {
   productId: number;
 }
 
-const BuyButton: FC<BuyButtonProps> = ({ className, productId }) => {
+export const BuyButton: FC<BuyButtonProps> = ({ className, productId }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
@@ -44,5 +44,3 @@ const BuyButton: FC<BuyButtonProps> = ({ className, productId }) => {
     </Button>
   );
 };
-
-export default BuyButton;

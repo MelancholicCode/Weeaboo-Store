@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Delete,
   Get,
@@ -13,20 +14,27 @@ import { Auth } from '../auth/decorators/auth.decorator';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { RolesGuard } from '../auth/roles.guard';
 
-@Controller()
+@Controller('review')
 export class ReviewController {
   constructor(private readonly reviewService: ReviewService) {}
+
+  @Auth()
+  @Get()
+  getMy(@CurrentUser('id') userId: number) {
+    return this.reviewService.getMy(userId);
+  }
 
   @Get(':productId')
   getAll(@Param('productId') productId: string) {
     return this.reviewService.getAll(+productId);
   }
 
+  @Auth()
   @Post(':productId')
   create(
     @CurrentUser('id') userId: number,
     @Param('productId') productId: string,
-    dto: ReviewDto,
+    @Body() dto: ReviewDto,
   ) {
     return this.reviewService.create(userId, +productId, dto);
   }

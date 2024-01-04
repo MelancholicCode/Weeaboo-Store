@@ -11,6 +11,23 @@ export class ReviewService {
     private readonly productService: ProductService,
   ) {}
 
+  async getMy(userId: number) {
+    return await this.prisma.review.findMany({
+      where: {
+        userId,
+      },
+      include: {
+        user: {
+          select: {
+            avatar: true,
+            name: true,
+            surname: true,
+          },
+        },
+      },
+    });
+  }
+
   async getAll(productId: number) {
     return await this.prisma.review.findMany({
       where: {
@@ -46,6 +63,15 @@ export class ReviewService {
         userId,
         productId,
         orderItemId: orderItem.id,
+      },
+      include: {
+        user: {
+          select: {
+            avatar: true,
+            name: true,
+            surname: true,
+          },
+        },
       },
     });
 

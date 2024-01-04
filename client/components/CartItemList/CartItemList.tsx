@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks/hooks';
 import Image from 'next/image';
 import styles from './CartItemList.module.scss';
 import { Typography } from '@/shared/components/Typography/Typography';
-import TrashIcon from '@/assets/icons/TrashIcon/TrashIcon';
+import { TrashIcon } from '@/assets/icons/TrashIcon/TrashIcon';
 import {
   cartReset,
   changeCartItemQuantity,
@@ -15,7 +15,7 @@ import { routes } from '@/constants/routes';
 import { Button } from '@/shared/components/Button/Button';
 import { createOrder } from '@/store/order/order.slice';
 
-const CartItemList = () => {
+export const CartItemList = () => {
   const { cartItems } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
 
@@ -113,5 +113,3 @@ const CartItemList = () => {
     </div>
   );
 };
-
-export default CartItemList;

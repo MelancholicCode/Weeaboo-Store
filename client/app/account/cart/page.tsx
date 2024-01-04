@@ -1,4 +1,4 @@
-import CartItemList from '@/components/CartItemList/CartItemList';
+import { CartItemList } from '@/components/CartItemList/CartItemList';
 import styles from './page.module.scss';
 
 const CartPage = () => {

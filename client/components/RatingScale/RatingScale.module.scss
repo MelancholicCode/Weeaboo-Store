@@ -1,0 +1,22 @@
+.rate {
+  &_list {
+    display: flex;
+    gap: 3px;
+  }
+
+  &_item {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+  }
+
+  &_icon {
+    width: 100%;
+    height: 100%;
+    fill: var(--grey-color);
+
+    &_active {
+      fill: var(--orange-color);
+    }
+  }
+}

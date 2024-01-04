@@ -7,7 +7,7 @@ interface FormProps extends HTMLAttributes<HTMLFormElement> {
   className?: string;
 }
 
-const Form: FC<PropsWithChildren<FormProps>> = ({
+export const Form: FC<PropsWithChildren<FormProps>> = ({
   children,
   className,
   ...props
@@ -18,5 +18,3 @@ const Form: FC<PropsWithChildren<FormProps>> = ({
     </form>
   );
 };
-
-export default Form;

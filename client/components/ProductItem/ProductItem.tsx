@@ -5,8 +5,8 @@ import styles from './ProductItem.module.scss';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { routes } from '@/constants/routes';
-import BuyButton from '../../shared/components/BuyButton/BuyButton';
-import FavoriteButton from '@/shared/components/FavoriteButton/FavoriteButton';
+import { BuyButton } from '../../shared/components/BuyButton/BuyButton';
+import { FavoriteButton } from '@/shared/components/FavoriteButton/FavoriteButton';
 
 interface ProductItemProps {
   className?: string;
@@ -43,7 +43,7 @@ export const ProductItem: FC<ProductItemProps> = ({
             {title}
           </Typography>
         </Link>
-        <Typography variant="body-2">{price}$</Typography>
+        <Typography variant="body-2">{Number(price).toFixed(2)}$</Typography>
       </div>
       <BuyButton productId={id} />
       <FavoriteButton className={styles.favorite_button} productId={id} />

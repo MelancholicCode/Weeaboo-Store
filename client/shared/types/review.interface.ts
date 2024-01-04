@@ -1,3 +1,9 @@
+interface IUserInfo {
+  avatar: string;
+  name: string;
+  surname: string;
+}
+
 export interface IReview {
   id: number;
   rate: number;
@@ -5,12 +11,5 @@ export interface IReview {
   userId: number;
   orderItemId: number;
   productId: number;
+  user: IUserInfo;
 }
-
-interface IUserInfo {
-  avatar: string;
-  name: string;
-  surname: string;
-}
-
-export type ReviewInfo = IReview & { user: IUserInfo };

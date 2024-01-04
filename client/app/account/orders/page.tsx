@@ -1,6 +1,4 @@
-'use client';
-
-import OrderList from '@/components/OrderList/OrderList';
+import { OrderList } from '@/components/OrderList/OrderList';
 import styles from './page.module.scss';
 
 const OrdersPage = () => {

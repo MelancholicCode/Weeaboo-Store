@@ -1,6 +1,6 @@
 import { useAppSelector } from '@/store/hooks/hooks';
 
-const OrderItems = () => {
+export const OrderList = () => {
   const { orders } = useAppSelector((state) => state.order);
 
   return (
@@ -11,5 +11,3 @@ const OrderItems = () => {
     </ul>
   );
 };
-
-export default OrderItems;

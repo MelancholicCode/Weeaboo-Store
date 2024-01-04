@@ -3,7 +3,7 @@
   padding-bottom: 20px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 25px;
 }
 
 .card {
@@ -31,7 +31,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 30%;
+  width: calc(30% - 20px);
 }
 
 .button {
@@ -55,4 +55,23 @@
 .favorite_button {
   width: 45px;
   height: 45px;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  &_icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  &_rate {
+    transform: translateY(2px);
+  }
+}
+
+.reviews {
+  width: 70%;
 }

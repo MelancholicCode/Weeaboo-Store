@@ -11,8 +11,10 @@ import { routes } from '@/constants/routes';
 import { cartReset } from '@/store/cart/cart.slice';
 import { favoritesReset } from '@/store/favorite/favorite.slice';
 import { RolesEnum } from '@/shared/types/role.interface';
+import { ordersReset } from '@/store/order/order.slice';
+import { reviewsReset } from '@/store/review/review.slice';
 
-const AccountMenu = () => {
+export const AccountMenu = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { user } = useAppSelector((state) => state.auth);
@@ -23,6 +25,8 @@ const AccountMenu = () => {
       await dispatch(logout());
       dispatch(cartReset());
       dispatch(favoritesReset());
+      dispatch(ordersReset());
+      dispatch(reviewsReset());
       router.push(routes.publicRoutes.CATALOG);
     } catch (error) {
       console.log(error);
@@ -66,5 +70,3 @@ const AccountMenu = () => {
     </div>
   ) : null;
 };
-
-export default AccountMenu;

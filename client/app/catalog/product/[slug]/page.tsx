@@ -2,8 +2,11 @@ import ProductService from '@/services/product/product.service';
 import styles from './page.module.scss';
 import Image from 'next/image';
 import { Typography } from '@/shared/components/Typography/Typography';
-import BuyButton from '@/shared/components/BuyButton/BuyButton';
-import FavoriteButton from '@/shared/components/FavoriteButton/FavoriteButton';
+import { BuyButton } from '@/shared/components/BuyButton/BuyButton';
+import { FavoriteButton } from '@/shared/components/FavoriteButton/FavoriteButton';
+import { StarIcon } from '@/assets/icons/StarIcon/StarIcon';
+import { ReviewForm } from '@/components/ReviewForm/ReviewForm';
+import { ReviewList } from '@/components/ReviewList/ReviewList';
 
 const ProductPage = async ({ params }: { params: { slug: string } }) => {
   const product = await ProductService.getOne(params.slug);
@@ -22,8 +25,16 @@ const ProductPage = async ({ params }: { params: { slug: string } }) => {
           />
         </div>
         <div className={styles.info}>
+          <div className={styles.rating}>
+            <StarIcon className={styles.rating_icon} />
+            <Typography variant="body-2" className={styles.rating_rate}>
+              {product.rate}
+            </Typography>
+          </div>
           <Typography variant="body-1">{product.title}</Typography>
-          <Typography variant="body-2">Price: {product.price}$</Typography>
+          <Typography variant="body-2">
+            Price: {Number(product.price).toFixed(2)}$
+          </Typography>
           <div className={styles.buttons}>
             <FavoriteButton
               className={styles.favorite_button}
@@ -38,6 +49,10 @@ const ProductPage = async ({ params }: { params: { slug: string } }) => {
           Description:
         </Typography>
         <Typography variant="body-1">{product.description}</Typography>
+      </div>
+      <div className={styles.reviews}>
+        <ReviewForm productId={product.id} />
+        <ReviewList productId={product.id} />
       </div>
     </main>
   );

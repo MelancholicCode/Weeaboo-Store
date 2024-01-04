@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import styles from './FavoriteButton.module.scss';
-import HeartIcon from '@/assets/icons/HeartIcon/HeartIcon';
+import { HeartIcon } from '@/assets/icons/HeartIcon/HeartIcon';
 import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks/hooks';
 import {
@@ -15,7 +15,10 @@ interface FavoriteButtonProps {
   productId: number;
 }
 
-const FavoriteButton: FC<FavoriteButtonProps> = ({ className, productId }) => {
+export const FavoriteButton: FC<FavoriteButtonProps> = ({
+  className,
+  productId,
+}) => {
   const { user } = useAppSelector((state) => state.auth);
   const { items } = useAppSelector((state) => state.favorite);
   const dispatch = useAppDispatch();
@@ -43,5 +46,3 @@ const FavoriteButton: FC<FavoriteButtonProps> = ({ className, productId }) => {
     </span>
   ) : null;
 };
-
-export default FavoriteButton;

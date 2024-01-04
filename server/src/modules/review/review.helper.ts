@@ -6,7 +6,7 @@ export const calcRating = (
 ): Prisma.Decimal => {
   return new Prisma.Decimal(
     (
-      (rateArray.reduce((acc, curr) => acc + curr) + newRate, 0) /
+      (rateArray.reduce((acc, curr) => acc + curr, 0) + newRate) /
       (rateArray.length + 1)
     ).toFixed(1),
   );

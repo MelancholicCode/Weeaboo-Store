@@ -1,9 +1,7 @@
 'use client';
 
 import { FC, FormEvent, useState } from 'react';
-import Form from '@/shared/components/Form/Form';
-import clsx from 'clsx';
-import styles from './AuthForm.module.scss';
+import { Form } from '@/shared/components/Form/Form';
 import { Input } from '@/shared/components/Input/Input';
 import { Button } from '@/shared/components/Button/Button';
 import { useRouter } from 'next/navigation';
@@ -13,12 +11,16 @@ import { useAppDispatch } from '@/store/hooks/hooks';
 import { login, registration } from '@/store/auth/auth.slice';
 import { getCartItems } from '@/store/cart/cart.slice';
 import { getFavorites } from '@/store/favorite/favorite.slice';
+import { getOrders } from '@/store/order/order.slice';
+import { getMyReviews } from '@/store/review/review.slice';
+import clsx from 'clsx';
+import styles from './AuthForm.module.scss';
 
 interface AuthFormProps {
   className?: string;
 }
 
-const AuthForm: FC<AuthFormProps> = ({ className }) => {
+export const AuthForm: FC<AuthFormProps> = ({ className }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [isLogin, setIsLogin] = useState(true);
@@ -51,6 +53,8 @@ const AuthForm: FC<AuthFormProps> = ({ className }) => {
       }
       await dispatch(getCartItems());
       await dispatch(getFavorites());
+      await dispatch(getOrders());
+      await dispatch(getMyReviews());
     } catch (error: any) {
       setError(error);
     }
@@ -159,5 +163,3 @@ const AuthForm: FC<AuthFormProps> = ({ className }) => {
     </Form>
   );
 };
-
-export default AuthForm;

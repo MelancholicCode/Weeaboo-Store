@@ -1,18 +1,8 @@
-import { FC } from 'react';
+import { FC, SVGProps } from 'react';
 
-interface AuthIconProps {
-  className?: string;
-}
-
-export const AuthIcon: FC<AuthIconProps> = ({ className }) => {
+export const AuthIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
   return (
-    <svg
-      className={className}
-      version="1.1"
-      x="0px"
-      y="0px"
-      viewBox="0 0 512 512"
-    >
+    <svg version="1.1" x="0px" y="0px" viewBox="0 0 512 512" {...props}>
       <g>
         <g>
           <g>

@@ -41,7 +41,7 @@ model Product {
   id          Int         @id @unique @default(autoincrement())
   title       String
   description String
-  price       Int
+  price       Decimal
   rate        Decimal     @default(0.0)
   img         String
   slug        String      @unique

@@ -1,12 +1,8 @@
-import { FC } from 'react';
+import { FC, SVGProps } from 'react';
 
-interface HeartIconProps {
-  className?: string;
-}
-
-const HeartIcon: FC<HeartIconProps> = ({ className }) => {
+export const HeartIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
   return (
-    <svg className={className} fill="none" viewBox="0 0 24 24">
+    <svg fill="none" viewBox="0 0 24 24" {...props}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -19,5 +15,3 @@ const HeartIcon: FC<HeartIconProps> = ({ className }) => {
     </svg>
   );
 };
-
-export default HeartIcon;

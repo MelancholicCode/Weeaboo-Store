@@ -10,6 +10,16 @@ const nextConfig = {
       'constants',
       'services',
       'store',
+      'api',
+      'fonts',
+    ],
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
     ],
   },
   env: {

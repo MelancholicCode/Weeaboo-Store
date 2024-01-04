@@ -1,4 +1,4 @@
-import FavoriteList from '@/components/FavoriteList/FavoriteList';
+import { FavoriteList } from '@/components/FavoriteList/FavoriteList';
 import styles from './page.module.scss';
 
 const FavoritesPage = () => {
