@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { ProductItem } from '../ProductItem/ProductItem';
+import { ProductItem } from '@/components/ProductItem/ProductItem';
 import { IProduct } from '@/shared/types/product.interface';
 import styles from './ProductList.module.scss';
 

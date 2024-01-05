@@ -1,8 +1,8 @@
 import { FC } from 'react';
+import Image from 'next/image';
 import ReviewService from '@/services/review/review.service';
 import styles from './ReviewList.module.scss';
 import { Typography } from '@/shared/components/Typography/Typography';
-import Image from 'next/image';
 import { StarIcon } from '@/assets/icons/StarIcon/StarIcon';
 
 interface ReviewListProps {

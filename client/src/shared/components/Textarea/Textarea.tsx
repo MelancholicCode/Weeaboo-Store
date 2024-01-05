@@ -1,7 +1,7 @@
+import { FC, HTMLAttributes, PropsWithChildren } from 'react';
 import clsx from 'clsx';
 import styles from './Textarea.module.scss';
 import { inter } from '@/fonts/inter';
-import { FC, HTMLAttributes, PropsWithChildren } from 'react';
 
 interface TextareaProps extends HTMLAttributes<HTMLTextAreaElement> {
   className?: string;

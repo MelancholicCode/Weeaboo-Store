@@ -2,6 +2,7 @@
 
 import { useAppDispatch, useAppSelector } from '@/store/hooks/hooks';
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from './CartItemList.module.scss';
 import { Typography } from '@/shared/components/Typography/Typography';
 import { TrashIcon } from '@/assets/icons/TrashIcon/TrashIcon';
@@ -10,7 +11,6 @@ import {
   changeCartItemQuantity,
   deleteCartItem,
 } from '@/store/cart/cart.slice';
-import Link from 'next/link';
 import { routes } from '@/constants/routes';
 import { Button } from '@/shared/components/Button/Button';
 import { createOrder } from '@/store/order/order.slice';

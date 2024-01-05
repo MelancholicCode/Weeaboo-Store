@@ -1,10 +1,10 @@
 'use client';
 
-import { RatingScale } from '../RatingScale/RatingScale';
+import { FC, useState, FormEvent } from 'react';
+import { RatingScale } from '@/components/RatingScale/RatingScale';
 import { Button } from '@/shared/components/Button/Button';
 import { Textarea } from '@/shared/components/Textarea/Textarea';
 import styles from './ReviewForm.module.scss';
-import { FC, useState, FormEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks/hooks';
 import { createReview } from '@/store/review/review.slice';
 

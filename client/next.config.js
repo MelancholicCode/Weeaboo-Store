@@ -1,18 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
-    dirs: [
-      'shared',
-      'assets',
-      'utils',
-      'api',
-      'assets',
-      'constants',
-      'services',
-      'store',
-      'api',
-      'fonts',
-    ],
+    dirs: 'src',
   },
   images: {
     remotePatterns: [

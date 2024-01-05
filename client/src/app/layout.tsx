@@ -3,7 +3,7 @@ import { inter } from '@/fonts/inter';
 import { Header } from '@/components/Header/Header';
 import '@/styles/globals.scss';
 import '@/styles/variables.scss';
-import { AppProvider } from '../providers/AppProvider/AppProvider';
+import { AppProvider } from '@/providers/AppProvider/AppProvider';
 
 export const metadata: Metadata = {
   title: 'Weeaboo Store',

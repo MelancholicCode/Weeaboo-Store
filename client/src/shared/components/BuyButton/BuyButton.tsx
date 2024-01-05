@@ -2,7 +2,7 @@
 
 import { FC } from 'react';
 import { routes } from '@/constants/routes';
-import { Button } from '@/shared/components/Button/Button';
+import { Button } from '../Button/Button';
 import { useAppDispatch, useAppSelector } from '@/store/hooks/hooks';
 import { useRouter } from 'next/navigation';
 import { createCartItem } from '@/store/cart/cart.slice';

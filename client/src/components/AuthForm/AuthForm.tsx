@@ -1,10 +1,11 @@
 'use client';
 
 import { FC, FormEvent, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import clsx from 'clsx';
 import { Form } from '@/shared/components/Form/Form';
 import { Input } from '@/shared/components/Input/Input';
 import { Button } from '@/shared/components/Button/Button';
-import { useRouter } from 'next/navigation';
 import { routes } from '@/constants/routes';
 import { Typography } from '@/shared/components/Typography/Typography';
 import { useAppDispatch } from '@/store/hooks/hooks';
@@ -13,7 +14,6 @@ import { getCartItems } from '@/store/cart/cart.slice';
 import { getFavorites } from '@/store/favorite/favorite.slice';
 import { getOrders } from '@/store/order/order.slice';
 import { getMyReviews } from '@/store/review/review.slice';
-import clsx from 'clsx';
 import styles from './AuthForm.module.scss';
 
 interface AuthFormProps {

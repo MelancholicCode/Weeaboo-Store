@@ -1,11 +1,11 @@
 import { FC } from 'react';
-import { Typography } from '@/shared/components/Typography/Typography';
-import Image from 'next/image';
-import styles from './ProductItem.module.scss';
 import clsx from 'clsx';
 import Link from 'next/link';
+import Image from 'next/image';
+import { Typography } from '@/shared/components/Typography/Typography';
+import styles from './ProductItem.module.scss';
 import { routes } from '@/constants/routes';
-import { BuyButton } from '../../shared/components/BuyButton/BuyButton';
+import { BuyButton } from '@/shared/components/BuyButton/BuyButton';
 import { FavoriteButton } from '@/shared/components/FavoriteButton/FavoriteButton';
 
 interface ProductItemProps {

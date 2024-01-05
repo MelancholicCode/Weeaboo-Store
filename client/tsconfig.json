@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "./src",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -19,15 +20,16 @@
       }
     ],
     "paths": {
-      "@/components/*": ["./components/*"],
-      "@/assets/*": ["./assets/*"],
-      "@/shared/*": ["./shared/*"],
-      "@/api/*": ["./api/*"],
-      "@/constants/*": ["./constants/*"],
-      "@/services/*": ["./services/*"],
-      "@/store/*": ["./store/*"],
-      "@/styles/*": ["./styles/*"],
-      "@/fonts/*": ["./fonts/*"]
+      "@/components/*": ["components/*"],
+      "@/providers/*": ["providers/*"],
+      "@/assets/*": ["assets/*"],
+      "@/shared/*": ["shared/*"],
+      "@/api/*": ["api/*"],
+      "@/constants/*": ["constants/*"],
+      "@/services/*": ["services/*"],
+      "@/store/*": ["store/*"],
+      "@/styles/*": ["styles/*"],
+      "@/fonts/*": ["fonts/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
