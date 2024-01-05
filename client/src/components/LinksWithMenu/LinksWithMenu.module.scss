@@ -1,7 +1,11 @@
-.account_buttons {
+.link_buttons {
   display: flex;
   align-items: center;
   gap: 16px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .link {

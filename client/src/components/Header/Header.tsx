@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { LogoIcon } from '@/assets/icons/LogoIcon/LogoIcon';
 import CategoryService from '@/services/category/category.service';
 import styles from './Header.module.scss';
-import { AccountButtons } from '../AccountButtons/AccountButtons';
+import { LinksWithMenu } from '../LinksWithMenu/LinksWithMenu';
 import { routes } from '@/constants/routes';
+import { Logo } from '../Logo/Logo';
 
 export const Header = async () => {
   const navLinks = [
@@ -18,10 +18,7 @@ export const Header = async () => {
     <header className={styles.header}>
       <div className={`container ${styles.container}`}>
         <div className={styles.header_top}>
-          <Link href={routes.publicRoutes.HOME} className={styles.logo}>
-            <LogoIcon />
-            <span className={styles.logo_text}>Weeaboo Store</span>
-          </Link>
+          <Logo />
           <nav>
             <ul className={styles.links_list}>
               {navLinks.map(({ text, href }) => (
@@ -31,7 +28,7 @@ export const Header = async () => {
               ))}
             </ul>
           </nav>
-          <AccountButtons />
+          <LinksWithMenu navLinks={navLinks} />
         </div>
         <div className={styles.header_bottom}>
           <ul className={styles.category_list}>

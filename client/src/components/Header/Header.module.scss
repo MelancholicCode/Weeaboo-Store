@@ -22,15 +22,6 @@
   padding: 8px 0 12px;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-
-  &_text {
-    font-size: 1.25rem;
-  }
-}
-
 .links_list {
   position: absolute;
   top: 50%;
@@ -38,6 +29,10 @@
   transform: translate(-50%, -50%);
   display: flex;
   gap: 16px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .category_list {
