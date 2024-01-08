@@ -55,6 +55,8 @@ model Product {
 
 model Order {
   id        Int         @id @unique @default(autoincrement())
+  address   String
+  createdAt DateTime    @default(now())
   user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
   OrderItem OrderItem[]

@@ -31,8 +31,11 @@ export class OrderController {
 
   @Auth()
   @Post()
-  create(@CurrentUser('id') userId: number) {
-    return this.orderService.create(+userId);
+  create(
+    @CurrentUser('id') userId: number,
+    @CurrentUser('address') address: string,
+  ) {
+    return this.orderService.create(+userId, address);
   }
 
   @Auth()

@@ -15,7 +15,11 @@ export class OrderService {
         userId,
       },
       include: {
-        OrderItem: true,
+        OrderItem: {
+          include: {
+            product: true,
+          },
+        },
       },
     });
   }
@@ -27,12 +31,16 @@ export class OrderService {
         id,
       },
       include: {
-        OrderItem: true,
+        OrderItem: {
+          include: {
+            product: true,
+          },
+        },
       },
     });
   }
 
-  async create(userId: number) {
+  async create(userId: number, address: string) {
     const cartItems = await this.cartService.getAllItems(userId);
 
     const orderItems = cartItems.map((item) => ({
@@ -43,6 +51,7 @@ export class OrderService {
     if (cartItems.length) {
       const order = await this.prisma.order.create({
         data: {
+          address,
           userId,
           OrderItem: {
             createMany: {
@@ -51,7 +60,11 @@ export class OrderService {
           },
         },
         include: {
-          OrderItem: true,
+          OrderItem: {
+            include: {
+              product: true,
+            },
+          },
         },
       });
 
