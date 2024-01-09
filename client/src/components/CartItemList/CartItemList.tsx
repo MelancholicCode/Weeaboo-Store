@@ -107,9 +107,12 @@ export const CartItemList = () => {
           </li>
         ))}
       </ul>
-      <Button className={styles.order_button} onClick={handleCreateOrder}>
-        Create order
-      </Button>
+
+      {cartItems.length ? (
+        <Button className={styles.order_button} onClick={handleCreateOrder}>
+          Create order
+        </Button>
+      ) : null}
     </div>
   );
 };

@@ -48,6 +48,7 @@
   }
 
   &_image {
+    object-fit: cover;
     border-radius: 5px;
 
     @media (max-width: 480px) {

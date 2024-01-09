@@ -47,7 +47,6 @@ export const AccountMenu = () => {
       </Typography>
       <Typography variant="body-1">Email: {user.email}</Typography>
       <Typography variant="body-1">Address: {user.address}</Typography>
-      {isAdmin && <Button className={styles.button}>Admin panel</Button>}
       <Button
         className={styles.button}
         onClick={() => router.push(routes.authUserRoutes.FAVORITES)}
