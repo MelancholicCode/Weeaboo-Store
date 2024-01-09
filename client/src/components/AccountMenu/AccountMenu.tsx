@@ -10,15 +10,14 @@ import { useRouter } from 'next/navigation';
 import { routes } from '@/constants/routes';
 import { cartReset } from '@/store/cart/cart.slice';
 import { favoritesReset } from '@/store/favorite/favorite.slice';
-import { RolesEnum } from '@/shared/types/role.interface';
 import { ordersReset } from '@/store/order/order.slice';
 import { reviewsReset } from '@/store/review/review.slice';
+import { images } from '@/constants/imageUrl';
 
 export const AccountMenu = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { user } = useAppSelector((state) => state.auth);
-  const isAdmin = user?.roles.some((role) => role.name === RolesEnum.ADMIN);
 
   const handleLogout = async () => {
     try {
@@ -39,7 +38,7 @@ export const AccountMenu = () => {
         className={styles.avatar}
         width={200}
         height={200}
-        src={user.avatar}
+        src={user.avatar || images.avatarPlaceholder}
         alt="User avatar"
       />
       <Typography variant="body-2" className={styles.fullname}>

@@ -35,7 +35,7 @@ export class UserService {
           image,
           this.configService.getOrThrow('YA_CLOUD_BUCKET'),
         )
-      : this.configService.getOrThrow('PLACEHOLDER_IMAGE_URL');
+      : null;
 
     const role = await this.roleService.getByName('USER');
     const user = await this.prisma.user.create({

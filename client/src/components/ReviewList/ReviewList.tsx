@@ -4,6 +4,7 @@ import ReviewService from '@/services/review/review.service';
 import styles from './ReviewList.module.scss';
 import { Typography } from '@/shared/components/Typography/Typography';
 import { StarIcon } from '@/assets/icons/StarIcon/StarIcon';
+import { images } from '@/constants/imageUrl';
 
 interface ReviewListProps {
   productId: number;
@@ -20,7 +21,7 @@ export const ReviewList: FC<ReviewListProps> = async ({ productId }) => {
             className={styles.avatar}
             width={100}
             height={100}
-            src={user.avatar}
+            src={user.avatar || images.avatarPlaceholder}
             alt="User avatar"
           />
           <div>
