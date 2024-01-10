@@ -10,7 +10,7 @@ export const OrderList = () => {
   return (
     <ul className={styles.list}>
       {orders.map((order) => (
-        <OrderItem order={order} />
+        <OrderItem key={order.id} order={order} />
       ))}
     </ul>
   );

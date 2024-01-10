@@ -40,13 +40,10 @@ export const OrderItem: FC<OrderItemProps> = ({ order }) => {
         </div>
       </div>
       {isActive && (
-        <ul
-          className={clsx(styles.order_item_list, {
-            [styles.order_item_list_active]: isActive,
-          })}
-        >
+        <ul>
           {order.OrderItem.map(({ product }) => (
             <li
+              key={product.id}
               className={styles.order_item}
               onClick={() =>
                 router.push(`${routes.publicRoutes.PRODUCT}/${product.slug}`)
@@ -59,7 +56,9 @@ export const OrderItem: FC<OrderItemProps> = ({ order }) => {
                 src={product.img}
                 alt=""
               />
-              <Typography variant="body-1">{product.title}</Typography>
+              <Typography className={styles.order_item_title} variant="body-1">
+                {product.title}
+              </Typography>
             </li>
           ))}
         </ul>

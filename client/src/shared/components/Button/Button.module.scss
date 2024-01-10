@@ -4,8 +4,8 @@
   font-weight: 600;
 
   &_contained {
-    background: var(--accent-color);
     color: var(--white-color);
+    background-color: var(--accent-color);
   }
 
   &_outlined {

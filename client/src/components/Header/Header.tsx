@@ -20,9 +20,9 @@ export const Header = async () => {
         <div className={styles.header_top}>
           <Logo />
           <nav>
-            <ul className={styles.links_list}>
+            <ul className={styles.link_list}>
               {navLinks.map(({ text, href }) => (
-                <li key={href}>
+                <li key={href} className={styles.link_item}>
                   <Link href={href}>{text}</Link>
                 </li>
               ))}

@@ -24,7 +24,7 @@ export const ReviewList: FC<ReviewListProps> = async ({ productId }) => {
             src={user.avatar || images.avatarPlaceholder}
             alt="User avatar"
           />
-          <div>
+          <div className={styles.review_content}>
             <div className={styles.info}>
               <Typography variant="body-1">
                 {user.name} {user.surname}

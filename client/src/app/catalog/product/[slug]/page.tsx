@@ -40,7 +40,7 @@ const ProductPage = async ({ params }: { params: { slug: string } }) => {
               className={styles.favorite_button}
               productId={product.id}
             />
-            <BuyButton className={styles.button} productId={product.id} />
+            <BuyButton className={styles.buy_button} productId={product.id} />
           </div>
         </div>
       </div>

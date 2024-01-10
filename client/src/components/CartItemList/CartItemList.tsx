@@ -72,7 +72,7 @@ export const CartItemList = () => {
                     {item.product.title}
                   </Typography>
                 </Link>
-                <Typography variant="body-2">
+                <Typography className={styles.price} variant="body-2">
                   Price: {item.product.price}$
                 </Typography>
               </div>

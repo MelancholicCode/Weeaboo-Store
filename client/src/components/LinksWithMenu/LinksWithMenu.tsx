@@ -23,15 +23,15 @@ export const LinksWithMenu: FC<LinksWithMenuProps> = ({ navLinks }) => {
       <div className={styles.link_buttons}>
         {user ? (
           <>
-            <Link href={routes.authUserRoutes.CART}>
+            <Link className={styles.link_button} href={routes.authUserRoutes.CART}>
               <CartIcon className={styles.icon} />
             </Link>
-            <Link className={styles.link} href={routes.authUserRoutes.PROFILE}>
+            <Link className={styles.link_button} href={routes.authUserRoutes.PROFILE}>
               <ProfileIcon className={styles.icon} />
             </Link>
           </>
         ) : (
-          <Link className={styles.link} href={routes.AUTH}>
+          <Link className={styles.link_button} href={routes.AUTH}>
             <AuthIcon className={styles.icon} />
           </Link>
         )}

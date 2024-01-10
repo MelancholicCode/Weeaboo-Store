@@ -1,9 +1,9 @@
 'use client';
 
+import { FC } from 'react';
 import clsx from 'clsx';
 import styles from './FavoriteButton.module.scss';
 import { HeartIcon } from '@/assets/icons/HeartIcon/HeartIcon';
-import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/hooks/hooks';
 import {
   createFavorite,

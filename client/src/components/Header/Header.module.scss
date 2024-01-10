@@ -11,9 +11,9 @@
 .header_top {
   position: relative;
   display: flex;
-  width: 100%;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  width: 100%;
   padding: 8px 0 12px;
 }
 
@@ -22,23 +22,28 @@
   padding: 8px 0 12px;
 }
 
-.links_list {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  gap: 16px;
+.link {
+  &_list {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    transform: translate(-50%, -50%);
 
-  @media (max-width: 768px) {
-    display: none;
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &_item + &_item {
+    margin-left: 20px;
   }
 }
 
 .category_list {
   display: flex;
-  width: 100%;
   align-items: center;
+  width: 100%;
 }
 
 .category_item {

@@ -1,9 +1,9 @@
 .input {
   display: block;
-  transition: color 0.5s;
-  border-radius: 5px;
   padding: 4px;
+  transition: color 0.5s;
   border: 1px solid var(--dark-color);
+  border-radius: 5px;
 
   &:hover,
   &:focus {

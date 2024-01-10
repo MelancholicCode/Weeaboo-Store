@@ -4,9 +4,8 @@
   border-radius: 10px;
 
   &_content {
-    cursor: pointer;
     display: flex;
-    gap: 20px;
+    cursor: pointer;
 
     &_active {
       padding-bottom: 15px;
@@ -17,14 +16,18 @@
 .order_info {
   display: flex;
   flex-direction: column;
-  gap: 10px;
   flex: 1;
+  padding-left: 20px;
+
+  & > * + * {
+    margin-top: 10px;
+  }
 }
 
 .arrow_icon {
-  margin-top: 20px;
   width: 20px;
   height: 20px;
+  margin-top: 20px;
   fill: var(--dark-color);
 
   &_active {
@@ -33,18 +36,15 @@
 }
 
 .order_item {
-  cursor: pointer;
-  padding: 15px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  padding: 15px;
+  cursor: pointer;
   box-shadow: var(--shadow-md);
   border-radius: 10px;
 
-  &_list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  &:not(:first-child) {
+    margin-top: 10px;
   }
 
   &_image {
@@ -55,6 +55,15 @@
       width: 100%;
       height: 200px;
       object-fit: cover;
+    }
+  }
+
+  &_title {
+    margin-left: 10px;
+
+    @media (max-width: 480px) {
+      margin-left: 0;
+      margin-top: 10px;
     }
   }
 
