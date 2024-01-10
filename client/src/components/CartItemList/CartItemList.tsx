@@ -14,16 +14,19 @@ import {
 import { routes } from '@/constants/routes';
 import { Button } from '@/shared/components/Button/Button';
 import { createOrder } from '@/store/order/order.slice';
+import { LoadingStatesEnum } from '@/store/store.types';
+import { Placeholder } from '../Placeholder/Placeholder';
 
 export const CartItemList = () => {
-  const { cartItems } = useAppSelector((state) => state.cart);
+  const { cartItems, loading, error } = useAppSelector((state) => state.cart);
+  const { loading: userLoading } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
   const handleDeleteItem = async (id: number) => {
     try {
       await dispatch(deleteCartItem(id));
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -32,7 +35,7 @@ export const CartItemList = () => {
       try {
         dispatch(changeCartItemQuantity({ id, quantity }));
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
   };
@@ -42,9 +45,26 @@ export const CartItemList = () => {
       await dispatch(createOrder());
       dispatch(cartReset());
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
+
+  if (
+    userLoading === LoadingStatesEnum.LOADING ||
+    loading === LoadingStatesEnum.LOADING
+  ) {
+    return null; // Return Skeleton
+  }
+
+  if (error) {
+    return <Placeholder type="error">Something went wrong</Placeholder>;
+  }
+
+  if (!cartItems.length) {
+    return (
+      <Placeholder type="empty">There are no items in the cart</Placeholder>
+    );
+  }
 
   return (
     <div className={styles.container}>
@@ -57,13 +77,14 @@ export const CartItemList = () => {
               >
                 <Image
                   src={item.product.img}
-                  alt=""
+                  alt={item.product.title}
                   sizes="100vw"
                   width={0}
                   height={0}
                   className={styles.image}
                 />
               </Link>
+
               <div className={styles.description}>
                 <Link
                   href={`${routes.publicRoutes.PRODUCT}/${item.product.slug}`}
@@ -77,6 +98,7 @@ export const CartItemList = () => {
                 </Typography>
               </div>
             </div>
+
             <div className={styles.item_right}>
               <div className={styles.count}>
                 <span
@@ -108,11 +130,9 @@ export const CartItemList = () => {
         ))}
       </ul>
 
-      {cartItems.length ? (
-        <Button className={styles.order_button} onClick={handleCreateOrder}>
-          Create order
-        </Button>
-      ) : null}
+      <Button className={styles.order_button} onClick={handleCreateOrder}>
+        Create order
+      </Button>
     </div>
   );
 };

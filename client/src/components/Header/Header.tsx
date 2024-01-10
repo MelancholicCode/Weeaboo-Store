@@ -30,6 +30,7 @@ export const Header = async () => {
           </nav>
           <LinksWithMenu navLinks={navLinks} />
         </div>
+
         <div className={styles.header_bottom}>
           <ul className={styles.category_list}>
             {categories.map((category) => (

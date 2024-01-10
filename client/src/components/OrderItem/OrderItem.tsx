@@ -31,6 +31,7 @@ export const OrderItem: FC<OrderItemProps> = ({ order }) => {
             [styles.arrow_icon_active]: isActive,
           })}
         />
+
         <div className={styles.order_info}>
           <Typography variant="body-1">Order ID: {order.id}</Typography>
           <Typography variant="body-1">Address: {order.address}</Typography>
@@ -39,6 +40,7 @@ export const OrderItem: FC<OrderItemProps> = ({ order }) => {
           </Typography>
         </div>
       </div>
+
       {isActive && (
         <ul>
           {order.OrderItem.map(({ product }) => (
@@ -54,7 +56,7 @@ export const OrderItem: FC<OrderItemProps> = ({ order }) => {
                 width={100}
                 height={100}
                 src={product.img}
-                alt=""
+                alt={product.title}
               />
               <Typography className={styles.order_item_title} variant="body-1">
                 {product.title}

@@ -12,12 +12,14 @@ import { cartReset } from '@/store/cart/cart.slice';
 import { favoritesReset } from '@/store/favorite/favorite.slice';
 import { ordersReset } from '@/store/order/order.slice';
 import { reviewsReset } from '@/store/review/review.slice';
-import { images } from '@/constants/imageUrl';
+import { images } from '@/constants/images';
+import { Placeholder } from '../Placeholder/Placeholder';
+import { LoadingStatesEnum } from '@/store/store.types';
 
 export const AccountMenu = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const { user } = useAppSelector((state) => state.auth);
+  const { user, error, loading } = useAppSelector((state) => state.auth);
 
   const handleLogout = async () => {
     try {
@@ -28,9 +30,17 @@ export const AccountMenu = () => {
       dispatch(reviewsReset());
       router.push(routes.publicRoutes.CATALOG);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
+
+  if (loading === LoadingStatesEnum.LOADING) {
+    return null; // Return Skeleton
+  }
+
+  if (error) {
+    return <Placeholder type="error">Something went wrong</Placeholder>;
+  }
 
   return user ? (
     <div className={styles.container}>
@@ -66,5 +76,5 @@ export const AccountMenu = () => {
         Logout
       </Button>
     </div>
-  ) : null;
+  ) : null; // Return Skeleton
 };

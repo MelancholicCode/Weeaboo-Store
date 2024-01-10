@@ -23,7 +23,7 @@ export const BuyButton: FC<BuyButtonProps> = ({ className, productId }) => {
       try {
         await dispatch(createCartItem(productId));
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     } else {
       router.push(routes.AUTH);

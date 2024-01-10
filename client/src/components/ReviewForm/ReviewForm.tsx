@@ -34,7 +34,7 @@ export const ReviewForm: FC<ReviewFormProps> = ({ productId }) => {
       try {
         await dispatch(createReview({ productId, rate, comment }));
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
   };
@@ -42,11 +42,13 @@ export const ReviewForm: FC<ReviewFormProps> = ({ productId }) => {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <RatingScale maxRate={5} onClick={(num) => setRate(num)} rate={rate} />
+
       <Textarea
         placeholder="Add your rate for this product"
         onChange={(event) => setComment(event.currentTarget.value)}
         className={styles.textarea}
       ></Textarea>
+
       <Button className={styles.button} disabled={!rate || !comment.length}>
         Send a review
       </Button>

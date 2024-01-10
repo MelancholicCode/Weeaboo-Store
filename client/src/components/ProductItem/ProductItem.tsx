@@ -26,17 +26,18 @@ export const ProductItem: FC<ProductItemProps> = ({
   slug,
 }) => {
   return (
-    <div className={clsx(styles.container, [className])}>
+    <div className={clsx(styles.item, [className])}>
       <Link href={`${routes.publicRoutes.PRODUCT}/${slug}`}>
         <Image
           src={img}
-          alt=""
+          alt={title}
           sizes="100vw"
           width={0}
           height={0}
           className={styles.image}
         />
       </Link>
+
       <div className={styles.info_wrapper}>
         <Link href={`${routes.publicRoutes.PRODUCT}/${slug}`}>
           <Typography className={styles.title} variant="body-2">
@@ -45,6 +46,7 @@ export const ProductItem: FC<ProductItemProps> = ({
         </Link>
         <Typography variant="body-2">{Number(price).toFixed(2)}$</Typography>
       </div>
+
       <BuyButton productId={id} />
       <FavoriteButton className={styles.favorite_button} productId={id} />
     </div>

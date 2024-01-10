@@ -51,12 +51,13 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
           })
         );
       }
-      await dispatch(getCartItems());
-      await dispatch(getFavorites());
-      await dispatch(getOrders());
-      await dispatch(getMyReviews());
-    } catch (error: any) {
-      setError(error);
+
+      dispatch(getCartItems()).catch(console.error);
+      dispatch(getFavorites()).catch(console.error);
+      dispatch(getOrders()).catch(console.error);
+      dispatch(getMyReviews()).catch(console.error);
+    } catch (error) {
+      if (error instanceof Error) setError(error);
     }
   };
 
@@ -74,6 +75,7 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
             Login
           </button>
         </div>
+
         <div className={styles.auth_button_wrapper}>
           <button
             onClick={() => setIsLogin(false)}
@@ -86,6 +88,7 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
           </button>
         </div>
       </div>
+
       {error && (
         <div className={styles.field}>
           <Typography className={styles.error} variant="body-1">
@@ -93,6 +96,7 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
           </Typography>
         </div>
       )}
+
       {!isLogin && (
         <>
           <div className={styles.field}>
@@ -105,6 +109,7 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
               id="name"
             />
           </div>
+
           <div className={styles.field}>
             <label htmlFor="surname">Surname</label>
             <Input
@@ -115,6 +120,7 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
               id="surname"
             />
           </div>
+
           <div className={styles.field}>
             <label htmlFor="address">Address</label>
             <Input
@@ -127,6 +133,7 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
           </div>
         </>
       )}
+
       <div className={styles.field}>
         <label htmlFor="email">Email</label>
         <Input
@@ -137,6 +144,7 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
           id="email"
         />
       </div>
+
       <div className={styles.field}>
         <label htmlFor="password">Password</label>
         <Input
@@ -147,6 +155,7 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
           id="password"
         />
       </div>
+
       {!isLogin && (
         <div className={styles.field}>
           <label htmlFor="second-password">Second password</label>

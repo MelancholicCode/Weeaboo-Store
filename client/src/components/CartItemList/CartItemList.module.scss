@@ -4,9 +4,21 @@
 }
 
 .list {
-  @media (max-width: 768px) {
+  display: flex;
+  flex-direction: column;
+  --item-margin: 10px;
+
+  & > li + li {
+    margin-top: var(--item-margin);
+  }
+
+  @media (min-width: 501px) and (max-width: 768px) {
     flex-direction: row;
     flex-wrap: wrap;
+
+    & > li + li {
+      margin-top: 0;
+    }
   }
 }
 
@@ -16,10 +28,6 @@
   padding: 15px;
   border-radius: 10px;
   box-shadow: var(--shadow-md);
-
-  & + & {
-    margin-top: 10px;
-  }
 
   &_left {
     display: flex;
@@ -48,11 +56,18 @@
   @media (max-width: 768px) {
     justify-content: flex-start;
     flex-direction: column;
-    width: calc((100% - 10px) / 2);
   }
 
-  @media (max-width: 480px) {
-    width: 100%;
+  @media (min-width: 501px) and (max-width: 768px) {
+    width: calc((100% - var(--item-margin)) / 2);
+
+    &:nth-child(2n) {
+      margin-left: var(--item-margin);
+    }
+
+    &:nth-child(n + 3) {
+      margin-top: var(--item-margin);
+    }
   }
 }
 
