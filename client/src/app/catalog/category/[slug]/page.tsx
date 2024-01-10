@@ -1,5 +1,4 @@
 import { ProductList } from '@/components/ProductList/ProductList';
-import styles from './page.module.scss';
 import ProductService from '@/services/product/product.service';
 import { Placeholder } from '@/components/Placeholder/Placeholder';
 
@@ -10,7 +9,7 @@ const CategoryPage = async ({ params }: { params: { slug: string } }) => {
     });
 
     return (
-      <main className={`container ${styles.container}`}>
+      <main className="page-container">
         <ProductList products={products} />
       </main>
     );
@@ -18,7 +17,7 @@ const CategoryPage = async ({ params }: { params: { slug: string } }) => {
     console.log(error);
 
     return (
-      <main className={`container ${styles.container}`}>
+      <main className="page-container">
         <Placeholder type="error">Something went wrong</Placeholder>
       </main>
     );

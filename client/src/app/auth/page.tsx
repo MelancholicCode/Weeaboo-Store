@@ -3,7 +3,7 @@ import styles from './page.module.scss';
 
 const AuthPage = () => {
   return (
-    <main className={`container ${styles.container}`}>
+    <main className="page-container">
       <AuthForm className={styles.form} />
     </main>
   );

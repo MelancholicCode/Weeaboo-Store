@@ -1,6 +1,5 @@
 import { ProductList } from '@/components/ProductList/ProductList';
 import ProductService from '@/services/product/product.service';
-import styles from './page.module.scss';
 import { Placeholder } from '@/components/Placeholder/Placeholder';
 
 const Catalog = async () => {
@@ -8,7 +7,7 @@ const Catalog = async () => {
     const products = await ProductService.getMany();
 
     return (
-      <main className={`container ${styles.container}`}>
+      <main className="page-container">
         <ProductList products={products} />
       </main>
     );
@@ -16,7 +15,7 @@ const Catalog = async () => {
     console.error(error);
 
     return (
-      <main className={`container ${styles.container}`}>
+      <main className="page-container">
         <Placeholder type="error">Something went wrong</Placeholder>
       </main>
     );
