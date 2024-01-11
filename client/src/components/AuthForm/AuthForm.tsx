@@ -15,6 +15,7 @@ import { getFavorites } from '@/store/favorite/favorite.slice';
 import { getOrders } from '@/store/order/order.slice';
 import { getMyReviews } from '@/store/review/review.slice';
 import styles from './AuthForm.module.scss';
+import { Field } from '../../shared/components/Field/Field';
 
 interface AuthFormProps {
   className?: string;
@@ -99,7 +100,7 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
 
       {!isLogin && (
         <>
-          <div className={styles.field}>
+          <Field>
             <label htmlFor="name">Name</label>
             <Input
               value={name}
@@ -108,9 +109,9 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
               name="name"
               id="name"
             />
-          </div>
+          </Field>
 
-          <div className={styles.field}>
+          <Field>
             <label htmlFor="surname">Surname</label>
             <Input
               value={surname}
@@ -119,9 +120,9 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
               name="surname"
               id="surname"
             />
-          </div>
+          </Field>
 
-          <div className={styles.field}>
+          <Field>
             <label htmlFor="address">Address</label>
             <Input
               value={address}
@@ -130,11 +131,11 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
               name="address"
               id="address"
             />
-          </div>
+          </Field>
         </>
       )}
 
-      <div className={styles.field}>
+      <Field>
         <label htmlFor="email">Email</label>
         <Input
           value={email}
@@ -143,9 +144,9 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
           name="email"
           id="email"
         />
-      </div>
+      </Field>
 
-      <div className={styles.field}>
+      <Field>
         <label htmlFor="password">Password</label>
         <Input
           value={password}
@@ -154,10 +155,10 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
           name="password"
           id="password"
         />
-      </div>
+      </Field>
 
       {!isLogin && (
-        <div className={styles.field}>
+        <Field>
           <label htmlFor="second-password">Second password</label>
           <Input
             value={secondPassword}
@@ -166,7 +167,7 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
             name="second-password"
             id="second-password"
           />
-        </div>
+        </Field>
       )}
       <Button type="submit">Submit</Button>
     </Form>
