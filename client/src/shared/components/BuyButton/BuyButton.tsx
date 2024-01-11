@@ -1,7 +1,7 @@
 'use client';
 
 import { FC } from 'react';
-import { routes } from '@/constants/routes';
+import { routes } from '@/shared/constants/routes';
 import { Button } from '../Button/Button';
 import { useAppDispatch, useAppSelector } from '@/store/hooks/hooks';
 import { useRouter } from 'next/navigation';

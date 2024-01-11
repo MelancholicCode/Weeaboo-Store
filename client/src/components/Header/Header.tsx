@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import styles from './Header.module.scss';
 import { LinksWithMenu } from '../LinksWithMenu/LinksWithMenu';
-import { routes } from '@/constants/routes';
+import { routes } from '@/shared/constants/routes';
 import { Logo } from '../Logo/Logo';
 
 export const Header = async () => {

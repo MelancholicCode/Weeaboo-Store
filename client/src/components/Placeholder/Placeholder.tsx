@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren } from 'react';
 import Image from 'next/image';
-import { images } from '@/constants/images';
+import { images } from '@/shared/constants/images';
 import { Typography } from '@/shared/components/Typography/Typography';
 import styles from './Placeholder.module.scss';
 

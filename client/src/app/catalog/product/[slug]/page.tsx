@@ -1,3 +1,5 @@
+import { FC } from 'react';
+import { Metadata } from 'next';
 import ProductService from '@/services/product/product.service';
 import styles from './page.module.scss';
 import Image from 'next/image';
@@ -8,8 +10,35 @@ import { StarIcon } from '@/assets/icons/StarIcon/StarIcon';
 import { ReviewForm } from '@/components/ReviewForm/ReviewForm';
 import { ReviewList } from '@/components/ReviewList/ReviewList';
 import { Placeholder } from '@/components/Placeholder/Placeholder';
+import { SEO_TITLE } from '@/shared/constants/seo';
 
-const ProductPage = async ({ params }: { params: { slug: string } }) => {
+interface MetadataProps {
+  params: {
+    slug: string;
+  };
+}
+
+export const generateMetadata = async ({
+  params,
+}: MetadataProps): Promise<Metadata> => {
+  const product = await ProductService.getOne(params.slug);
+
+  return {
+    title: `${product.title} | ${SEO_TITLE}`,
+    description: product.description,
+    openGraph: {
+      images: product.img,
+    },
+  };
+};
+
+interface ProductPageProps {
+  params: {
+    slug: string;
+  };
+}
+
+const ProductPage: FC<ProductPageProps> = async ({ params }) => {
   try {
     const product = await ProductService.getOne(params.slug);
 

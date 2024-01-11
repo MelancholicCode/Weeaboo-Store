@@ -8,7 +8,7 @@ import styles from './OrderItem.module.scss';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { routes } from '@/constants/routes';
+import { routes } from '@/shared/constants/routes';
 
 interface OrderItemProps {
   order: OrderWithItems;

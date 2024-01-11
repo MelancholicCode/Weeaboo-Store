@@ -11,7 +11,7 @@ import {
   changeCartItemQuantity,
   deleteCartItem,
 } from '@/store/cart/cart.slice';
-import { routes } from '@/constants/routes';
+import { routes } from '@/shared/constants/routes';
 import { Button } from '@/shared/components/Button/Button';
 import { createOrder } from '@/store/order/order.slice';
 import { LoadingStatesEnum } from '@/store/store.types';

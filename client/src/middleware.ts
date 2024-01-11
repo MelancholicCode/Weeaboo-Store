@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from 'next/server';
-import { routes } from './constants/routes';
+import { routes } from './shared/constants/routes';
 import { IUser } from './shared/types/user.interface';
 import { RolesEnum } from './shared/types/role.interface';
 import { TokensEnum } from './services/auth/auth.types';

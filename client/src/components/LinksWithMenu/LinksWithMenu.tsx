@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { routes } from '@/constants/routes';
+import { routes } from '@/shared/constants/routes';
 import { ProfileIcon } from '@/assets/icons/ProfileIcon/ProfileIcon';
 import { AuthIcon } from '@/assets/icons/AuthIcon/AuthIcon';
 import styles from './LinksWithMenu.module.scss';

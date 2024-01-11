@@ -4,9 +4,10 @@ import { Header } from '@/components/Header/Header';
 import '@/styles/globals.scss';
 import '@/styles/variables.scss';
 import { AppProvider } from '@/providers/AppProvider/AppProvider';
+import { SEO_TITLE } from '@/shared/constants/seo';
 
 export const metadata: Metadata = {
-  title: 'Weeaboo Store',
+  title: SEO_TITLE,
   description: 'Japanese goods store',
 };
 

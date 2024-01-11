@@ -7,12 +7,12 @@ import Image from 'next/image';
 import styles from './AccountMenu.module.scss';
 import { logout } from '@/store/auth/auth.slice';
 import { useRouter } from 'next/navigation';
-import { routes } from '@/constants/routes';
+import { routes } from '@/shared/constants/routes';
 import { cartReset } from '@/store/cart/cart.slice';
 import { favoritesReset } from '@/store/favorite/favorite.slice';
 import { ordersReset } from '@/store/order/order.slice';
 import { reviewsReset } from '@/store/review/review.slice';
-import { images } from '@/constants/images';
+import { images } from '@/shared/constants/images';
 import { Placeholder } from '../Placeholder/Placeholder';
 import { LoadingStatesEnum } from '@/store/store.types';
 

@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { Form } from '@/shared/components/Form/Form';
 import { Input } from '@/shared/components/Input/Input';
 import { Button } from '@/shared/components/Button/Button';
-import { routes } from '@/constants/routes';
+import { routes } from '@/shared/constants/routes';
 import { Typography } from '@/shared/components/Typography/Typography';
 import { useAppDispatch } from '@/store/hooks/hooks';
 import { login, registration } from '@/store/auth/auth.slice';

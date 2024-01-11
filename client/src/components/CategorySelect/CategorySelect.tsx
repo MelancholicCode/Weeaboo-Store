@@ -2,7 +2,7 @@
 
 import { FC } from 'react';
 import ReactSelect, { SingleValue } from 'react-select';
-import { routes } from '@/constants/routes';
+import { routes } from '@/shared/constants/routes';
 import { ICategory } from '@/shared/types/category.interface';
 import { useRouter } from 'next/navigation';
 import styles from './CategorySelect.module.scss';

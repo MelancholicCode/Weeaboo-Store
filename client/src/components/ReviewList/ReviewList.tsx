@@ -4,7 +4,7 @@ import ReviewService from '@/services/review/review.service';
 import styles from './ReviewList.module.scss';
 import { Typography } from '@/shared/components/Typography/Typography';
 import { StarIcon } from '@/assets/icons/StarIcon/StarIcon';
-import { images } from '@/constants/images';
+import { images } from '@/shared/constants/images';
 import { Placeholder } from '../Placeholder/Placeholder';
 
 interface ReviewListProps {

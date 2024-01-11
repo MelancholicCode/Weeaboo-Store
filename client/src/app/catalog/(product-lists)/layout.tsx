@@ -1,7 +1,15 @@
 import { FC, PropsWithChildren } from 'react';
+import { Metadata } from 'next';
 import { CategorySelect } from '@/components/CategorySelect/CategorySelect';
 import CategoryService from '@/services/category/category.service';
 import styles from './layout.module.scss';
+
+import { SEO_TITLE } from '@/shared/constants/seo';
+
+export const metadata: Metadata = {
+  title: `Catalog | ${SEO_TITLE}`,
+  description: "The list of the store's products.",
+};
 
 const Layout: FC<PropsWithChildren> = async ({ children }) => {
   const categories = await CategoryService.getAll();

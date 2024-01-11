@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { INavLink } from '@/shared/types/link.interface';
 import { Typography } from '@/shared/components/Typography/Typography';
 import { useAppSelector } from '@/store/hooks/hooks';
-import { routes } from '@/constants/routes';
+import { routes } from '@/shared/constants/routes';
 
 interface BurgerMenuProps {
   navLinks: INavLink[];
