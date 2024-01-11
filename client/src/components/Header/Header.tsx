@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import CategoryService from '@/services/category/category.service';
 import styles from './Header.module.scss';
 import { LinksWithMenu } from '../LinksWithMenu/LinksWithMenu';
 import { routes } from '@/constants/routes';
@@ -12,12 +11,10 @@ export const Header = async () => {
     { text: 'Gallery', href: routes.publicRoutes.GALLERY },
   ];
 
-  const categories = await CategoryService.getAll();
-
   return (
     <header className={styles.header}>
       <div className={`container ${styles.container}`}>
-        <div className={styles.header_top}>
+        <div className={styles.header_content}>
           <Logo />
           <nav>
             <ul className={styles.link_list}>
@@ -29,18 +26,6 @@ export const Header = async () => {
             </ul>
           </nav>
           <LinksWithMenu navLinks={navLinks} />
-        </div>
-
-        <div className={styles.header_bottom}>
-          <ul className={styles.category_list}>
-            {categories.map((category) => (
-              <li key={category.id} className={styles.category_item}>
-                <Link href={`${routes.publicRoutes.CATEGORY}/${category.slug}`}>
-                  {category.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
     </header>

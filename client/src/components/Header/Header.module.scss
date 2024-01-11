@@ -8,18 +8,15 @@
   align-items: center;
 }
 
-.header_top {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 8px 0 12px;
-}
-
-.header_bottom {
-  width: 100%;
-  padding: 8px 0 12px;
+.header {
+  &_content {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 8px 0 12px;
+  }
 }
 
 .link {
@@ -38,16 +35,4 @@
   &_item + &_item {
     margin-left: 20px;
   }
-}
-
-.category_list {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.category_item {
-  flex: 1;
-  padding: 0 8px;
-  text-align: center;
 }
