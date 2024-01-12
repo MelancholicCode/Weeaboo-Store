@@ -34,7 +34,7 @@ export const FavoriteButton: FC<FavoriteButtonProps> = ({
   };
 
   return user ? (
-    <span
+    <button
       className={clsx(styles.button, [className])}
       onClick={handleToggleFavorite}
     >
@@ -43,6 +43,6 @@ export const FavoriteButton: FC<FavoriteButtonProps> = ({
           [styles.button_active]: favorite,
         })}
       />
-    </span>
+    </button>
   ) : null;
 };

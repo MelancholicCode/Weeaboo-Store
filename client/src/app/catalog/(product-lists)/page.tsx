@@ -1,6 +1,6 @@
 import { ProductList } from '@/components/ProductList/ProductList';
 import ProductService from '@/services/product/product.service';
-import { Placeholder } from '@/components/Placeholder/Placeholder';
+import { Placeholder } from '@/shared/components/Placeholder/Placeholder';
 
 const Catalog = async () => {
   try {

@@ -3,7 +3,7 @@
 import { useAppSelector } from '@/store/hooks/hooks';
 import { ProductList } from '@/components/ProductList/ProductList';
 import { LoadingStatesEnum } from '@/store/store.types';
-import { Placeholder } from '../Placeholder/Placeholder';
+import { Placeholder } from '../../shared/components/Placeholder/Placeholder';
 
 export const FavoriteList = () => {
   const { items, loading, error } = useAppSelector((state) => state.favorite);

@@ -13,7 +13,7 @@ import { favoritesReset } from '@/store/favorite/favorite.slice';
 import { ordersReset } from '@/store/order/order.slice';
 import { reviewsReset } from '@/store/review/review.slice';
 import { images } from '@/shared/constants/images';
-import { Placeholder } from '../Placeholder/Placeholder';
+import { Placeholder } from '../../shared/components/Placeholder/Placeholder';
 import { LoadingStatesEnum } from '@/store/store.types';
 
 export const AccountMenu = () => {

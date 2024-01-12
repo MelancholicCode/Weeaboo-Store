@@ -6,6 +6,6 @@ export interface IUser {
   surname: string;
   email: string;
   roles: IRole[];
-  avatar: string;
+  avatar: string | null;
   address: string;
 }

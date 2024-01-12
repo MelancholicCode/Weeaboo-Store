@@ -15,7 +15,7 @@ import { routes } from '@/shared/constants/routes';
 import { Button } from '@/shared/components/Button/Button';
 import { createOrder } from '@/store/order/order.slice';
 import { LoadingStatesEnum } from '@/store/store.types';
-import { Placeholder } from '../Placeholder/Placeholder';
+import { Placeholder } from '../../shared/components/Placeholder/Placeholder';
 
 export const CartItemList = () => {
   const { cartItems, loading, error } = useAppSelector((state) => state.cart);

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { ProductItem } from '@/components/ProductItem/ProductItem';
 import { IProduct } from '@/shared/types/product.interface';
 import styles from './ProductList.module.scss';
-import { Placeholder } from '../Placeholder/Placeholder';
+import { Placeholder } from '../../shared/components/Placeholder/Placeholder';
 
 interface ProductListProps {
   products: IProduct[];

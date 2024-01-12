@@ -9,7 +9,7 @@ import { FavoriteButton } from '@/shared/components/FavoriteButton/FavoriteButto
 import { StarIcon } from '@/assets/icons/StarIcon/StarIcon';
 import { ReviewForm } from '@/components/ReviewForm/ReviewForm';
 import { ReviewList } from '@/components/ReviewList/ReviewList';
-import { Placeholder } from '@/components/Placeholder/Placeholder';
+import { Placeholder } from '@/shared/components/Placeholder/Placeholder';
 import { SEO_TITLE } from '@/shared/constants/seo';
 
 interface MetadataProps {

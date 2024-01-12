@@ -5,7 +5,7 @@ import styles from './ReviewList.module.scss';
 import { Typography } from '@/shared/components/Typography/Typography';
 import { StarIcon } from '@/assets/icons/StarIcon/StarIcon';
 import { images } from '@/shared/constants/images';
-import { Placeholder } from '../Placeholder/Placeholder';
+import { Placeholder } from '../../shared/components/Placeholder/Placeholder';
 
 interface ReviewListProps {
   productId: number;

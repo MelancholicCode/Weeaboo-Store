@@ -3,7 +3,7 @@
 import { useAppSelector } from '@/store/hooks/hooks';
 import styles from './OrderList.module.scss';
 import { OrderItem } from '../OrderItem/OrderItem';
-import { Placeholder } from '../Placeholder/Placeholder';
+import { Placeholder } from '../../shared/components/Placeholder/Placeholder';
 import { LoadingStatesEnum } from '@/store/store.types';
 
 export const OrderList = () => {

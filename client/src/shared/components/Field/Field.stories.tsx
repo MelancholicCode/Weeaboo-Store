@@ -12,7 +12,6 @@ const children = (
 const meta: Meta<typeof Field> = {
   title: 'shared/Field',
   component: Field,
-  tags: ['autodocs'],
   args: { children },
 };
 

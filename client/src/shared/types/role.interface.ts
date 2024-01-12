@@ -4,6 +4,6 @@ export enum RolesEnum {
 }
 
 export interface IRole {
-  id: string;
+  id: number;
   name: RolesEnum;
 }

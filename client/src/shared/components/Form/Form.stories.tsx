@@ -6,7 +6,6 @@ import { Input } from '../Input/Input';
 const meta: Meta<typeof Form> = {
   title: 'shared/Form',
   component: Form,
-  tags: ['autodocs'],
 };
 
 export default meta;
