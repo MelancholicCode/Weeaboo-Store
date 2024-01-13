@@ -5,6 +5,7 @@
 
 .auth_buttons {
   display: flex;
+  margin-bottom: 10px;
 }
 
 .auth_button_wrapper {
@@ -25,9 +26,6 @@
 
 .auth_button {
   position: relative;
-  width: fit-content;
-  font-size: 16px;
-  font-weight: 700;
 
   &::before {
     position: absolute;

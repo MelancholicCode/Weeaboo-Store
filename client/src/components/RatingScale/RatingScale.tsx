@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { StarIcon } from '@/assets/icons/StarIcon/StarIcon';
+import { StarIcon } from '@/shared/assets/icons/StarIcon/StarIcon';
 import styles from './RatingScale.module.scss';
 import clsx from 'clsx';
 

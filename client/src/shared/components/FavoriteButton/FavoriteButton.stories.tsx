@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { FavoriteButton } from './FavoriteButton';
 import { http, HttpResponse } from 'msw';
-import { mockFavorite, mockFavoritesData } from '@/shared/constants/mockData';
+import { mockFavorites } from '@/shared/constants/mockData';
 
 const meta: Meta<typeof FavoriteButton> = {
   title: 'shared/Favorite button',
@@ -13,38 +13,6 @@ const meta: Meta<typeof FavoriteButton> = {
       </span>
     ),
   ],
-  parameters: {
-    msw: {
-      handlers: {
-        createFavorite: http.post(
-          `${process.env.API_URL}/favorite/:productId`,
-          ({ request }) => {
-            const productId = request.url.split('/').slice(-1)[0];
-
-            return !Number.isNaN(+productId)
-              ? HttpResponse.json({
-                  ...mockFavorite,
-                  productId: +productId,
-                  product: {
-                    ...mockFavorite.product,
-                    id: +productId,
-                  },
-                })
-              : HttpResponse.error();
-          }
-        ),
-        removeFavorite: http.delete(
-          `${process.env.API_URL}/favorite/:id`,
-          ({ request }) => {
-            const param = request.url.split('/').slice(-1)[0];
-            return !Number.isNaN(+param)
-              ? HttpResponse.json(+param)
-              : HttpResponse.error();
-          }
-        ),
-      },
-    },
-  },
 };
 
 export default meta;
@@ -72,7 +40,7 @@ export const Is_favorite: Story = {
     msw: {
       handlers: {
         favorite: http.get(`${process.env.API_URL}/favorite`, () =>
-          HttpResponse.json(mockFavoritesData)
+          HttpResponse.json(mockFavorites)
         ),
       },
     },

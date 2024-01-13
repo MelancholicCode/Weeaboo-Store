@@ -2,6 +2,11 @@
   display: flex;
   align-items: center;
 
+  &_icon {
+    width: 40px;
+    height: 40px;
+  }
+
   &_text {
     font-size: 1.25rem;
   }

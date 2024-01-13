@@ -51,23 +51,29 @@ export const AccountMenu = () => {
         src={user.avatar || images.avatarPlaceholder}
         alt="User avatar"
       />
-      <Typography variant="body-2" className={styles.fullname}>
-        {user.name} {user.surname}
-      </Typography>
-      <Typography variant="body-1">Email: {user.email}</Typography>
-      <Typography variant="body-1">Address: {user.address}</Typography>
+
+      <div className={styles.user_info}>
+        <Typography variant="body-2" className={styles.fullname}>
+          {user.name} {user.surname}
+        </Typography>
+        <Typography variant="body-1">Email: {user.email}</Typography>
+        <Typography variant="body-1">Address: {user.address}</Typography>
+      </div>
+
       <Button
         className={styles.button}
         onClick={() => router.push(routes.authUserRoutes.FAVORITES)}
       >
         Check favorites
       </Button>
+
       <Button
         className={styles.button}
         onClick={() => router.push(routes.authUserRoutes.ORDERS)}
       >
         Check orders
       </Button>
+
       <Button
         className={styles.button}
         variant="outlined"

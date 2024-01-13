@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Typography } from '@/shared/components/Typography/Typography';
 import { BuyButton } from '@/shared/components/BuyButton/BuyButton';
 import { FavoriteButton } from '@/shared/components/FavoriteButton/FavoriteButton';
-import { StarIcon } from '@/assets/icons/StarIcon/StarIcon';
+import { StarIcon } from '@/shared/assets/icons/StarIcon/StarIcon';
 import { ReviewForm } from '@/components/ReviewForm/ReviewForm';
 import { ReviewList } from '@/components/ReviewList/ReviewList';
 import { Placeholder } from '@/shared/components/Placeholder/Placeholder';

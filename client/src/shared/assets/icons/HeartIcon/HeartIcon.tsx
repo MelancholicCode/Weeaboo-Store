@@ -2,7 +2,7 @@ import { FC, SVGProps } from 'react';
 
 export const HeartIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
   return (
-    <svg fill="none" viewBox="0 0 24 24" {...props}>
+    <svg fill="none" viewBox="0 0 24 24" width="20px" height="20px" {...props}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"

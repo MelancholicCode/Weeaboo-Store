@@ -22,7 +22,6 @@
     "paths": {
       "@/components/*": ["components/*"],
       "@/providers/*": ["providers/*"],
-      "@/assets/*": ["assets/*"],
       "@/shared/*": ["shared/*"],
       "@/api/*": ["api/*"],
       "@/constants/*": ["constants/*"],

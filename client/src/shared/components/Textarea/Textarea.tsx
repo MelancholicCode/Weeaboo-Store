@@ -5,6 +5,7 @@ import { inter } from '@/fonts/inter';
 
 interface TextareaProps extends HTMLAttributes<HTMLTextAreaElement> {
   className?: string;
+  placeholder?: string;
 }
 
 export const Textarea: FC<PropsWithChildren<TextareaProps>> = ({

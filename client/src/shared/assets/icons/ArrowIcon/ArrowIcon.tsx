@@ -5,8 +5,8 @@ export const ArrowIcon: FC<SVGProps<SVGSVGElement>> = (props) => {
     <svg
       x="0px"
       y="0px"
-      width="284.929px"
-      height="284.929px"
+      width="20px"
+      height="20px"
       viewBox="0 0 284.929 284.929"
       {...props}
     >

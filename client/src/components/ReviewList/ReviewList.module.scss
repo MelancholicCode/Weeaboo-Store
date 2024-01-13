@@ -1,48 +1,5 @@
-.review {
-  &_list {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-  }
-
-  &_item {
-    display: flex;
-    padding: 15px;
-    box-shadow: var(--shadow-md);
-    border-radius: 5px;
-
-    &:not(:first-child) {
-      margin-top: 10px;
-    }
-  }
-
-  &_content {
-    margin-left: 10px;
-  }
-}
-
-.avatar {
-  border-radius: 50%;
-}
-
-.info {
+.review_list {
   display: flex;
-  padding-top: 15px;
-}
-
-.rate {
-  display: flex;
-  align-items: center;
-  margin-left: 10px;
-
-  &_icon {
-    width: 15px;
-    height: 15px;
-    margin-right: 5px;
-    transform: translateY(-1px);
-  }
-}
-
-.comment {
-  margin-top: 15px;
+  flex-direction: column;
+  margin-top: 20px;
 }

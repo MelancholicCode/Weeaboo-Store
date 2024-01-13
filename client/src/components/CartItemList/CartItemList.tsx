@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './CartItemList.module.scss';
 import { Typography } from '@/shared/components/Typography/Typography';
-import { TrashIcon } from '@/assets/icons/TrashIcon/TrashIcon';
+import { TrashIcon } from '@/shared/assets/icons/TrashIcon/TrashIcon';
 import {
   cartReset,
   changeCartItemQuantity,

@@ -1,7 +1,7 @@
 'use client';
 
 import { FC, useState } from 'react';
-import { ArrowIcon } from '@/assets/icons/ArrowIcon/ArrowIcon';
+import { ArrowIcon } from '@/shared/assets/icons/ArrowIcon/ArrowIcon';
 import { Typography } from '@/shared/components/Typography/Typography';
 import { OrderWithItems } from '@/shared/types/order.interface';
 import styles from './OrderItem.module.scss';

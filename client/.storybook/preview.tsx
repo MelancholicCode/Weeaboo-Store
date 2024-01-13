@@ -3,7 +3,11 @@ import '@/styles/globals.scss';
 import '@/styles/variables.scss';
 import { initialize, mswLoader } from 'msw-storybook-addon';
 import { http, HttpResponse } from 'msw';
-import { mockUserData } from '@/shared/constants/mockData';
+import {
+  mockUser,
+  mockCartItem,
+  mockFavorite,
+} from '@/shared/constants/mockData';
 import { AppProvider } from '@/providers/AppProvider/AppProvider';
 
 // Initialize MSW
@@ -25,7 +29,7 @@ const preview: Preview = {
     msw: {
       handlers: {
         auth: http.get(`${process.env.API_URL}/auth/me`, () =>
-          HttpResponse.json(mockUserData)
+          HttpResponse.json(mockUser)
         ),
         cart: http.get(`${process.env.API_URL}/cart`, () =>
           HttpResponse.json([])
@@ -38,6 +42,49 @@ const preview: Preview = {
         ),
         review: http.get(`${process.env.API_URL}/review`, () =>
           HttpResponse.json([])
+        ),
+        createCartItem: http.post(
+          `${process.env.API_URL}/cart/:productId`,
+          ({ request }) => {
+            const productId = request.url.split('/').slice(-1)[0];
+
+            return !Number.isNaN(+productId)
+              ? HttpResponse.json({
+                  ...mockCartItem,
+                  productId: +productId,
+                  product: {
+                    ...mockCartItem.product,
+                    id: +productId,
+                  },
+                })
+              : HttpResponse.error();
+          }
+        ),
+        createFavorite: http.post(
+          `${process.env.API_URL}/favorite/:productId`,
+          ({ request }) => {
+            const productId = request.url.split('/').slice(-1)[0];
+
+            return !Number.isNaN(+productId)
+              ? HttpResponse.json({
+                  ...mockFavorite,
+                  productId: +productId,
+                  product: {
+                    ...mockFavorite.product,
+                    id: +productId,
+                  },
+                })
+              : HttpResponse.error();
+          }
+        ),
+        removeFavorite: http.delete(
+          `${process.env.API_URL}/favorite/:id`,
+          ({ request }) => {
+            const param = request.url.split('/').slice(-1)[0];
+            return !Number.isNaN(+param)
+              ? HttpResponse.json(+param)
+              : HttpResponse.error();
+          }
         ),
       },
     },

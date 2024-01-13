@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import { routes } from '@/shared/constants/routes';
-import { ProfileIcon } from '@/assets/icons/ProfileIcon/ProfileIcon';
-import { AuthIcon } from '@/assets/icons/AuthIcon/AuthIcon';
+import { ProfileIcon } from '@/shared/assets/icons/ProfileIcon/ProfileIcon';
+import { AuthIcon } from '@/shared/assets/icons/AuthIcon/AuthIcon';
 import styles from './LinksWithMenu.module.scss';
-import { CartIcon } from '@/assets/icons/CartIcon/CartIcon';
+import { CartIcon } from '@/shared/assets/icons/CartIcon/CartIcon';
 import { useAppSelector } from '@/store/hooks/hooks';
 import { FC } from 'react';
 import { BurgerMenu } from '../BurgerMenu/BurgerMenu';

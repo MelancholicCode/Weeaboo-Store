@@ -2,6 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { Form } from './Form';
 import { Field } from '@/shared/components/Field/Field';
 import { Input } from '../Input/Input';
+import { Button } from '../Button/Button';
 
 const meta: Meta<typeof Form> = {
   title: 'shared/Form',
@@ -23,6 +24,10 @@ export const Default: Story = {
       <Field>
         <label htmlFor="form-field-2">Label</label>
         <Input id="form-field-2" />
+      </Field>
+
+      <Field>
+        <Button>Submit</Button>
       </Field>
     </Form>
   ),

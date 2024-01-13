@@ -66,27 +66,29 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
     <Form className={clsx(styles.form, [className])} onSubmit={handleSubmit}>
       <div className={styles.auth_buttons}>
         <div className={styles.auth_button_wrapper}>
-          <button
+          <Button
             className={clsx(styles.auth_button, {
               [styles.auth_button_active]: isLogin,
             })}
             type="button"
             onClick={() => setIsLogin(true)}
+            variant="text"
           >
             Login
-          </button>
+          </Button>
         </div>
 
         <div className={styles.auth_button_wrapper}>
-          <button
+          <Button
             onClick={() => setIsLogin(false)}
             className={clsx(styles.auth_button, {
               [styles.auth_button_active]: !isLogin,
             })}
             type="button"
+            variant="text"
           >
             Registration
-          </button>
+          </Button>
         </div>
       </div>
 
@@ -169,7 +171,10 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
           />
         </Field>
       )}
-      <Button type="submit">Submit</Button>
+
+      <Field>
+        <Button type="submit">Submit</Button>
+      </Field>
     </Form>
   );
 };
