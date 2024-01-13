@@ -6,9 +6,14 @@ import '@/styles/variables.scss';
 import { AppProvider } from '@/providers/AppProvider/AppProvider';
 import { SEO_TITLE } from '@/shared/constants/seo';
 
-export const metadata: Metadata = {
+const mainMetaData = {
   title: SEO_TITLE,
   description: 'Japanese goods store',
+};
+
+export const metadata: Metadata = {
+  ...mainMetaData,
+  openGraph: mainMetaData,
 };
 
 const RootLayout = async ({ children }: { children: React.ReactNode }) => {

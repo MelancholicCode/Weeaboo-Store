@@ -22,11 +22,15 @@ export const generateMetadata = async ({
   params,
 }: MetadataProps): Promise<Metadata> => {
   const product = await ProductService.getOne(params.slug);
-
-  return {
+  const mainMetaData = {
     title: `${product.title} | ${SEO_TITLE}`,
     description: product.description,
+  };
+
+  return {
+    ...mainMetaData,
     openGraph: {
+      ...mainMetaData,
       images: product.img,
     },
   };

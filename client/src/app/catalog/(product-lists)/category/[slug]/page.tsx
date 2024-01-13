@@ -13,10 +13,14 @@ export const generateMetadata = async ({
   params,
 }: MetadataProps): Promise<Metadata> => {
   const category = await CategoryService.getOne(params.slug);
-
-  return {
+  const mainMetaData = {
     title: `${category.name} | ${SEO_TITLE}`,
     description: `List of products of the ${category.name} category.`,
+  };
+
+  return {
+    ...mainMetaData,
+    openGraph: mainMetaData,
   };
 };
 

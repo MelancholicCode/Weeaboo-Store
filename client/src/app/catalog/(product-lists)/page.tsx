@@ -2,7 +2,7 @@ import { ProductList } from '@/components/ProductList/ProductList';
 import ProductService from '@/services/product/product.service';
 import { Placeholder } from '@/shared/components/Placeholder/Placeholder';
 
-const Catalog = async () => {
+const CatalogPage = async () => {
   try {
     const products = await ProductService.getMany();
 
@@ -22,4 +22,4 @@ const Catalog = async () => {
   }
 };
 
-export default Catalog;
+export default CatalogPage;

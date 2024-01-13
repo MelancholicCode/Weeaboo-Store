@@ -2,13 +2,17 @@ import { FC, PropsWithChildren } from 'react';
 import { Metadata } from 'next';
 import { CategorySelect } from '@/components/CategorySelect/CategorySelect';
 import CategoryService from '@/services/category/category.service';
+import { SEO_TITLE } from '@/shared/constants/seo';
 import styles from './layout.module.scss';
 
-import { SEO_TITLE } from '@/shared/constants/seo';
-
-export const metadata: Metadata = {
+const mainMetaData = {
   title: `Catalog | ${SEO_TITLE}`,
   description: "The list of the store's products.",
+};
+
+export const metadata: Metadata = {
+  ...mainMetaData,
+  openGraph: mainMetaData,
 };
 
 const Layout: FC<PropsWithChildren> = async ({ children }) => {
