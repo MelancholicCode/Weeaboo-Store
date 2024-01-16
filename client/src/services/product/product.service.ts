@@ -1,6 +1,5 @@
 import { api } from '@/api/api.instance';
-import { getParamsString } from './product.helper';
-import { IProductBody } from './product.interface';
+import { getParamsString } from '@/utils/getParamsString';
 import { IProduct } from '@/shared/types/product.interface';
 
 const ProductService = {
@@ -19,7 +18,12 @@ const ProductService = {
         category: categorySlug,
       })}`
     );
-    return response.data;
+    const { data, headers } = response;
+
+    return {
+      totalCount: +headers['x-total-count'],
+      products: data,
+    };
   },
 
   async getOne(slug: string) {
@@ -27,19 +31,17 @@ const ProductService = {
     return response.data;
   },
 
-  async create(body: IProductBody) {
-    const formData = new FormData();
-
-    for (const key in body) {
-      formData.append(key, body[key as keyof IProductBody]);
-    }
-
-    const response = await api.post<IProduct>('/product', formData);
+  async create(formData: FormData) {
+    const response = await api.post<IProduct>('/product', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
     return response.data;
   },
 
-  async delete(slug: string) {
-    const response = await api.delete<void>(`/product/${slug}`);
+  async delete(id: number) {
+    const response = await api.delete<void>(`/product/${id}`);
     return response.data;
   },
 };

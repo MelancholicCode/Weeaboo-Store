@@ -4,21 +4,13 @@ import { Placeholder } from '@/shared/components/Placeholder/Placeholder';
 
 const CatalogPage = async () => {
   try {
-    const products = await ProductService.getMany();
+    const { products } = await ProductService.getMany();
 
-    return (
-      <main className="page-container">
-        <ProductList products={products} />
-      </main>
-    );
+    return <ProductList products={products} />;
   } catch (error) {
     console.error(error);
 
-    return (
-      <main className="page-container">
-        <Placeholder type="error">Something went wrong</Placeholder>
-      </main>
-    );
+    return <Placeholder type="error">Something went wrong</Placeholder>;
   }
 };
 

@@ -26,23 +26,15 @@ export const generateMetadata = async ({
 
 const CategoryPage = async ({ params }: { params: { slug: string } }) => {
   try {
-    const products = await ProductService.getMany({
+    const { products } = await ProductService.getMany({
       categorySlug: params.slug,
     });
 
-    return (
-      <main className="page-container">
-        <ProductList products={products} />
-      </main>
-    );
+    return <ProductList products={products} />;
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
-    return (
-      <main className="page-container">
-        <Placeholder type="error">Something went wrong</Placeholder>
-      </main>
-    );
+    return <Placeholder type="error">Something went wrong</Placeholder>;
   }
 };
 

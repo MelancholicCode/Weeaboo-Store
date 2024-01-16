@@ -1,6 +1,6 @@
 export enum RolesEnum {
-  'USER',
-  'ADMIN',
+  USER = 'USER',
+  ADMIN = 'ADMIN',
 }
 
 export interface IRole {

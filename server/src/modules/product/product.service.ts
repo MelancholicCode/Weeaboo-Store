@@ -4,6 +4,7 @@ import { ProductDto } from './dto/product.dto';
 import { FileType, FileService } from '../file/file.service';
 import { Product } from '@prisma/client';
 import { ConfigService } from '@nestjs/config';
+import { Response } from 'express';
 
 @Injectable()
 export class ProductService {
@@ -18,7 +19,12 @@ export class ProductService {
     offset: string = '0',
     query: string,
     categorySlug: string,
+    response: Response,
   ) {
+    const totalCount = await this.prisma.product.count();
+
+    response.setHeader('x-total-count', totalCount);
+
     return await this.prisma.product.findMany({
       take: +count,
       skip: +offset,
@@ -76,19 +82,17 @@ export class ProductService {
     });
   }
 
-  async delete(id: string) {
+  async delete(id: number) {
     const product = await this.prisma.product.delete({
       where: {
-        id: +id,
+        id,
       },
     });
 
     const splittedPath = product.img.split('/');
-    const type = splittedPath[splittedPath.length - 2];
-    const fileName = splittedPath[splittedPath.length - 1];
-    const key = `${type}/${fileName}`;
+    const key = splittedPath.slice(-3).join('/');
 
-    this.fileService.removeFile(
+    await this.fileService.removeFile(
       key,
       this.configService.getOrThrow('YA_CLOUD_BUCKET'),
     );

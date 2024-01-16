@@ -105,6 +105,7 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
           <Field>
             <label htmlFor="name">Name</label>
             <Input
+              required
               value={name}
               onChange={(event) => setName(event.target.value)}
               type="text"
@@ -116,6 +117,7 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
           <Field>
             <label htmlFor="surname">Surname</label>
             <Input
+              required
               value={surname}
               onChange={(event) => setSurname(event.target.value)}
               type="text"
@@ -127,6 +129,7 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
           <Field>
             <label htmlFor="address">Address</label>
             <Input
+              required
               value={address}
               onChange={(event) => setAddress(event.target.value)}
               type="text"
@@ -140,6 +143,7 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
       <Field>
         <label htmlFor="email">Email</label>
         <Input
+          required
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           type="text"
@@ -151,6 +155,7 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
       <Field>
         <label htmlFor="password">Password</label>
         <Input
+          required
           value={password}
           onChange={(event) => setPassword(event.target.value)}
           type="password"
@@ -163,6 +168,7 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
         <Field>
           <label htmlFor="second-password">Second password</label>
           <Input
+            required
             value={secondPassword}
             onChange={(event) => setSecondPassword(event.target.value)}
             type="password"

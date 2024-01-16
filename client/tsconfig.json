@@ -29,7 +29,8 @@
       "@/store/*": ["store/*"],
       "@/styles/*": ["styles/*"],
       "@/fonts/*": ["fonts/*"],
-      "@/hooks/*": ["hooks/*"]
+      "@/hooks/*": ["hooks/*"],
+      "@/utils/*": ["utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

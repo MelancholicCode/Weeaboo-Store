@@ -19,12 +19,12 @@ const Layout: FC<PropsWithChildren> = async ({ children }) => {
   const categories = await CategoryService.getAll();
 
   return (
-    <>
+    <main className="page-container">
       <div className={`container ${styles.select_container}`}>
         <CategorySelect categories={categories} />
       </div>
       {children}
-    </>
+    </main>
   );
 };
 

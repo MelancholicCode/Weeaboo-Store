@@ -5,6 +5,7 @@ import { RoleService } from '../role/role.service';
 import { FileType, FileService } from '../file/file.service';
 import { CartService } from '../cart/cart.service';
 import { ConfigService } from '@nestjs/config';
+import { Response } from 'express';
 
 @Injectable()
 export class UserService {
@@ -16,8 +17,34 @@ export class UserService {
     private readonly configService: ConfigService,
   ) {}
 
-  async getAll() {
-    return this.prisma.user.findMany();
+  async getMany(
+    count: string = '20',
+    offset: string = '0',
+    response: Response,
+  ) {
+    const totalCount = await this.prisma.user.count();
+
+    response.setHeader('x-total-count', totalCount);
+
+    const users: any = await this.prisma.user.findMany({
+      take: +count,
+      skip: +offset,
+      include: {
+        roles: {
+          select: {
+            role: true,
+          },
+        },
+      },
+    });
+
+    const formattedUsers = users.map((user) => {
+      user.roles = user.roles.map((item) => item.role);
+
+      return user;
+    });
+
+    return formattedUsers;
   }
 
   async getOneById(id: number) {
@@ -63,12 +90,20 @@ export class UserService {
     };
   }
 
-  delete(email: string) {
-    this.prisma.user.delete({
+  async delete(email: string) {
+    const user = await this.prisma.user.delete({
       where: {
         email,
       },
     });
+
+    const splittedPath = user.avatar.split('/');
+    const key = splittedPath.slice(-3).join('/');
+
+    await this.fileService.removeFile(
+      key,
+      this.configService.getOrThrow('YA_CLOUD_BUCKET'),
+    );
   }
 
   private async findByIdentifier(

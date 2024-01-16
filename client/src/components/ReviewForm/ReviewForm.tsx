@@ -7,12 +7,14 @@ import { Textarea } from '@/shared/components/Textarea/Textarea';
 import styles from './ReviewForm.module.scss';
 import { useAppDispatch, useAppSelector } from '@/store/hooks/hooks';
 import { createReview } from '@/store/review/review.slice';
+import { useRouter } from 'next/navigation';
 
 interface ReviewFormProps {
   productId: number;
 }
 
 export const ReviewForm: FC<ReviewFormProps> = ({ productId }) => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const [rate, setRate] = useState<number | null>(null);
   const [comment, setComment] = useState('');
@@ -33,6 +35,8 @@ export const ReviewForm: FC<ReviewFormProps> = ({ productId }) => {
     if (comment.length && rate) {
       try {
         await dispatch(createReview({ productId, rate, comment }));
+
+        router.refresh();
       } catch (error) {
         console.error(error);
       }

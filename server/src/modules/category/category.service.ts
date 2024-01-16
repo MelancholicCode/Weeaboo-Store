@@ -23,4 +23,12 @@ export class CategoryService {
       data: dto,
     });
   }
+
+  async delete(id: number) {
+    await this.prisma.category.delete({
+      where: {
+        id,
+      },
+    });
+  }
 }

@@ -12,8 +12,8 @@ const PROFILE = `${ACCOUNT}/profile`;
 const ORDERS = `${ACCOUNT}/orders`;
 const ADMIN = '/admin';
 const ADMIN_USERS = `${ADMIN}/users`;
+const ADMIN_CATEGORIES = `${ADMIN}/categories`;
 const ADMIN_PRODUCTS = `${ADMIN}/products`;
-const ADMIN_ORDERS = `${ADMIN}/orders`;
 
 const publicRoutes = {
   HOME,
@@ -24,18 +24,18 @@ const publicRoutes = {
 };
 
 const authUserRoutes = {
+  ACCOUNT,
   PROFILE,
   CART,
   FAVORITES,
-  ACCOUNT,
   ORDERS,
 };
 
 const adminRoutes = {
   ADMIN,
   ADMIN_USERS,
+  ADMIN_CATEGORIES,
   ADMIN_PRODUCTS,
-  ADMIN_ORDERS,
 };
 
 export const routes = {

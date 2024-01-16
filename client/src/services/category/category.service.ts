@@ -16,6 +16,11 @@ const CategoryService = {
     const response = await api.post<ICategory>('/category', { name, slug });
     return response.data;
   },
+
+  async delete(id: number) {
+    const response = await api.delete<void>(`/category/${id}`);
+    return response.data;
+  },
 };
 
 export default CategoryService;

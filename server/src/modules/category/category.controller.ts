@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CategoryDto } from './dto/category.dto';
 import { Roles } from '../auth/decorators/roles.decorator';
@@ -25,5 +33,13 @@ export class CategoryController {
   @Post()
   create(@Body() dto: CategoryDto) {
     return this.categoryService.create(dto);
+  }
+
+  @Auth()
+  @Roles('ADMIN')
+  @UseGuards(RolesGuard)
+  @Delete(':id')
+  delete(@Param('id') id: string) {
+    return this.categoryService.delete(+id);
   }
 }

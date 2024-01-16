@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Query,
+  Res,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -16,6 +17,7 @@ import { ProductDto } from './dto/product.dto';
 import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { Auth } from '../auth/decorators/auth.decorator';
+import { Response } from 'express';
 
 @UseGuards(RolesGuard)
 @Controller('product')
@@ -23,13 +25,22 @@ export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @Get()
-  getMany(
+  async getMany(
     @Query('count') count: string,
     @Query('offset') offset: string,
     @Query('query') query: string,
     @Query('category') categorySlug: string,
+    @Res() response: Response,
   ) {
-    return this.productService.getMany(count, offset, query, categorySlug);
+    const products = await this.productService.getMany(
+      count,
+      offset,
+      query,
+      categorySlug,
+      response,
+    );
+
+    response.json(products);
   }
 
   @Get(':slug')
@@ -49,8 +60,8 @@ export class ProductController {
   @Auth()
   @Roles('ADMIN')
   @UseGuards(RolesGuard)
-  @Delete(':slug')
-  delete(@Param('slug') slug: string) {
-    return this.productService.delete(slug);
+  @Delete(':id')
+  delete(@Param('id') id: string) {
+    return this.productService.delete(+id);
   }
 }

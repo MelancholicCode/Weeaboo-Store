@@ -45,7 +45,7 @@ model Product {
   rate        Decimal     @default(0.0)
   img         String
   slug        String      @unique
-  category    Category    @relation(fields: [categoryId], references: [id])
+  category    Category    @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   categoryId  Int
   CartItem    CartItem?
   Favorite    Favorite?

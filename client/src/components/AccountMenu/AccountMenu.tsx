@@ -15,6 +15,7 @@ import { reviewsReset } from '@/store/review/review.slice';
 import { images } from '@/shared/constants/images';
 import { Placeholder } from '../../shared/components/Placeholder/Placeholder';
 import { LoadingStatesEnum } from '@/store/store.types';
+import { RolesEnum } from '@/shared/types/role.interface';
 
 export const AccountMenu = () => {
   const dispatch = useAppDispatch();
@@ -73,6 +74,31 @@ export const AccountMenu = () => {
       >
         Check orders
       </Button>
+
+      {user.roles.some((role) => role.name === RolesEnum.ADMIN) && (
+        <>
+          <Button
+            className={styles.button}
+            onClick={() => router.push(routes.adminRoutes.ADMIN_USERS)}
+          >
+            Users management
+          </Button>
+
+          <Button
+            className={styles.button}
+            onClick={() => router.push(routes.adminRoutes.ADMIN_CATEGORIES)}
+          >
+            Categories management
+          </Button>
+
+          <Button
+            className={styles.button}
+            onClick={() => router.push(routes.adminRoutes.ADMIN_PRODUCTS)}
+          >
+            Products management
+          </Button>
+        </>
+      )}
 
       <Button
         className={styles.button}
