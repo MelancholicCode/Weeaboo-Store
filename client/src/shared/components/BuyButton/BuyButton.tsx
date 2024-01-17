@@ -6,6 +6,7 @@ import { Button } from '../Button/Button';
 import { useAppDispatch, useAppSelector } from '@/store/hooks/hooks';
 import { useRouter } from 'next/navigation';
 import { createCartItem } from '@/store/cart/cart.slice';
+import { useQueryParams } from '@/shared/hooks/useQueryParams';
 
 interface BuyButtonProps {
   className?: string;
@@ -15,14 +16,19 @@ interface BuyButtonProps {
 export const BuyButton: FC<BuyButtonProps> = ({ className, productId }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const query = useQueryParams();
   const { user } = useAppSelector((state) => state.auth);
   const { cartItems } = useAppSelector((state) => state.cart);
 
   const handleAddInCart = async () => {
     if (user) {
+      if (!user.isActivated) {
+        return query.add('not_activated', 'true');
+      }
+
       try {
         await dispatch(createCartItem(productId));
-      } catch (error) {
+      } catch (error: any) {
         console.error(error);
       }
     } else {

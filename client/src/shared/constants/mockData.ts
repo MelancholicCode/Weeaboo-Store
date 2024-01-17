@@ -15,6 +15,7 @@ export const mockUser: IUser = {
   avatar: null,
   address: 'Some user address',
   roles: [{ id: 1, name: RolesEnum.USER }],
+  isActivated: true,
 };
 
 export const mockProduct: IProduct = {

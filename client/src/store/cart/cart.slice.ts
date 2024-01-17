@@ -35,32 +35,29 @@ const cartSlice = createSlice({
     });
     builder.addCase(getCartItems.rejected, (state, action) => {
       state = { ...internalInitialState, error: action.error };
-      throw new Error(action.error.message);
-    });
-    builder.addCase(createCartItem.pending, (state) => {
-      state.loading = LoadingStatesEnum.LOADING;
+      throw action.payload;
     });
     builder.addCase(createCartItem.fulfilled, (state, action) => {
       state.cartItems = [...state.cartItems, action.payload];
-      state.loading = LoadingStatesEnum.IDLE;
     });
-    builder.addCase(deleteCartItem.pending, (state) => {
-      state.loading = LoadingStatesEnum.LOADING;
+    builder.addCase(createCartItem.rejected, (state, action) => {
+      throw action.payload;
     });
     builder.addCase(deleteCartItem.fulfilled, (state, action) => {
       state.cartItems = state.cartItems.filter(
         (item) => item.id !== action.payload
       );
-      state.loading = LoadingStatesEnum.IDLE;
     });
-    builder.addCase(changeCartItemQuantity.pending, (state) => {
-      state.loading = LoadingStatesEnum.LOADING;
+    builder.addCase(deleteCartItem.rejected, (state, action) => {
+      throw action.payload;
     });
     builder.addCase(changeCartItemQuantity.fulfilled, (state, action) => {
       state.cartItems = state.cartItems.map((item) =>
         item.id === action.payload.id ? action.payload : item
       );
-      state.loading = LoadingStatesEnum.IDLE;
+    });
+    builder.addCase(changeCartItemQuantity.rejected, (state, action) => {
+      throw action.payload;
     });
   },
 });
@@ -71,7 +68,7 @@ export const getCartItems = createAsyncThunk(
     try {
       return await CartService.getAll();
     } catch (error: any) {
-      return thunkAPI.rejectWithValue({ error: error.message });
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -82,7 +79,7 @@ export const createCartItem = createAsyncThunk(
     try {
       return await CartService.createItem(productId);
     } catch (error: any) {
-      return thunkAPI.rejectWithValue({ error: error.message });
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -93,7 +90,7 @@ export const changeCartItemQuantity = createAsyncThunk(
     try {
       return await CartService.changeQuantity(id, quantity);
     } catch (error: any) {
-      return thunkAPI.rejectWithValue({ error: error.message });
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -105,7 +102,7 @@ export const deleteCartItem = createAsyncThunk(
       await CartService.delete(id);
       return id;
     } catch (error: any) {
-      return thunkAPI.rejectWithValue({ error: error.message });
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );

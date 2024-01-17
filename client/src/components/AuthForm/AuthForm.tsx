@@ -48,7 +48,8 @@ export const AuthForm: FC<AuthFormProps> = ({ className }) => {
         await dispatch(
           registration({
             authData: { email, password, name, surname, address },
-            push: () => router.push(routes.publicRoutes.CATALOG),
+            push: () =>
+              router.push(`${routes.publicRoutes.CATALOG}?not_activated=true`),
           })
         );
       }

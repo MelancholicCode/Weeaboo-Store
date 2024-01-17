@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
   Req,
   Res,
@@ -18,12 +19,14 @@ import { Request, Response } from 'express';
 import { Auth } from './decorators/auth.decorator';
 import { CurrentUser } from './decorators/user.decorator';
 import { UserService } from '../user/user.service';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('auth')
 export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly userService: UserService,
+    private readonly configService: ConfigService,
   ) {}
 
   @Auth()
@@ -69,6 +72,15 @@ export class AuthController {
     this.authService.addTokensInResponse(response, refreshToken, accessToken);
 
     return response.json(userData);
+  }
+
+  @Get('activate/:activationLink')
+  async activate(
+    @Param('activationLink') activationLink: string,
+    @Res() response: Response,
+  ) {
+    await this.userService.activate(activationLink);
+    return response.redirect(this.configService.getOrThrow('CLIENT_URL'));
   }
 
   @Get('logout')

@@ -5,6 +5,7 @@ import '@/styles/globals.scss';
 import '@/styles/variables.scss';
 import { AppProvider } from '@/providers/AppProvider/AppProvider';
 import { SEO_TITLE } from '@/shared/constants/seo';
+import { NotActivatedPopup } from '@/shared/components/NotActivatedPopup/NotActivatedPopup';
 
 const mainMetaData = {
   title: SEO_TITLE,
@@ -22,6 +23,7 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
       <body className={inter.className}>
         <AppProvider>
           <Header />
+          <NotActivatedPopup />
           {children}
         </AppProvider>
       </body>

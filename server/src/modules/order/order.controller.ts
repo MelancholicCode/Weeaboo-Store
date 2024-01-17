@@ -1,6 +1,7 @@
 import {
   Controller,
   Delete,
+  ForbiddenException,
   Get,
   NotFoundException,
   Param,
@@ -33,8 +34,13 @@ export class OrderController {
   @Post()
   create(
     @CurrentUser('id') userId: number,
+    @CurrentUser('isActivated') isActivated: boolean,
     @CurrentUser('address') address: string,
   ) {
+    if (!isActivated) {
+      throw new ForbiddenException('The account is not activated');
+    }
+
     return this.orderService.create(+userId, address);
   }
 
@@ -42,7 +48,14 @@ export class OrderController {
   @Roles('ADMIN')
   @UseGuards(RolesGuard)
   @Delete(':id')
-  delete(@Param('id') id: string) {
+  delete(
+    @CurrentUser('isActivated') isActivated: boolean,
+    @Param('id') id: string,
+  ) {
+    if (!isActivated) {
+      throw new ForbiddenException('The account is not activated');
+    }
+
     try {
       return this.orderService.delete(+id);
     } catch (error) {

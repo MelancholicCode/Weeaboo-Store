@@ -8,4 +8,5 @@ export interface IUser {
   roles: IRole[];
   avatar: string | null;
   address: string;
+  isActivated: boolean;
 }

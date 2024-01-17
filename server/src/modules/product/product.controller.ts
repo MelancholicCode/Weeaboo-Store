@@ -7,6 +7,7 @@ import {
   Post,
   Query,
   Res,
+  ForbiddenException,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -18,6 +19,7 @@ import { RolesGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { Auth } from '../auth/decorators/auth.decorator';
 import { Response } from 'express';
+import { CurrentUser } from '../auth/decorators/user.decorator';
 
 @UseGuards(RolesGuard)
 @Controller('product')
@@ -53,7 +55,15 @@ export class ProductController {
   @UseGuards(RolesGuard)
   @Post()
   @UseInterceptors(FileInterceptor('picture'))
-  create(@UploadedFile() image, @Body() dto: ProductDto) {
+  create(
+    @CurrentUser('isActivated') isActivated: boolean,
+    @UploadedFile() image,
+    @Body() dto: ProductDto,
+  ) {
+    if (!isActivated) {
+      throw new ForbiddenException('The account is not activated');
+    }
+
     return this.productService.create(dto, image);
   }
 
@@ -61,7 +71,14 @@ export class ProductController {
   @Roles('ADMIN')
   @UseGuards(RolesGuard)
   @Delete(':id')
-  delete(@Param('id') id: string) {
+  delete(
+    @CurrentUser('isActivated') isActivated: boolean,
+    @Param('id') id: string,
+  ) {
+    if (!isActivated) {
+      throw new ForbiddenException('The account is not activated');
+    }
+
     return this.productService.delete(+id);
   }
 }

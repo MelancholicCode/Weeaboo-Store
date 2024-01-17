@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { UserRegistrationDto } from './dto/user-registration.dto';
 import { RoleService } from '../role/role.service';
@@ -6,6 +6,8 @@ import { FileType, FileService } from '../file/file.service';
 import { CartService } from '../cart/cart.service';
 import { ConfigService } from '@nestjs/config';
 import { Response } from 'express';
+import * as uuid from 'uuid';
+import { MailService } from '../mail/mail.service';
 
 @Injectable()
 export class UserService {
@@ -15,6 +17,7 @@ export class UserService {
     private readonly cartService: CartService,
     private readonly fileService: FileService,
     private readonly configService: ConfigService,
+    private readonly mailService: MailService,
   ) {}
 
   async getMany(
@@ -64,16 +67,26 @@ export class UserService {
         )
       : null;
 
+    const activationLink = uuid.v4();
+
     const role = await this.roleService.getByName('USER');
     const user = await this.prisma.user.create({
       data: {
         ...dto,
         avatar: imagePath,
+        activationLink,
       },
       include: {
         roles: true,
       },
     });
+
+    this.mailService.sendActivationMail(
+      user.email,
+      `${this.configService.getOrThrow(
+        'API_URL',
+      )}/api/auth/activate/${activationLink}`,
+    );
 
     await this.cartService.create(user.id);
 
@@ -133,5 +146,26 @@ export class UserService {
       ...user,
       roles,
     };
+  }
+
+  async activate(activationLink: string) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        activationLink,
+      },
+    });
+
+    if (!user) {
+      throw new BadRequestException('Invalid activation link');
+    }
+
+    await this.prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        isActivated: true,
+      },
+    });
   }
 }

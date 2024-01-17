@@ -9,18 +9,20 @@ datasource db {
 }
 
 model User {
-  id       Int            @id @default(autoincrement())
-  avatar   String?
-  name     String
-  surname  String
-  email    String         @unique
-  password String
-  address  String
-  Cart     Cart?
-  Review   Review[]
-  roles    RolesOnUsers[]
-  Favorite Favorite[]
-  Order    Order[]
+  id             Int            @id @default(autoincrement())
+  avatar         String?
+  name           String
+  surname        String
+  email          String         @unique
+  password       String
+  address        String
+  isActivated    Boolean        @default(false)
+  activationLink String         @unique
+  Cart           Cart?
+  Review         Review[]
+  roles          RolesOnUsers[]
+  Favorite       Favorite[]
+  Order          Order[]
 }
 
 model Cart {

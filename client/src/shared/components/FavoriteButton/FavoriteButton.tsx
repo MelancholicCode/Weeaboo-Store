@@ -9,6 +9,9 @@ import {
   createFavorite,
   deleteFavorite,
 } from '@/store/favorite/favorite.slice';
+import { useQueryParams } from '@/shared/hooks/useQueryParams';
+import { useRouter } from 'next/navigation';
+import { routes } from '@/shared/constants/routes';
 
 interface FavoriteButtonProps {
   className?: string;
@@ -21,15 +24,27 @@ export const FavoriteButton: FC<FavoriteButtonProps> = ({
 }) => {
   const { user } = useAppSelector((state) => state.auth);
   const { items } = useAppSelector((state) => state.favorite);
+  const router = useRouter();
+  const query = useQueryParams();
   const dispatch = useAppDispatch();
 
   const favorite = items.find((item) => item.product.id === productId);
 
   const handleToggleFavorite = async () => {
-    if (favorite) {
-      dispatch(deleteFavorite(favorite.id));
+    if (user) {
+      if (favorite) {
+        dispatch(deleteFavorite(favorite.id));
+      } else {
+        try {
+          await dispatch(createFavorite(productId));
+        } catch (error: any) {
+          if (error.response.status === 403) {
+            query.add('not_activated', 'true');
+          }
+        }
+      }
     } else {
-      dispatch(createFavorite(productId));
+      router.push(routes.AUTH);
     }
   };
 

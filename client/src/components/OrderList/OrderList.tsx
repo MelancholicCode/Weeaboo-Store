@@ -21,6 +21,14 @@ export const OrderList = () => {
     return <Placeholder type="error">Something went wrong</Placeholder>;
   }
 
+  if (!orders.length) {
+    return (
+      <Placeholder type="empty">
+        You haven&apos;t ordered the goods yet
+      </Placeholder>
+    );
+  }
+
   return (
     <ul className={styles.list}>
       {orders.map((order) => (

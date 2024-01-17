@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Delete,
+  ForbiddenException,
   Get,
   NotFoundException,
   Param,
@@ -26,9 +27,14 @@ export class CartController {
   @Auth()
   @Post(':productId')
   createItem(
+    @CurrentUser('isActivated') isActivated: boolean,
     @CurrentUser('id') userId: number,
     @Param('productId') productId: string,
   ) {
+    if (!isActivated) {
+      throw new ForbiddenException('The account is not activated');
+    }
+
     return this.cartService.createItem(userId, +productId);
   }
 

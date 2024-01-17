@@ -40,7 +40,7 @@ export const authSlice = createSlice({
     });
     builder.addCase(getMe.rejected, (state, action) => {
       state = { ...internalInitialState, error: action.error };
-      throw new Error(action.error.message);
+      throw action.payload;
     });
     builder.addCase(login.pending, (state) => {
       state.loading = LoadingStatesEnum.LOADING;
@@ -51,7 +51,7 @@ export const authSlice = createSlice({
     });
     builder.addCase(login.rejected, (state, action) => {
       state = { ...internalInitialState, error: action.error };
-      throw new Error(action.error.message);
+      throw action.payload;
     });
     builder.addCase(registration.pending, (state) => {
       state.loading = LoadingStatesEnum.LOADING;
@@ -62,7 +62,7 @@ export const authSlice = createSlice({
     });
     builder.addCase(registration.rejected, (state, action) => {
       state = { ...internalInitialState, error: action.error };
-      throw new Error(action.error.message);
+      throw action.payload;
     });
     builder.addCase(logout.pending, (state) => {
       state.loading = LoadingStatesEnum.LOADING;
@@ -75,7 +75,7 @@ export const getMe = createAsyncThunk('auth/getMe', async (_, thunkAPI) => {
   try {
     return await AuthService.getMe();
   } catch (error: any) {
-    return thunkAPI.rejectWithValue({ error: error.message });
+    return thunkAPI.rejectWithValue(error);
   }
 });
 
@@ -90,7 +90,7 @@ export const registration = createAsyncThunk(
       push();
       return user;
     } catch (error: any) {
-      return thunkAPI.rejectWithValue({ error: error.message });
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -106,7 +106,7 @@ export const login = createAsyncThunk(
       push();
       return user;
     } catch (error: any) {
-      return thunkAPI.rejectWithValue({ error: error.message });
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -115,7 +115,7 @@ export const logout = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
     return await AuthService.logout();
   } catch (error: any) {
-    return thunkAPI.rejectWithValue({ error: error.message });
+    return thunkAPI.rejectWithValue(error);
   }
 });
 

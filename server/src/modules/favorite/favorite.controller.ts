@@ -1,4 +1,11 @@
-import { Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Controller,
+  Delete,
+  ForbiddenException,
+  Get,
+  Param,
+  Post,
+} from '@nestjs/common';
 import { FavoriteService } from './favorite.service';
 import { Auth } from '../auth/decorators/auth.decorator';
 import { CurrentUser } from '../auth/decorators/user.decorator';
@@ -16,9 +23,14 @@ export class FavoriteController {
   @Auth()
   @Post(':productId')
   create(
+    @CurrentUser('isActivated') isActivated: boolean,
     @CurrentUser('id') userId: number,
     @Param('productId') productId: string,
   ) {
+    if (!isActivated) {
+      throw new ForbiddenException('The account is not activated');
+    }
+
     return this.favoriteService.create(userId, +productId);
   }
 

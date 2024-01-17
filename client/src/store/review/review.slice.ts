@@ -35,14 +35,13 @@ const reviewSlice = createSlice({
     });
     builder.addCase(getMyReviews.rejected, (state, action) => {
       state = { ...internalInitialState, error: action.error };
-      throw new Error(action.error.message);
-    });
-    builder.addCase(createReview.pending, (state) => {
-      state.loading = LoadingStatesEnum.LOADING;
+      throw action.payload;
     });
     builder.addCase(createReview.fulfilled, (state, action) => {
       state.reviews = [...state.reviews, action.payload];
-      state.loading = LoadingStatesEnum.IDLE;
+    });
+    builder.addCase(createReview.rejected, (state, action) => {
+      throw action.payload;
     });
   },
 });
@@ -53,7 +52,7 @@ export const getMyReviews = createAsyncThunk(
     try {
       return await ReviewService.getMy();
     } catch (error: any) {
-      return thunkAPI.rejectWithValue({ error: error.message });
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -71,7 +70,7 @@ export const createReview = createAsyncThunk(
     try {
       return await ReviewService.create(productId, rate, comment);
     } catch (error: any) {
-      return thunkAPI.rejectWithValue({ error: error.message });
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );

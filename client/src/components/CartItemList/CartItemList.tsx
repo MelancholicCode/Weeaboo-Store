@@ -62,7 +62,7 @@ export const CartItemList = () => {
 
   if (!cartItems.length) {
     return (
-      <Placeholder type="empty">There are no items in the cart</Placeholder>
+      <Placeholder type="empty">There&apos;s nothing here yet</Placeholder>
     );
   }
 

@@ -35,14 +35,13 @@ const orderSlice = createSlice({
     });
     builder.addCase(getOrders.rejected, (state, action) => {
       state = { ...internalInitialState, error: action.error };
-      throw new Error(action.error.message);
-    });
-    builder.addCase(createOrder.pending, (state) => {
-      state.loading = LoadingStatesEnum.LOADING;
+      throw action.payload;
     });
     builder.addCase(createOrder.fulfilled, (state, action) => {
       state.orders = [...state.orders, action.payload];
-      state.loading = LoadingStatesEnum.IDLE;
+    });
+    builder.addCase(createOrder.rejected, (state, action) => {
+      throw action.payload;
     });
   },
 });
@@ -53,7 +52,7 @@ export const getOrders = createAsyncThunk(
     try {
       return await OrderService.getAll();
     } catch (error: any) {
-      return thunkAPI.rejectWithValue({ error: error.message });
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -64,7 +63,7 @@ export const createOrder = createAsyncThunk(
     try {
       return await OrderService.create();
     } catch (error: any) {
-      return thunkAPI.rejectWithValue({ error: error.message });
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );

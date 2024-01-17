@@ -1,6 +1,7 @@
 import {
   Controller,
   Delete,
+  ForbiddenException,
   Get,
   Param,
   Query,
@@ -12,6 +13,7 @@ import { Roles } from '../auth/decorators/roles.decorator';
 import { RolesGuard } from '../auth/roles.guard';
 import { Auth } from '../auth/decorators/auth.decorator';
 import { Response } from 'express';
+import { CurrentUser } from '../auth/decorators/user.decorator';
 
 @Auth()
 @Roles('ADMIN')
@@ -37,7 +39,14 @@ export class UserController {
   }
 
   @Delete(':email')
-  delete(@Param('email') email: string) {
+  delete(
+    @CurrentUser('isActivated') isActivated: boolean,
+    @Param('email') email: string,
+  ) {
+    if (!isActivated) {
+      return new ForbiddenException('The account is not activated');
+    }
+
     return this.userService.delete(email);
   }
 }

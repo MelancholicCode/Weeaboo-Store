@@ -78,6 +78,7 @@ export class AuthService {
     roles: user.roles,
     address: user.address,
     avatar: user.avatar,
+    isActivated: user.isActivated,
     ...this.generateTokens(user),
   });
 

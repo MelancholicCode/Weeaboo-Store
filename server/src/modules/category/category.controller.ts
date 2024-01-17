@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Delete,
+  ForbiddenException,
   Get,
   Param,
   Post,
@@ -12,6 +13,7 @@ import { CategoryDto } from './dto/category.dto';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { RolesGuard } from '../auth/roles.guard';
 import { Auth } from '../auth/decorators/auth.decorator';
+import { CurrentUser } from '../auth/decorators/user.decorator';
 
 @Controller('category')
 export class CategoryController {
@@ -31,7 +33,14 @@ export class CategoryController {
   @Roles('ADMIN')
   @UseGuards(RolesGuard)
   @Post()
-  create(@Body() dto: CategoryDto) {
+  create(
+    @CurrentUser('isActivated') isActivated: boolean,
+    @Body() dto: CategoryDto,
+  ) {
+    if (!isActivated) {
+      throw new ForbiddenException('The account is not activated');
+    }
+
     return this.categoryService.create(dto);
   }
 
@@ -39,7 +48,14 @@ export class CategoryController {
   @Roles('ADMIN')
   @UseGuards(RolesGuard)
   @Delete(':id')
-  delete(@Param('id') id: string) {
+  delete(
+    @CurrentUser('isActivated') isActivated: boolean,
+    @Param('id') id: string,
+  ) {
+    if (!isActivated) {
+      throw new ForbiddenException('The account is not activated');
+    }
+
     return this.categoryService.delete(+id);
   }
 }

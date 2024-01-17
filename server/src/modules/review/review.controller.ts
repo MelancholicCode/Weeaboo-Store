@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Delete,
+  ForbiddenException,
   Get,
   Param,
   Post,
@@ -43,7 +44,14 @@ export class ReviewController {
   @Roles('ADMIN')
   @UseGuards(RolesGuard)
   @Delete(':reviewId')
-  delete(@Param('reviewId') id: string) {
+  delete(
+    @CurrentUser('isActivated') isActivated: boolean,
+    @Param('reviewId') id: string,
+  ) {
+    if (!isActivated) {
+      throw new ForbiddenException('The account is not activated');
+    }
+
     return this.reviewService.delete(+id);
   }
 }

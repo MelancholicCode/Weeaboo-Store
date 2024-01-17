@@ -35,21 +35,19 @@ const favoriteSlice = createSlice({
     });
     builder.addCase(getFavorites.rejected, (state, action) => {
       state = { ...internalInitialState, error: action.error };
-      throw new Error(action.error.message);
-    });
-    builder.addCase(createFavorite.pending, (state) => {
-      state.loading = LoadingStatesEnum.LOADING;
+      throw action.payload;
     });
     builder.addCase(createFavorite.fulfilled, (state, action) => {
       state.items = [...state.items, action.payload];
-      state.loading = LoadingStatesEnum.IDLE;
     });
-    builder.addCase(deleteFavorite.pending, (state) => {
-      state.loading = LoadingStatesEnum.LOADING;
+    builder.addCase(createFavorite.rejected, (state, action) => {
+      throw action.payload;
     });
     builder.addCase(deleteFavorite.fulfilled, (state, action) => {
       state.items = state.items.filter((item) => item.id !== action.payload);
-      state.loading = LoadingStatesEnum.IDLE;
+    });
+    builder.addCase(deleteFavorite.rejected, (state, action) => {
+      throw action.payload;
     });
   },
 });
@@ -60,7 +58,7 @@ export const getFavorites = createAsyncThunk(
     try {
       return await FavoriteService.getAll();
     } catch (error: any) {
-      return thunkAPI.rejectWithValue({ error: error.message });
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -71,7 +69,7 @@ export const createFavorite = createAsyncThunk(
     try {
       return await FavoriteService.createItem(productId);
     } catch (error: any) {
-      return thunkAPI.rejectWithValue({ error: error.message });
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
@@ -83,7 +81,7 @@ export const deleteFavorite = createAsyncThunk(
       await FavoriteService.delete(id);
       return id;
     } catch (error: any) {
-      return thunkAPI.rejectWithValue({ error: error.message });
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );

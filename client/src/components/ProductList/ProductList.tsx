@@ -23,6 +23,6 @@ export const ProductList: FC<ProductListProps> = ({ products }) => {
       ))}
     </ul>
   ) : (
-    <Placeholder type="empty">There&apos;s nothing here yet.</Placeholder>
+    <Placeholder type="empty">There&apos;s nothing here yet</Placeholder>
   );
 };
