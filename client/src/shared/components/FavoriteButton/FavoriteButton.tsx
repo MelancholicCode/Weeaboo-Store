@@ -12,6 +12,8 @@ import {
 import { useQueryParams } from '@/shared/hooks/useQueryParams';
 import { useRouter } from 'next/navigation';
 import { routes } from '@/shared/constants/routes';
+// import { LoadingStatesEnum } from '@/store/store.types';
+// import ContentLoader from 'react-content-loader';
 
 interface FavoriteButtonProps {
   className?: string;
@@ -22,8 +24,14 @@ export const FavoriteButton: FC<FavoriteButtonProps> = ({
   className,
   productId,
 }) => {
-  const { user } = useAppSelector((state) => state.auth);
-  const { items } = useAppSelector((state) => state.favorite);
+  const {
+    user,
+    // loading: userLoading
+  } = useAppSelector((state) => state.auth);
+  const {
+    items,
+    // loading
+  } = useAppSelector((state) => state.favorite);
   const router = useRouter();
   const query = useQueryParams();
   const dispatch = useAppDispatch();
@@ -47,6 +55,24 @@ export const FavoriteButton: FC<FavoriteButtonProps> = ({
       router.push(routes.AUTH);
     }
   };
+
+  // if (
+  //   userLoading === LoadingStatesEnum.LOADING ||
+  //   loading === LoadingStatesEnum.LOADING
+  // ) {
+  //   return (
+  //     <ContentLoader
+  //       style={{
+  //         cursor: 'pointer',
+  //       }}
+  //       width="40px"
+  //       height="40px"
+  //       className={clsx(styles.button, [className])}
+  //     >
+  //       <rect width="40px" height="40px" rx="5px" ry="5px" />
+  //     </ContentLoader>
+  //   );
+  // }
 
   return user ? (
     <button

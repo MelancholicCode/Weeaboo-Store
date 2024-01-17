@@ -1,0 +1,22 @@
+.hero {
+  &_wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &_description {
+    width: calc(60% - 30px);
+  }
+
+  &_text {
+    margin-top: 20px;
+  }
+
+  &_image {
+    margin-left: 30px;
+    width: 40%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+}

@@ -26,7 +26,7 @@ export const ProductItem: FC<ProductItemProps> = ({
   slug,
 }) => {
   return (
-    <div className={clsx(styles.item, [className])}>
+    <li className={clsx(styles.item, [className])}>
       <Link href={`${routes.publicRoutes.PRODUCT}/${slug}`}>
         <Image
           src={img}
@@ -49,6 +49,6 @@ export const ProductItem: FC<ProductItemProps> = ({
 
       <BuyButton productId={id} />
       <FavoriteButton className={styles.favorite_button} productId={id} />
-    </div>
+    </li>
   );
 };

@@ -93,11 +93,14 @@
 .favorite_button {
   width: 45px;
   height: 45px;
+
+  & + .buy_button {
+    margin-left: 10px;
+  }
 }
 
 .buy_button {
   width: 100%;
-  margin-left: 10px;
   font-size: 20px;
 }
 

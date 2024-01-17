@@ -16,7 +16,7 @@
   }
 }
 
-.loader_item {
+.item {
   position: relative;
   width: calc(100% - var(--item-margin));
   height: 420px;
@@ -63,4 +63,8 @@
       margin-top: var(--item-margin);
     }
   }
+}
+
+.button {
+  cursor: pointer;
 }

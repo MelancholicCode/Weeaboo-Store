@@ -32,10 +32,10 @@ export class AuthController {
   @Auth()
   @Get('me')
   async getMe(@CurrentUser('id') userId: number) {
-    const { id, name, surname, roles, avatar, email, address } =
+    const { id, name, surname, roles, avatar, email, address, isActivated } =
       await this.userService.getOneById(userId);
 
-    return { id, name, surname, roles, avatar, email, address };
+    return { id, name, surname, roles, avatar, email, address, isActivated };
   }
 
   @Post('login')

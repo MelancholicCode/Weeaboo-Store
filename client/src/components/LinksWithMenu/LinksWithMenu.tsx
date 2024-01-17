@@ -10,13 +10,27 @@ import { useAppSelector } from '@/store/hooks/hooks';
 import { FC } from 'react';
 import { BurgerMenu } from '../BurgerMenu/BurgerMenu';
 import { INavLink } from '@/shared/types/link.interface';
+// import { LoadingStatesEnum } from '@/store/store.types';
+// import ContentLoader from 'react-content-loader';
 
 interface LinksWithMenuProps {
   navLinks: INavLink[];
 }
 
 export const LinksWithMenu: FC<LinksWithMenuProps> = ({ navLinks }) => {
-  const { user } = useAppSelector((state) => state.auth);
+  const {
+    user,
+    // loading
+  } = useAppSelector((state) => state.auth);
+
+  // if (loading === LoadingStatesEnum.LOADING) {
+  //   return (
+  //     <ContentLoader width="84px" height="32px">
+  //       <rect width="32px" height="32px" rx="5px" ry="5px" />
+  //       <rect width="32px" height="32px" rx="5px" ry="5px" x="52px" />
+  //     </ContentLoader>
+  //   );
+  // }
 
   return (
     <>

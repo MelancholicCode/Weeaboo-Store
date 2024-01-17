@@ -8,7 +8,7 @@ export const Header = async () => {
   const navLinks = [
     { text: 'Home', href: routes.publicRoutes.HOME },
     { text: 'Catalog', href: routes.publicRoutes.CATALOG },
-    { text: 'Gallery', href: routes.publicRoutes.GALLERY },
+    // { text: 'Gallery', href: routes.publicRoutes.GALLERY },
   ];
 
   return (

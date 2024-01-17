@@ -7,6 +7,8 @@ import { useAppDispatch, useAppSelector } from '@/store/hooks/hooks';
 import { useRouter } from 'next/navigation';
 import { createCartItem } from '@/store/cart/cart.slice';
 import { useQueryParams } from '@/shared/hooks/useQueryParams';
+// import { LoadingStatesEnum } from '@/store/store.types';
+// import ContentLoader from 'react-content-loader';
 
 interface BuyButtonProps {
   className?: string;
@@ -17,8 +19,14 @@ export const BuyButton: FC<BuyButtonProps> = ({ className, productId }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const query = useQueryParams();
-  const { user } = useAppSelector((state) => state.auth);
-  const { cartItems } = useAppSelector((state) => state.cart);
+  const {
+    user,
+    // loading: userLoading
+  } = useAppSelector((state) => state.auth);
+  const {
+    cartItems,
+    // loading
+  } = useAppSelector((state) => state.cart);
 
   const handleAddInCart = async () => {
     if (user) {
@@ -35,6 +43,23 @@ export const BuyButton: FC<BuyButtonProps> = ({ className, productId }) => {
       router.push(routes.AUTH);
     }
   };
+
+  // if (
+  //   userLoading === LoadingStatesEnum.LOADING ||
+  //   loading === LoadingStatesEnum.LOADING
+  // ) {
+  //   return (
+  //     <ContentLoader
+  //       style={{
+  //         cursor: 'pointer',
+  //       }}
+  //       height="47px"
+  //       width="100%"
+  //     >
+  //       <rect height="47px" width="100%" rx="10" ry="10" />
+  //     </ContentLoader>
+  //   );
+  // }
 
   return cartItems.some((item) => item.productId === productId) ? (
     <Button

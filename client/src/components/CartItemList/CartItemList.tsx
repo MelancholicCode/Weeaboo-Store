@@ -16,10 +16,10 @@ import { Button } from '@/shared/components/Button/Button';
 import { createOrder } from '@/store/order/order.slice';
 import { LoadingStatesEnum } from '@/store/store.types';
 import { Placeholder } from '../../shared/components/Placeholder/Placeholder';
+import { CartItemListSkeleton } from '@/shared/skeletons/CartItemListSkeleton/CartItemListSkeleton';
 
 export const CartItemList = () => {
   const { cartItems, loading, error } = useAppSelector((state) => state.cart);
-  const { loading: userLoading } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
   const handleDeleteItem = async (id: number) => {
@@ -49,11 +49,12 @@ export const CartItemList = () => {
     }
   };
 
-  if (
-    userLoading === LoadingStatesEnum.LOADING ||
-    loading === LoadingStatesEnum.LOADING
-  ) {
-    return null; // Return Skeleton
+  if (loading === LoadingStatesEnum.LOADING) {
+    return (
+      <div className={styles.container}>
+        <CartItemListSkeleton />
+      </div>
+    );
   }
 
   if (error) {
