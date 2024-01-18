@@ -1,0 +1,8 @@
+.list {
+  width: 100%;
+  max-width: 768px;
+
+  & > li + li {
+    margin-top: 10px;
+  }
+}

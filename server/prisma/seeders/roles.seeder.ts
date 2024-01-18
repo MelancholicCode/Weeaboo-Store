@@ -6,18 +6,21 @@ export const seedRoles = async (): Promise<Role[]> => {
   try {
     const user = await prisma.role.create({
       data: {
-        name: 'user',
+        name: 'USER',
       },
     });
 
     const admin = await prisma.role.create({
       data: {
-        name: 'admin',
+        name: 'ADMIN',
       },
     });
 
+    const roles = [user, admin];
+
     console.log('Roles seeded successfully');
-    return [user, admin];
+    console.log(roles);
+    return roles;
   } catch (error) {
     console.error('Error seeding roles:', error);
     return [];

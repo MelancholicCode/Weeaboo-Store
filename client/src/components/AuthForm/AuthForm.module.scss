@@ -1,0 +1,51 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth_buttons {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.auth_button_wrapper {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
+@keyframes strike {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+.auth_button {
+  position: relative;
+
+  &::before {
+    position: absolute;
+    width: 0;
+    height: 1px;
+    transition: width 0.3s;
+  }
+
+  &_active {
+    &::before {
+      top: 110%;
+      left: 0;
+      width: 100%;
+      animation: strike 1s 1;
+      background-color: var(--black-color);
+      content: '';
+    }
+  }
+}
+
+.error {
+  color: var(--red-color);
+}

@@ -1,0 +1,12 @@
+.input {
+  display: block;
+  padding: 4px;
+  transition: color 0.5s;
+  border: 1px solid var(--dark-color);
+  border-radius: 5px;
+
+  &:hover,
+  &:focus {
+    background-color: var(--grey-color);
+  }
+}

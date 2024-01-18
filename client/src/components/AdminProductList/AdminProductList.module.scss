@@ -1,0 +1,29 @@
+.wrapper {
+  max-width: 720px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.list {
+  & > li + li {
+    margin-top: 10px;
+  }
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: var(--shadow-md);
+}
+
+.delete_button {
+  margin-left: 10px;
+}
+
+.load_more_button {
+  width: 100%;
+  margin-top: 20px;
+}

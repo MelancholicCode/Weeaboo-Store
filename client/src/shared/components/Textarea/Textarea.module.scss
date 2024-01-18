@@ -1,0 +1,9 @@
+.textarea {
+  display: block;
+  min-height: 100px;
+  padding: 5px 10px;
+  outline: none;
+  border: 2px solid var(--black-color);
+  border-radius: 5px;
+  resize: none;
+}

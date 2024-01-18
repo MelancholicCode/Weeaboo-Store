@@ -1,0 +1,18 @@
+:root {
+  // Colors
+  --white-color: #fff;
+  --accent-color: #f0a3df;
+  --light-accent-color: #f5c3ea;
+  --dark-accent-color: #dd96ce;
+  --black-color: #000;
+  --dark-color: #333;
+  --grey-color: #ddd;
+  --red-color: #d13a3a;
+  --orange-color: #ffa947;
+  --transparent-bg: rgba(0, 0, 0, 0.4);
+
+  // Shadow
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 1px 1px 10px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
+}

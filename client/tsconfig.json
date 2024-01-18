@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "./src",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -19,18 +20,19 @@
       }
     ],
     "paths": {
-      "@/components/*": ["./components/*"],
-      "@/assets/*": ["./assets/*"],
-      "@/shared/*": ["./shared/*"]
+      "@/components/*": ["components/*"],
+      "@/providers/*": ["providers/*"],
+      "@/shared/*": ["shared/*"],
+      "@/api/*": ["api/*"],
+      "@/constants/*": ["constants/*"],
+      "@/services/*": ["services/*"],
+      "@/store/*": ["store/*"],
+      "@/styles/*": ["styles/*"],
+      "@/fonts/*": ["fonts/*"],
+      "@/hooks/*": ["hooks/*"],
+      "@/utils/*": ["utils/*"]
     }
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "postcss.config.js",
-    "tailwind.config.js"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }

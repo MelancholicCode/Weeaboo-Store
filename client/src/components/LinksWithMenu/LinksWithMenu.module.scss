@@ -1,0 +1,26 @@
+.link {
+  &_buttons {
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &_button {
+    display: block;
+    height: fit-content;
+    width: fit-content;
+    padding: 8px;
+
+    &:not(:first-child) {
+      margin-left: 20px;
+    }
+  }
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
