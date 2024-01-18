@@ -3,14 +3,9 @@ import { AuthForm } from '@/components/AuthForm/AuthForm';
 import { SEO_TITLE } from '@/shared/constants/seo';
 import styles from './page.module.scss';
 
-const mainMetaData = {
+export const metadata: Metadata = {
   title: `Authorization | ${SEO_TITLE}`,
   description: "The user's authorization page.",
-};
-
-export const metadata: Metadata = {
-  ...mainMetaData,
-  openGraph: mainMetaData,
 };
 
 const AuthPage = () => {

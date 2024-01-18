@@ -55,7 +55,7 @@ export class ProductService {
   }
 
   async getOne(slug: string) {
-    return await this.prisma.product.findFirst({
+    return await this.prisma.product.findUnique({
       where: {
         slug,
       },
