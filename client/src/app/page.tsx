@@ -8,7 +8,7 @@ const HomePage = () => {
     <main className="page-container">
       <div className={styles.hero_wrapper}>
         <div className={styles.hero_description}>
-          <Typography variant="title-1" type="h1">
+          <Typography className={styles.hero_title} variant="title-1" type="h1">
             Welcome to the Weeaboo Store
           </Typography>
           <Typography className={styles.hero_text} variant="body-2">

@@ -1,11 +1,17 @@
 export const getParamsString = (params: {
   [key: string]: string | number | undefined;
 }) => {
-  let result = '?';
+  const paramsArr: string[] = [];
 
   for (const key in params) {
-    result += params[key] ? `${key}=${params[key]}` : '';
+    if (!params[key]) {
+      continue;
+    }
+
+    paramsArr.push(`${key}=${params[key]}`);
   }
+
+  const result = `?${paramsArr.join('&')}`;
 
   return result;
 };

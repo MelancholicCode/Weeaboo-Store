@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
-import { ProductList } from '@/components/ProductList/ProductList';
 import ProductService from '@/services/product/product.service';
 import { Placeholder } from '@/shared/components/Placeholder/Placeholder';
 import CategoryService from '@/services/category/category.service';
 import { SEO_TITLE } from '@/shared/constants/seo';
+import { CatalogProductList } from '@/components/CatalogProductList/CatalogProductList';
 
 interface MetadataProps {
   params: { slug: string };
@@ -26,11 +26,17 @@ export const generateMetadata = async ({
 
 const CategoryPage = async ({ params }: { params: { slug: string } }) => {
   try {
-    const { products } = await ProductService.getMany({
+    const { products, totalCount } = await ProductService.getMany({
       categorySlug: params.slug,
     });
 
-    return <ProductList products={products} />;
+    return (
+      <CatalogProductList
+        items={products}
+        totalCount={totalCount}
+        categorySlug={params.slug}
+      />
+    );
   } catch (error) {
     console.error(error);
 

@@ -21,7 +21,19 @@ export class ProductService {
     categorySlug: string,
     response: Response,
   ) {
-    const totalCount = await this.prisma.product.count();
+    const totalCount = await this.prisma.product.count({
+      where: {
+        title: {
+          search: query,
+        },
+        description: {
+          search: query,
+        },
+        category: {
+          slug: categorySlug,
+        },
+      },
+    });
 
     response.setHeader('x-total-count', totalCount);
 
@@ -29,19 +41,15 @@ export class ProductService {
       take: +count,
       skip: +offset,
       where: {
-        ...(query && {
-          title: {
-            search: query,
-          },
-          description: {
-            search: query,
-          },
-        }),
-        ...(categorySlug && {
-          category: {
-            slug: categorySlug,
-          },
-        }),
+        title: {
+          search: query,
+        },
+        description: {
+          search: query,
+        },
+        category: {
+          slug: categorySlug,
+        },
       },
     });
   }

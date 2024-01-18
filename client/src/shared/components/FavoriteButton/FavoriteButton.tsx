@@ -41,7 +41,11 @@ export const FavoriteButton: FC<FavoriteButtonProps> = ({
   const handleToggleFavorite = async () => {
     if (user) {
       if (favorite) {
-        dispatch(deleteFavorite(favorite.id));
+        try {
+          dispatch(deleteFavorite(favorite.id));
+        } catch (error) {
+          console.error(error);
+        }
       } else {
         try {
           await dispatch(createFavorite(productId));
